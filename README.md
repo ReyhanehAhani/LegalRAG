@@ -6,6 +6,8 @@ A modular Retrieval-Augmented Generation system for legal documents, backed by O
 
 ## Architecture
 
+![architecture- vector RAG](assets/vector_rag_architecture.png)
+
 ### Offline Ingestion Pipeline
 
 ```
@@ -99,23 +101,28 @@ LegalRAG/
 ├── docker-compose.yml          # OpenSearch + Dashboards (local dev)
 ├── pyproject.toml              # dependencies & tooling config
 ├── .env.example                # environment variable template
+├── cursor.md                   # session log
 ├── scripts/
 │   ├── ingest.py               # CLI: ingest documents
 │   └── query.py                # CLI: run a query
 ├── legalrag/
 │   ├── core/
 │   │   ├── config.py           # Pydantic settings (env-driven)
-│   │   ├── models.py           # Shared domain models (Pydantic schemas)
+│   │   ├── models.py           # Shared domain models 
 │   │   └── interfaces.py       # Abstract base classes for all components
 │   ├── ingestion/
-│   │   ├── loader.py           # TxtFileLoader
-│   │   ├── metadata_extractor.py  # RegexMetadataExtractor
-│   │   ├── chunker.py          # HierarchicalChunker
+│   │   ├── loader.py           # TxtFileLoader + clean_document_text()
+│   │   ├── metadata_extractor.py  # CanLIIMetadataExtractor (header + body fallback)
+│   │   ├── chunker.py          # HierarchicalChunker (deterministic chunk IDs)
 │   │   ├── embedder.py         # SentenceTransformerEmbedder / OpenAIEmbedder
 │   │   ├── indexer.py          # OpenSearchIndexer
 │   │   └── pipeline.py         # IngestionPipeline orchestrator
+│   ├── prompts/                # ← prompt configs (edit here, not in Python)
+│   │   ├── loader.py           # YAML loader with lru_cache
+│   │   ├── formulator.yaml     # system prompt + field docs + model params
+│   │   └── generator.yaml      # system prompt + context templates + model params
 │   ├── query/
-│   │   ├── formulator.py       # LLMQueryFormulator (Pydantic JSON schema)
+│   │   ├── formulator.py       # LLMQueryFormulator (pydantic-ai Agent)
 │   │   ├── retriever.py        # OpenSearchRetriever (hybrid kNN + BM25)
 │   │   ├── reranker.py         # CrossEncoderReranker
 │   │   ├── router.py           # ThresholdRouter (fast/slow path)
@@ -124,6 +131,7 @@ LegalRAG/
 │   ├── opensearch/
 │   │   └── client.py           # OpenSearchClient (kNN, BM25, hybrid, bulk)
 │   └── utils/
+│       ├── llm_client.py       # OpenAI-compatible client factory (sync + async)
 │       └── logging.py          # structlog configuration
 └── tests/
     ├── ingestion/

@@ -12,6 +12,8 @@ dependencies = [
     "opensearch-py>=2.7.0",
     # LLM / embeddings
     "openai>=1.40.0",          # swappable LLM client (also used for Qwen via compatible API)
+    "pydantic-ai>=1.0.0",      # structured LLM agent (formulator + generator)
+    "pyyaml>=6.0.0",           # prompt YAML file loading
     "tiktoken>=0.7.0",
     # Embeddings (swappable)
     "sentence-transformers>=3.0.0",
