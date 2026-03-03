@@ -143,9 +143,6 @@ conda activate legalrag
 pip install -e ".[dev]"
 ```
 
-> **Why conda over uv?**  
-> The project uses `conda` for environment isolation so that future GPU/CUDA deps (e.g. `faiss-gpu`, CUDA-linked `torch`) can be added via `conda install` without rebuilding from source.  
-> For day-to-day package installs `pip` is used inside the env — no separate `environment.yml` is needed.
 
 ### 2. Configure environment variables
 
@@ -153,8 +150,7 @@ pip install -e ".[dev]"
 cp .env.example .env
 ```
 
-The default LLM is **Qwen3.5-397B-A17B** via the HuggingFace Inference Router
-(no local GPU needed). Get a free token at https://huggingface.co/settings/tokens, then:
+The default LLM is **Qwen3.5-397B-A17B** via the HuggingFace Inference Router. Get a free token at https://huggingface.co/settings/tokens, then:
 
 ```bash
 export HF_TOKEN=hf_...      # picked up automatically, or set LLM_API_KEY in .env
@@ -210,13 +206,10 @@ pytest tests/ -v
 
 ### Medium-term (Phase 2)
 - [ ] **Deep Search implementation**: iterative multi-query expansion loop in `ThresholdRouter._deep_search`, following the RLM paper (arxiv:2512.24601)
-- [ ] **Streaming API**: expose `generator.stream()` via a FastAPI endpoint
 - [ ] **Parent-chunk summarisation**: store LLM-generated summaries as parent chunks instead of raw text for better context quality
-- [ ] **PDF loader**: add a `PdfLoader` subclassing `BaseLoader` using `pdfplumber` or `pymupdf`
 
 ### Long-term (Phase 3)
 - [ ] **Citation graph**: link cases by citation relationships and use graph traversal in Deep Search
-- [ ] **Fine-tuned embedding model**: domain-adapt an embedding model on legal text (legal-BERT, e5-legal)
 - [ ] **Feedback loop**: collect user relevance signals to improve routing thresholds
 - [ ] **Multi-index support**: separate indices per jurisdiction or doc_type with a meta-router
 
