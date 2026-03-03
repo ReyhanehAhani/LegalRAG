@@ -18,11 +18,10 @@ This approach follows the "small-to-big retrieval" pattern:
 from __future__ import annotations
 
 import logging
-from uuid import uuid4
 
 from legalrag.core.config import settings
 from legalrag.core.interfaces import BaseChunker
-from legalrag.core.models import Chunk, RawDocument
+from legalrag.core.models import Chunk, RawDocument, stable_id
 
 logger = logging.getLogger(__name__)
 
@@ -80,9 +79,9 @@ class HierarchicalChunker(BaseChunker):
         char_cursor = 0
 
         for parent_text in parent_texts:
-            parent_id = str(uuid4())
             parent_start = document.text.find(parent_text, char_cursor)
             parent_end = parent_start + len(parent_text)
+            parent_id = stable_id(document.metadata.doc_id, str(parent_start), str(parent_end))
 
             # Parent chunk (not embedded – stored for context expansion)
             parent_chunk = Chunk(
@@ -97,7 +96,9 @@ class HierarchicalChunker(BaseChunker):
             all_chunks.append(parent_chunk)
 
             # Child chunks within this parent
-            children = self._sliding_window(parent_text, parent_start)
+            children = self._sliding_window(
+                parent_text, parent_start, document.metadata.doc_id
+            )
             for child in children:
                 child.doc_id = document.metadata.doc_id
                 child.parent_chunk_id = parent_id
@@ -114,20 +115,23 @@ class HierarchicalChunker(BaseChunker):
         )
         return all_chunks
 
-    def _sliding_window(self, text: str, offset: int) -> list[Chunk]:
-        """Produce overlapping child chunks from *text*."""
+    def _sliding_window(self, text: str, offset: int, doc_id: str) -> list[Chunk]:
+        """Produce overlapping child chunks with deterministic IDs."""
         chunks: list[Chunk] = []
         step = max(1, self._child_size - self._child_overlap)
         pos = 0
         while pos < len(text):
             end = min(pos + self._child_size, len(text))
+            char_start = offset + pos
+            char_end = offset + end
             snippet = text[pos:end]
             chunks.append(
                 Chunk(
+                    chunk_id=stable_id(doc_id, str(char_start), str(char_end)),
                     doc_id="",          # filled by caller
                     text=snippet,
-                    char_start=offset + pos,
-                    char_end=offset + end,
+                    char_start=char_start,
+                    char_end=char_end,
                     metadata=None,      # type: ignore[arg-type]  # filled by caller
                 )
             )

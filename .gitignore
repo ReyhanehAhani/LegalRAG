@@ -25,3 +25,4 @@ htmlcov/
 
 # OpenSearch data (managed by Docker volume)
 opensearch-data/
+/data

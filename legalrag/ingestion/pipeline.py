@@ -22,6 +22,7 @@ from legalrag.core.interfaces import (
     BaseLoader,
     BaseMetadataExtractor,
 )
+from legalrag.core.models import doc_id_from_citation
 from legalrag.ingestion.chunker import HierarchicalChunker
 from legalrag.ingestion.embedder import build_embedder
 from legalrag.ingestion.indexer import OpenSearchIndexer
@@ -74,13 +75,20 @@ class IngestionPipeline:
             # Step 1 – metadata extraction (reads raw text incl. CanLII header)
             doc = self.extractor.extract(doc)
 
-            # Step 2 – clean body text (strip header block + page markers)
+            # Step 2 – finalise doc_id now that citation is known.
+            # Uses citation if available (content-based, path-independent),
+            # falls back to filename stem for docs without a parseable citation.
+            doc.metadata.doc_id = doc_id_from_citation(
+                doc.metadata.citation, doc.metadata.source_path
+            )
+
+            # Step 3 – clean body text (strip header block + page markers)
             doc.text = clean_document_text(doc.text)
 
-            # Step 3 – chunking
+            # Step 4 – chunking
             chunks = self.chunker.chunk(doc)
 
-            # Step 4 – embed child chunks only (parents are stored as-is)
+            # Step 5 – embed child chunks only (parents are stored as-is)
             child_chunks = [c for c in chunks if c.parent_chunk_id is not None]
             if child_chunks:
                 texts = [c.text for c in child_chunks]
@@ -88,7 +96,7 @@ class IngestionPipeline:
                 for chunk, emb in zip(child_chunks, embeddings):
                     chunk.embedding = emb
 
-            # Step 5 – index everything
+            # Step 6 – index everything
             self.indexer.index(chunks)
 
         logger.info("Ingestion complete.")

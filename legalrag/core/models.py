@@ -2,11 +2,40 @@
 
 from __future__ import annotations
 
+import hashlib
 from datetime import date
+from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
+
+
+def stable_id(*parts: str) -> str:
+    """Return a deterministic hex ID from one or more string parts.
+
+    Used to make doc_id and chunk_id stable across ingestion runs so that
+    re-ingesting the same file overwrites existing documents (upsert) instead
+    of creating duplicates.
+    """
+    key = "|".join(parts)
+    return hashlib.md5(key.encode()).hexdigest()
+
+
+def doc_id_from_citation(citation: str | None, source_path: str) -> str:
+    """Derive a stable doc_id.
+
+    Priority:
+      1. citation  (e.g. "2010 BCCA 220") – content-based, path-independent
+      2. filename stem  (e.g. "2010_BCCA_2010 BCCA 220 Harrison...") – fallback
+         for the ~0.7% of documents without a parseable citation
+
+    This means the ID survives folder renames, path changes, and re-downloads
+    of the same document to a different location.
+    """
+    if citation:
+        return stable_id("citation", citation)
+    return stable_id("stem", Path(source_path).stem)
 
 
 # ── Document models ───────────────────────────────────────────────────────────
@@ -15,7 +44,10 @@ from pydantic import BaseModel, Field
 class LegalDocumentMetadata(BaseModel):
     """Metadata fields extracted from / assigned to a legal document."""
 
-    doc_id: str = Field(default_factory=lambda: str(uuid4()))
+    # Set automatically on construction from source_path (path-based fallback).
+    # The ingestion pipeline overwrites this with doc_id_from_citation() once
+    # the metadata extractor has populated the citation field.
+    doc_id: str = Field(default="")
     source_path: str
     doc_type: str | None = None          # e.g. "case", "statute", "regulation"
     court: str | None = None             # full name e.g. "British Columbia Court of Appeal"
@@ -28,6 +60,18 @@ class LegalDocumentMetadata(BaseModel):
     url: str | None = None               # CanLII source URL
     jurisdiction: str | None = None      # for future use
     extra: dict[str, Any] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def _set_doc_id(self) -> "LegalDocumentMetadata":
+        """Set a path-based doc_id at construction time if none was provided.
+
+        This is the construction-time fallback only. The ingestion pipeline
+        calls doc_id_from_citation() after metadata extraction to upgrade the
+        ID to a citation-based one.
+        """
+        if not self.doc_id:
+            self.doc_id = stable_id("stem", Path(self.source_path).stem)
+        return self
 
 
 class RawDocument(BaseModel):
@@ -43,6 +87,8 @@ class RawDocument(BaseModel):
 class Chunk(BaseModel):
     """An individual text chunk with its lineage and embedding."""
 
+    # The chunker always supplies a stable_id()-derived chunk_id.
+    # The random uuid4 fallback is only for ad-hoc construction in tests.
     chunk_id: str = Field(default_factory=lambda: str(uuid4()))
     doc_id: str                          # foreign key → LegalDocumentMetadata.doc_id
     parent_chunk_id: str | None = None   # for hierarchical chunking: parent summary chunk
