@@ -110,5 +110,6 @@ class QueryPipeline:
         # Step 4 – generation
         response = self.generator.generate(structured.raw_query, final_chunks)
         response.router_path = path
+        logger.info("ANSWER      :\n%s", response.answer)
         logger.info(_DIVIDER)
         return response
