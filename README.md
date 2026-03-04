@@ -201,25 +201,6 @@ python scripts/query.py "What is the standard of review for s.7 Charter claims?"
 pytest tests/ -v
 ```
 
----
 
-## Next Steps
-
-### Short-term (Phase 1)
-- [ ] **Unit tests** for chunker, metadata extractor, and retriever (mock OpenSearch)
-- [ ] **Evaluation harness**: build a small gold-standard Q&A set to measure retrieval recall@K and answer correctness
-- [ ] **Date range filtering**: add OpenSearch `range` query for `decision_date` in retriever
-- [ ] **LLM metadata extractor**: replace regex heuristics with an LLM call for better coverage
-
-### Medium-term (Phase 2)
-- [ ] **Deep Search implementation**: iterative multi-query expansion loop in `ThresholdRouter._deep_search`, following the RLM paper (arxiv:2512.24601)
-- [ ] **Parent-chunk summarisation**: store LLM-generated summaries as parent chunks instead of raw text for better context quality
-
-### Long-term (Phase 3)
-- [ ] **Citation graph**: link cases by citation relationships and use graph traversal in Deep Search
-- [ ] **Feedback loop**: collect user relevance signals to improve routing thresholds
-- [ ] **Multi-index support**: separate indices per jurisdiction or doc_type with a meta-router
-
----
 
 
