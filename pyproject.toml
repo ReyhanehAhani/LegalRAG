@@ -38,10 +38,14 @@ dev = [
     "ruff>=0.4.0",
     "mypy>=1.10.0",
 ]
+eval = [
+    "pytrec_eval-terrier>=0.5.6",   # NDCG / MRR / MAP evaluation (CLERC)
+    "datasets>=2.15.0",              # HuggingFace dataset loading
+]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["legalrag*"]
+include = ["legalrag*", "evaluation*"]
 
 [tool.ruff]
 line-length = 100

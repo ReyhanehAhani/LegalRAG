@@ -79,7 +79,6 @@ class OpenSearchClient:
             "settings": {
                 "index": {
                     "knn": True,
-                    "knn.algo_param.ef_search": 100,
                 },
                 "analysis": {
                     "analyzer": {
@@ -115,8 +114,8 @@ class OpenSearchClient:
                         "method": {
                             "name": "hnsw",
                             "space_type": "cosinesimil",
-                            "engine": "nmslib",
-                            "parameters": {"ef_construction": 128, "m": 24},
+                            "engine": "lucene",
+                            "parameters": {"ef_construction": 128, "m": 16},
                         },
                     },
                 }
