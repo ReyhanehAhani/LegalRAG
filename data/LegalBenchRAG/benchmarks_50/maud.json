@@ -1,0 +1,862 @@
+{
+  "tests": [
+    {
+      "query": "Consider the Merger Agreement between \"Sanofi\" and \"Kadmon Holdings, Inc.\"; What is the Definition of \"Interveining Event\"",
+      "snippets": [
+        {
+          "file_path": "maud/Kadmon_Holdings_Sanofi_SA_Merger_Agreement.txt",
+          "span": [
+            252399,
+            253458
+          ],
+          "answer": "“Company Intervening Event” means any event, development or change in circumstances that materially affects the business, assets or operations of the Company (other than any event, occurrence, fact or change primarily resulting from a breach of this Agreement by the Company) and that was neither known to the Company Board nor reasonably foreseeable as of or prior to the date of this Agreement, which event, occurrence, fact or change becomes known to the Company Board prior to the Company Stockholder Approval, other than (a) changes in the Company Common Stock price, in and of itself (however, the underlying reasons for such changes may constitute a Change Intervening Event), (b) any Acquisition Proposal or (c) the fact that, in and of itself, the Company exceeds any internal or published projections, estimates or expectations of the Company’s revenue, earnings or other financial performance or results of operations for any period, in and of itself (however, the underlying reasons for such events may constitute a Company Intervening Event). \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Vulcan Materials Company\" and Target \"U.S. Concrete, Inc.\"; I want information about the Limitations on Antitrust Efforts",
+      "snippets": [
+        {
+          "file_path": "maud/U.S. Concrete, Inc._Vulcan Materials Company.txt",
+          "span": [
+            207347,
+            207738
+          ],
+          "answer": "Section 7.2.    Reasonable Best Efforts. (a)    Subject to the terms and conditions of this Agreement, each Party will use its reasonable best efforts to take, or cause to be taken, all actions and to do, or cause to be done, all things necessary, proper or advisable under applicable Law to consummate the Transactions, including the Merger, as promptly as practicable after the date hereof"
+        },
+        {
+          "file_path": "maud/U.S. Concrete, Inc._Vulcan Materials Company.txt",
+          "span": [
+            209920,
+            210191
+          ],
+          "answer": "provided, however, that nothing in this Agreement shall require Parent to agree or commit to, and the Company may not agree or commit to, any Antitrust Remedial Action with respect to the assets or businesses described in Section 7.2(a) of the Company Disclosure Letter. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Cabot Oil & Gas Corporation\" and \"Cimarex Energy Co.\"; What is the Definition of \"Knowledge\"",
+      "snippets": [
+        {
+          "file_path": "maud/Cimarex Energy Co._Cabot Oil & Gas Corporation.pdf||Cimarex_Energy_Co_Cabot_Oil_Gas_Corporation_Amendment No.1.txt",
+          "span": [
+            386851,
+            386996
+          ],
+          "answer": "“knowledge” means the actual knowledge of: (a)in the case of Golden, the individuals listed in Schedule 1.1 of the Golden Disclosure Letter; and "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Electronic Arts Inc.\" and Target \"Glu Mobile Inc.\"; What is the Type of Consideration",
+      "snippets": [
+        {
+          "file_path": "maud/Glu Mobile Inc._Electronic Arts Inc..txt",
+          "span": [
+            12009,
+            12929
+          ],
+          "answer": "(iii)             All Other Shares. Each Share that is outstanding immediately prior to the Effective Time (other than (A)  Shares to be cancelled in accordance with Section 1.5(a)(i) and Section 1.5(a)(ii) (collectively, the “Cancelled Shares”) and (B) Dissenting Shares) shall be automatically converted into the right to receive an amount, net to the seller in cash, without interest, equal to $12.50 (the “Per Share Merger Consideration”), subject to any required withholding of Taxes. All Shares that have been converted pursuant to this Section 1.5(a)(iii) shall be cancelled automatically and shall be extinguished and cease to exist, and the holders of (1) Shares represented by Company Stock Certificates (as defined below) or (2) Book-Entry Shares shall cease to have any rights with respect to those Shares, other than the right to receive the Per Share Merger Consideration in accordance with Section 1.8.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Paloma Partners VI Holdings, LLC\" and Target \"Goodrich Petroleum Corporation\"; Information about the Fiduciary Termination Right Triggers for termination",
+      "snippets": [
+        {
+          "file_path": "maud/Goodrich_Petroleum_Corporation_EnCap_Investments_L_P.txt",
+          "span": [
+            233048,
+            233191
+          ],
+          "answer": "Section 11.01         Termination. This Agreement may be terminated and the Merger may be abandoned at any time prior to the Effective Time:   "
+        },
+        {
+          "file_path": "maud/Goodrich_Petroleum_Corporation_EnCap_Investments_L_P.txt",
+          "span": [
+            235641,
+            235978
+          ],
+          "answer": "(d)            by the Company, prior to the Acceptance Time:   (i)            if the Board of Directors has made an Adverse Recommendation Change in order to accept a Superior Proposal and concurrently enter into a binding written definitive acquisition agreement providing for the consummation of a transaction for a Superior Proposal; "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Perspecta Inc.\" and \"Jaguar Parentco Inc.\"; What is the Definition of \"Material Adverse Effect\"",
+      "snippets": [
+        {
+          "file_path": "maud/Perspecta Inc._Veritas Capital.txt",
+          "span": [
+            16698,
+            20726
+          ],
+          "answer": "“Company Material Adverse Effect” means any Effect that, individually or in the aggregate with any one or more other Effects, (i) has had or would reasonably be expected to have a material adverse effect on the business, financial condition or results of operations of the Company and the Company Subsidiaries, taken as a whole, or (ii) would reasonably be expected to prevent or delay beyond the Outside Date the closing of the Merger; provided, however, that no Effect, to the extent resulting or arising from the following, individually or in the aggregate with any one or more other Effects, shall constitute or shall be considered in determining whether there has occurred a Company Material Adverse Effect:  (A) changes in general economic, regulatory, political, business, financial, congressional appropriation or market conditions in the United States or elsewhere in the world; (B) changes in the credit, debt, financial or capital markets or in interest or exchange rates, in each case, in the United States or elsewhere in the world; (C) changes in conditions generally affecting the industry in which the Company and the Company Subsidiaries operate, including changes in Governmental Entity funding level or program changes; (D) any outbreak of any military conflict, declared or undeclared war, armed hostilities, or acts of foreign or domestic terrorism (including cyber-terrorism); (E) any epidemic, plague, pandemic or other outbreak of illness or public health event (including COVID-19), hurricane, flood, tornado, earthquake or other natural disaster or act of God (or any worsening of any of the foregoing), including, in each case, the response of governmental and non-governmental entities (including COVID-19 Measures); (F) any failure by the Company or any of the Company Subsidiaries to meet any internal or external projections or forecasts, any change in the market price or trading volume of Company Common Stock or any change in the Company’s credit rating (but excluding, in each case, the underlying causes of such failure or decline, as applicable, unless such underlying causes would otherwise be excepted from this definition); (G) the public announcement, pendency or performance of the Transactions or the identity of, or any facts or circumstances relating to Parent, Merger Sub or their respective Affiliates, including, in any such case, the impact thereof on relationships, contractual or otherwise, with customers, suppliers, vendors, lenders, investors, licensors, licensees, venture partners or employees (other than, in each case, for purposes of any representation or warranty set forth in Section 4.4, Section 4.5 or Section 4.11(i)); (H) changes in, including any actions taken to comply with any change in, applicable Laws or the interpretation thereof; (I) changes in, including any actions taken to comply with any change in, GAAP or any other applicable accounting standards or the interpretation thereof; (J) any action required or specifically permitted to be taken by the Company pursuant to the terms of this Agreement or taken at the prior written direction of Parent or Merger Sub; (K) any breach of this Agreement by Parent or Merger Sub; or (L) any litigation or other Proceeding brought by any stockholder of the Company (or a derivative or similar claim) in connection with this Agreement or any of the Transactions to the extent asserting breach of fiduciary duty, inadequate disclosure or violations of applicable securities Law claims; provided, further, that any Effect arising out of or resulting from any change or event referred to in clause (A), (B), (C), (D), (E), (H) or (I) above may constitute, and be taken into account in determining the occurrence of, a Company Material Adverse Effect if and only to the extent that such change or event has a disproportionate adverse impact on the Company and the Company Subsidiaries as compared to any other participants that operate in the industries in which the Company and the Company Subsidiaries operate.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"MERCK SHARP & DOHME CORP.\" and Target \"PANDION THERAPEUTICS, INC.\"; What are the Ordinary course of business covenants",
+      "snippets": [
+        {
+          "file_path": "maud/Pandion Therapeutics, Inc._Merck _ Co., Inc..txt",
+          "span": [
+            198706,
+            199291
+          ],
+          "answer": "SECTION 7.1. Conduct of the Company. \n\n\n(a) During the Pre-Closing Period, except (i) as set forth in Section 7.1 of the Company Disclosure Letter, (ii) as required by the express terms of this Agreement, (iii) with the prior written consent of Parent (which consent shall not be unreasonably withheld, conditioned, or delayed), or (iv) as required by applicable Law (including COVID-19 Measures), the Company shall, and shall cause the Company Subsidiaries to, (x) conduct their respective business only in the ordinary and usual course of business and consistent with past practice, "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Kimco Realty Corporation\" and Target \"Weingarten Realty Investors\"; What about the Fiduciary exception to the No-Shop Clause",
+      "snippets": [
+        {
+          "file_path": "maud/Weingarten Realty Investors_Kimco Realty Corporation.txt",
+          "span": [
+            233196,
+            233264
+          ],
+          "answer": "Section 5.4          Non-Solicitation; Change in Recommendation. \n\n\n"
+        },
+        {
+          "file_path": "maud/Weingarten Realty Investors_Kimco Realty Corporation.txt",
+          "span": [
+            234860,
+            236935
+          ],
+          "answer": "(b)            (i)           Notwithstanding the foregoing, prior to the time the Required Company Vote is obtained, in response to the receipt of a bona fide written Acquisition Proposal (that did not result from the Company’s breach of this Section 5.4 in any material respect) made after the date of this Agreement, subject to compliance with the other terms of this Section 5.4 and the Company first entering into a confidentiality agreement with the Person who has made such Acquisition Proposal having confidentiality and use provisions that are no less favorable to the Company than those contained in the Confidentiality Agreement (an “Acceptable Confidentiality Agreement”) (it being understood that such Acceptable Confidentiality Agreement need not prohibit the making or amending of an Acquisition Proposal), the Company shall be permitted to (A) engage in discussions and negotiations with the Person who has made such Acquisition Proposal and (B) provide any nonpublic information in response to a request therefor to the Person who has made such Acquisition Proposal; provided that prior to taking any action described in clause (A) or (B) above, the Board of Trust Managers of the Company determines in good faith based on the information then available and after consultation with outside legal counsel and its financial advisor that such Acquisition Proposal either constitutes a Superior Proposal or is reasonably likely to result in a Superior Proposal (and, for the avoidance of doubt, such actions shall not a breach of Section 5.4(a)).  The Company shall provide Parent with a copy of any nonpublic information provided to any Person pursuant to the prior sentence prior to or simultaneously with furnishing such information to such Person, unless such information has been previously made available to Parent.  Neither the Company nor any of its Subsidiaries shall enter into any agreement with any Person subsequent to the date of this Agreement that prohibits such Person from providing information to Parent in accordance with this Section 5.4. \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Microsoft Corporation\" and Target \"Nuance Communications, Inc.\"; What is the Definition of \"Superior Proposal\"",
+      "snippets": [
+        {
+          "file_path": "maud/Nuance Communications, Inc._Microsoft Corporation.txt",
+          "span": [
+            53579,
+            54664
+          ],
+          "answer": "“Superior Proposal” means any bona fide written Acquisition Proposal for an Acquisition Transaction on terms that the Company Board has determined in good faith (after consultation with its financial advisor and outside legal counsel) would be more favorable, from a financial point of view, to the Company Stockholders (in their capacity as such) than the Merger (taking into account any revisions to this Agreement made or proposed in writing by Parent prior to the time of such determination and after taking into account those factors and matters deemed relevant in good faith by the Company Board, including the identity of the Person making the proposal, the conditionality of such proposal, the likelihood of consummation in accordance with the terms of such proposal, and the legal, financial (including the financing terms), regulatory, timing and other aspects of such proposal). For purposes of the reference to an “Acquisition Proposal” in this definition, all references to “15%” in the definition of “Acquisition Transaction” will be deemed to be references to “50%.” \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Tribune Enterprises, LLC\" and Target \"Tribune Publishing Company\"; I want information about the Limitations on Antitrust Efforts",
+      "snippets": [
+        {
+          "file_path": "maud/Tribune Publishing Company_Alden Global Capital LLC.txt",
+          "span": [
+            203435,
+            204860
+          ],
+          "answer": "In no event shall Parent be required to take any such Divestiture Actions with respect to its businesses, properties, assets, Subsidiaries and Affiliates (other than, following the Effective Time, the Company and its Subsidiaries), including agreeing to divest such entities or terminate existing relationships and contractual rights. At the request of Parent, the Company shall agree to divest, hold separate or otherwise take or commit to take any action that limits its freedom of action with respect to, or its ability to retain, any of the businesses, services, or assets of the Company or any of its Subsidiaries, provided that any such action shall be conditioned upon the consummation of the Merger and the other transactions contemplated hereby. Notwithstanding any other provision in this Agreement, Parent shall not be required to undertake any Divestiture Actions with respect to businesses, assets, or properties of the Company that, directly or indirectly, would materially impair the benefits of the transactions contemplated hereby that are reasonably expected to be enjoyed by Parent; provided that, notwithstanding the foregoing or anything else to the contrary herein, Parent shall be required to undertake Divestiture Actions with respect to businesses, assets or properties of the Company and its Subsidiaries that account for up to $40 million of revenue for the fiscal year ended on December 27, 2020. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Merck Sharp & Dohme Corp.\" and \"Acceleron Pharma Inc.\"; Where is the Closing Conditions: Regulatory Approvals clause",
+      "snippets": [
+        {
+          "file_path": "maud/Acceleron_Pharma_Inc_Merck_Co.txt",
+          "span": [
+            189422,
+            189897
+          ],
+          "answer": "Section 6.6.     Further Action; Efforts.   (a)     Subject to the terms and conditions of this Agreement, prior to the Effective Time, each party shall use its reasonable best efforts to take, or cause to be taken, all actions and to do, or cause to be done, all things necessary, proper, or advisable under applicable Laws to consummate the Offer, the Merger and the other Contemplated Transactions as promptly as possible and, in any event, by or before the Outside Date. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Sterling Bancorp\" and \"Webster Financial Corporation\"; Information about the Closing Condition: Compliance with Covenants",
+      "snippets": [
+        {
+          "file_path": "maud/Sterling_Bancorp_Webster_Financial_Corporation.txt",
+          "span": [
+            248269,
+            248489
+          ],
+          "answer": "7.2          Conditions to Obligations of Webster. The obligation of Webster to effect the Merger is also subject to the satisfaction or waiver by Webster at or prior to the Effective Time of the following conditions:   "
+        },
+        {
+          "file_path": "maud/Sterling_Bancorp_Webster_Financial_Corporation.txt",
+          "span": [
+            251036,
+            251273
+          ],
+          "answer": "(b)          Performance of Obligations of Sterling. Sterling shall have performed in all material respects the obligations, covenants and agreements required to be performed by it under this Agreement at or prior to the Effective Time, "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Viasat, Inc.\" and Target \"RigNet, Inc.\"; Where is the Closing Conditions: Regulatory Approvals clause",
+      "snippets": [
+        {
+          "file_path": "maud/RigNet, Inc._Viasat, Inc..txt",
+          "span": [
+            204856,
+            205081
+          ],
+          "answer": "(a) Subject to the terms and conditions of this Agreement, each of the parties hereto shall cooperate with the other and use (and shall cause their respective Subsidiaries to use) their respective reasonable best efforts to: "
+        },
+        {
+          "file_path": "maud/RigNet, Inc._Viasat, Inc..txt",
+          "span": [
+            205947,
+            206380
+          ],
+          "answer": "(ii) obtain as promptly as reasonably practicable (and in any event no later than the End Date) all approvals, consents, clearances, expirations or terminations of waiting periods, registrations, permits, authorizations and other confirmations from any Governmental Entity or third party (collectively, “Approvals”) that are or may become necessary, proper or advisable to consummate the transactions contemplated by this Agreement; "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"STERIS plc\" and Target \"Cantel Medical Corp.\"; What is the Definition of \"Superior Proposal\"",
+      "snippets": [
+        {
+          "file_path": "maud/Cantel Medical Corp._STERIS plc.pdf||Cantel Medical Corp._STERIS plc. Amendment No. 1.txt",
+          "span": [
+            347156,
+            348296
+          ],
+          "answer": "“Superior Proposal” means a bona fide written proposal or offer constituting a Competing Proposal (with references to 20% being deemed to be replaced with references to 50%) made after the date of this Agreement, which the Company Board of Directors determines in good faith, after consultation with the Company’s outside legal and financial advisors and taking into account all of the terms and conditions of the Competing Proposal (including the identity of the Person making the Competing Proposal and the expected timing and likelihood of consummation, any governmental or other approval requirements (including divestitures and entry into other commitments and limitations), break-up fees, expense reimbursement provisions, conditions to consummation and availability of necessary financing (including, if a cash transaction (in whole or in part), the availability of such funds and the nature, terms and conditionality of any committed financing)) that the Company Board of Directors deems relevant, would result in a transaction that is more favorable from a financial point of view to the Company’s stockholders than the Mergers.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"ASTRO STONE INTERMEDIATE HOLDING, LLC\" and Target \"SELECT INTERIOR CONCEPTS, INC.\"; What is the Type of Consideration",
+      "snippets": [
+        {
+          "file_path": "maud/Select_Interior_Concepts_Astro_Stone.txt",
+          "span": [
+            38728,
+            39454
+          ],
+          "answer": "Section 2.2 Conversion of Shares. At the Effective Time: \n\n\n(a) Except as otherwise provided in Section 2.2(b) or Section 2.4, each share of Company Stock outstanding immediately prior to the Effective Time other than the shares of Company Stock referenced in Section 2.2(b) or Section 2.4 (the “Eligible Shares”) shall be converted into the right to receive $14.50 in cash, without interest (the “Merger Consideration”). As of the Effective Time, all of the Eligible Shares shall no longer be outstanding and shall automatically be canceled and retired and shall cease to exist, and shall thereafter represent only the right to receive the Merger Consideration to be paid in accordance with Section 2.3, without interest. \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Gray Television, Inc.\" and Target \"Meredith Corporation\"; Where is the Closing Conditions: Regulatory Approvals clause",
+      "snippets": [
+        {
+          "file_path": "maud/Meredith Corporation_Gray Television, Inc..pdf||Meredith Corporation_Gray Television, Inc. Amendment No.1.txt",
+          "span": [
+            245601,
+            247044
+          ],
+          "answer": "Section 7.1 Efforts. (a) Subject to the terms and conditions of this Agreement, including Section 7.1(i), each of the Company and Parent shall use reasonable best efforts to take, or cause to be taken, the following actions and do, or cause to be done, all incidental things necessary, proper or advisable under applicable Law to consummate and make effective the Merger and the other transactions contemplated by this Agreement as promptly as practicable after the date of this Agreement: (i) preparing and filing, in consultation with the other Parties, as promptly as practicable with any Governmental Authority or other Third Party all documentation to effect all necessary, proper or advisable filings, notices, petitions, statements, registrations, submissions of information, applications and other documents and (ii) obtaining and maintaining (and cooperating with each other to obtain or maintain) all approvals, consents, registrations, permits, authorizations and other confirmations required to be obtained from any Governmental Authority or other Third Party, in each case, that are necessary, proper or advisable to consummate and make effective the Merger and the other transactions contemplated by this Agreement (including the Station Divestiture) (whether or not such approvals, consents, registrations, permits, authorizations and other confirmations are conditions to the consummation of the Merger pursuant to Article VIII"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Kite Realty Group Trust\" and \"Retail Properties of America, Inc.\"; Where is the No-Shop Clause",
+      "snippets": [
+        {
+          "file_path": "maud/Retail_Properties_of_America_Inc_Kite_Realty_Group_Trust.txt",
+          "span": [
+            48084,
+            48330
+          ],
+          "answer": "“Representative” means, with respect to any Person, such Person’s directors, trustees, officers, employees, advisors (including attorneys, accountants, consultants, investment bankers, and financial advisors), agents and other representatives.   "
+        },
+        {
+          "file_path": "maud/Retail_Properties_of_America_Inc_Kite_Realty_Group_Trust.txt",
+          "span": [
+            332405,
+            335754
+          ],
+          "answer": "Section 7.3             No Solicitation; Company Acquisition Proposals.   (a)            Except as expressly permitted by this Section 7.3, Company shall not, and shall cause the Company Subsidiaries not to, and shall not authorize or permit any Representatives of Company or any of the Company Subsidiaries to, and shall instruct and use its reasonable best efforts to cause such Representatives not to, directly or indirectly, (i) solicit, initiate or knowingly encourage or facilitate any inquiry, proposal or offer with respect to, or the announcement, making or completion of, any Company Acquisition Proposal, or any inquiry, proposal or offer that would reasonably be expected to lead to any Company Acquisition Proposal or any other effort or attempt to make or implement a Company Acquisition Proposal, (ii) enter into, continue or otherwise participate or engage in any negotiations regarding, or furnish to any Person other than Parent or its Representatives any non-public information or data in connection with, any Company Acquisition Proposal, or any inquiry, proposal or offer that would reasonably be expected to lead to an Acquisition Proposal (other than to state that the terms of this Agreement prohibit such discussions), (iii) approve, recommend, publicly declare advisable or enter into any letter of intent, memorandum of understanding, agreement in principle, acquisition agreement, merger agreement, share exchange agreement, consolidation agreement, option agreement, joint venture agreement, partnership agreement or other agreement in each case related to a Company Acquisition Proposal (other than a Company Acceptable Confidentiality Agreement) or requiring or having the effect of requiring Company to abandon, terminate or violate its obligations hereunder or fail to consummate the Merger (each, a “Company Alternative Acquisition Agreement ”), or (iv) agree to or propose publicly to do any of the foregoing. Company shall, and shall cause each of the Company Subsidiaries and shall use its commercially reasonable efforts to cause the Representatives of Company and the Company Subsidiaries to, (A) immediately cease and cause to be terminated all existing discussions, negotiations and communications with any Person and its Representatives (other than Parent or any of its Representatives) conducted heretofore with respect to any Company Acquisition Proposal, (B) request the prompt return or destruction, to the extent required by any confidentiality agreement, of all confidential information previously furnished to any such Person and its Representatives, (C) terminate the access of any such Person (other than Parent, the Parent Subsidiaries and any of their respective Representatives) to any “data room” hosted by Company, the Company Subsidiaries or any of their respective Representatives relating to any Company Acquisition Proposal, and (D) not terminate, waive, amend, release or   \n\n\n91    \n\n\n  modify, any provision of any confidentiality, standstill (including any standstill provisions contained in any confidentiality or other agreement) or any similar agreement with respect to a Company Acquisition Proposal to which it or any of its Affiliates, including the Company Subsidiaries, or Representatives is a party, or any Takeover Statute, or otherwise fail to enforce any of the foregoing. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"SUPERNUS PHARMACEUTICALS, INC.\" and Target \"ADAMAS PHARMACEUTICALS, INC.\"; What are the Ordinary course of business covenants",
+      "snippets": [
+        {
+          "file_path": "maud/Adamas_Pharmaceuticals_Supernus_Pharmaceuticals.txt",
+          "span": [
+            169318,
+            170476
+          ],
+          "answer": "Section 6.2          Operation of the Business.   (a)            During the Pre-Closing Period: (i) except (A) as required or otherwise contemplated under this Agreement or as required by applicable Laws, (B) any action taken, or omitted to be taken, pursuant to COVID-19 Measures, (C) with the written consent of Parent (which consent shall not be unreasonably withheld, conditioned or delayed) or (D) as set forth in Section 6.2 of the Company Disclosure Schedule, the Company shall use its, and shall cause its Subsidiaries to use their, commercially reasonable efforts to (i) conduct in all material respects its business and operations in the ordinary course and (ii) preserve intact the material components of the current business organization of the Company and its Subsidiaries, including by maintaining their relations and goodwill with all material suppliers, material customers, Governmental Bodies and other material business relations (it being understood that with respect to the matters specifically addressed by any provision of Section 6.2(b), such specific provisions shall govern over the more general provision of this Section 6.2(a)).   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Gray Television, Inc.\" and Target \"Meredith Corporation\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date",
+      "snippets": [
+        {
+          "file_path": "maud/Meredith Corporation_Gray Television, Inc..pdf||Meredith Corporation_Gray Television, Inc. Amendment No.1.txt",
+          "span": [
+            121851,
+            122139
+          ],
+          "answer": "Section 3.10 Absence of Certain Changes. (a) From June 30, 2020 through the date of this Agreement, there has not been any effect, change, development or occurrence that has had or would reasonably be expected to have, individually or in the aggregate, a Company Material Adverse Effect. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Bridge Bancorp, Inc.\" and \"Dime Community Bancshares, Inc.\"; What is the Type of Consideration",
+      "snippets": [
+        {
+          "file_path": "maud/Dime Community Bancshares, Inc._Bridge Bancorp, Inc..txt",
+          "span": [
+            37892,
+            40065
+          ],
+          "answer": "3.1.3.      Subject to Section 3.1.4, each share of DCB Common Stock that is issued and outstanding immediately prior to the Effective Time (other than the Exception Shares) shall be converted into the right to receive 0.648 (the “Exchange Ratio”) validly issued, fully paid and nonassessable shares of Bridge Bancorp Common Stock (the “Merger Consideration”). Each share of DCB Common Stock converted into the right to receive the Merger Consideration pursuant to this Article III shall no longer be outstanding and shall automatically be canceled and shall cease to exist as of the Effective Time, and each certificate previously representing any such shares of DCB Common Stock (each, an “Old Certificate” , it being understood that any reference herein to “Old Certificate” shall be deemed to include reference to book-entry account statements relating to the ownership of shares of DCB Common Stock) shall thereafter represent only the right to receive (x) the Merger Consideration in accordance with, and subject to, this Section 3.1.3 and the other terms of this Article III, (y) cash in lieu of fractional shares that the shares of DCB Common Stock represented by such Old Certificate have been converted into the right to receive pursuant to this Section 3.1.3 and Section 3.1.4, without any interest thereon, and (z) any dividends or distributions that the holder thereof has the right to receive pursuant to Section 3.3.4, in the case of each of the foregoing, without interest and subject to all applicable withholding of Tax in accordance with Section 3.3.8. Old Certificates previously representing shares of DCB Common Stock shall be exchanged for evidence of shares in book-entry form or, at Bridge Bancorp’s option, certificates (collectively, referred to herein as “New Certificates”), representing the Merger Consideration (together with any dividends or distributions with respect thereto and cash in lieu of fractional shares issued in consideration therefor) upon the surrender of such Old Certificates in accordance with Section 3.3.1, without any interest thereon and subject to all applicable withholding of Tax in accordance with Section 3.3.8.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Mirasol Parent, LLC\" and Target \"RealPage, Inc.\"; What is the Definition of \"Interveining Event\"",
+      "snippets": [
+        {
+          "file_path": "maud/RealPage, Inc._Thoma Bravo, L.P..txt",
+          "span": [
+            220903,
+            221896
+          ],
+          "answer": "(i) the Company Board (or a committee thereof) may effect a Company Board Recommendation Change in response to any material event, fact, circumstance, development or occurrence that was (A) not known to, or reasonably foreseeable by, the Company Board as of the date hereof; and (B) does not relate to (a) any Acquisition Proposal (or any proposal or inquiry that constitutes, or is reasonably expected to lead to, an Acquisition Proposal); or (b) the mere fact, in and of itself, that the Company meets or exceeds any internal or published projections, forecasts, estimates or predictions of revenue, earnings or other financial or operating metrics for any period ending on or after the date hereof, or changes after the date hereof in the market price of the Company Common Stock or the credit rating of the Company (it being understood that the underlying cause of any of the foregoing in this clause (b) may be considered and taken into account); (each such event, an “Intervening Event”)"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Covert Intermediate, Inc.\" and Target \"Covanta Holding Corporation\"; What are the Ordinary course of business covenants",
+      "snippets": [
+        {
+          "file_path": "maud/Covanta_Holding_Corporation_EQT_Holdings_AB.txt",
+          "span": [
+            175753,
+            176679
+          ],
+          "answer": "Section 5.1 Conduct of the Company. From the date of this Agreement until the earlier to occur of the Effective Time and the termination of this Agreement in accordance with Article IX, except as (i) expressly permitted or required by this Agreement, (ii) set forth in Section 5.1 of the Company Disclosure Letter, (iii) the Company determines, in good faith, may be necessary or advisable in connection with any COVID-19 Measure, (iv) consented to in writing by Parent (such consent not to be unreasonably withheld, conditioned or delayed) or (v) required by applicable Law, the Company shall, and shall cause each of its Subsidiaries to, use its reasonable best efforts to conduct its business in all material respects in the ordinary course of business and preserve in all material respects its present relationships with key customers, suppliers, employees and other Persons with which it has material business relations. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"The Progressive Corporation\" and Target \"Protective Insurance Corporation\"; What are the Ordinary course of business covenants",
+      "snippets": [
+        {
+          "file_path": "maud/Protective Insurance Corporation_The Progressive Corporation.txt",
+          "span": [
+            45603,
+            45785
+          ],
+          "answer": "(g) References to the “ordinary course of business” shall mean any action taken by the Company that is generally consistent with the usual customs and past practices of the Company. "
+        },
+        {
+          "file_path": "maud/Protective Insurance Corporation_The Progressive Corporation.txt",
+          "span": [
+            140882,
+            141569
+          ],
+          "answer": "Section 6.01 Conduct of Business by the Company Pending the Merger.  During the period from the date of this Agreement through the earlier of the Closing and the termination of this Agreement, except for any COVID-19 Measures, as expressly permitted or required by this Agreement, as required by applicable Law or Order, as otherwise consented to by Parent in writing (which consent shall not be unreasonably withheld, conditioned or delayed), or as set forth in Section 6.01 of the Company Disclosure Letter, (x) the Company shall and shall cause each of its Subsidiaries to conduct their respective businesses and operations in the ordinary course of business in all material respects "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Chesapeake Energy Corporation\" and Target \"Vine Energy Inc.\"; What is the Definition of \"Superior Proposal\"",
+      "snippets": [
+        {
+          "file_path": "maud/Vine_Energy_Inc_Chesapeake_Energy.txt",
+          "span": [
+            324914,
+            326753
+          ],
+          "answer": "“Company Superior Proposal” means a bona fide Company Competing Proposal that is not solicited after the date of this Agreement by any Person or group (other than Parent or any of its Affiliates) to acquire, directly or indirectly, (a) businesses or assets of the Company or any of its Subsidiaries (including capital stock of or ownership interest in any Subsidiary) that account for 50% or more of the fair market value of such assets or that generated 50% or more of the Company’s and its Subsidiaries’ net revenue or earnings before interest, Taxes, depreciation and amortization for the preceding twelve (12) months, respectively, or (b) 50% or more of the total voting power or of any class of equity securities of the Company or those of any of its Subsidiaries, in each case whether by way of merger, amalgamation, share exchange, tender offer, exchange offer, recapitalization, consolidation, sale of assets or otherwise, that in the good faith determination of the Company Board, (i) if consummated, would result in a transaction more favorable to the Company’s stockholders (in their capacity as such) than the First Merger (after taking into account the time likely to be required to consummate such proposal and any adjustments or revisions to the terms of this Agreement offered by Parent in response to such proposal or otherwise) and (ii) is reasonably likely to be consummated on the terms proposed, in each case taking into account any legal, financial, regulatory and stockholder approval requirements, including the sources, availability and terms of any financing, financing market conditions and the existence of a financing contingency, the likelihood of termination, the timing of Closing, the identity of the Person or Persons making the proposal and any other aspects considered relevant by the Company Board. \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Gibraltar Acquisition Holdings LLC\" and Target \"W. R. Grace & Co.\"; Where is the Specific Performance clause",
+      "snippets": [
+        {
+          "file_path": "maud/W_R_Grace_Co_40_North_Management_LLC.txt",
+          "span": [
+            263917,
+            265947
+          ],
+          "answer": "SECTION 9.10           Specific Enforcement.   (a)           The Parties acknowledge and agree that irreparable damage for which monetary damages, even if available, would not be an adequate remedy, would occur in the event that any Party does not perform any of the provisions of this Agreement (including failing to take such actions as are required of it hereunder to consummate this Agreement) in accordance with their specific terms or otherwise breach or threaten to breach any such provisions. It is accordingly agreed that, at any time prior to the termination of this Agreement pursuant to Article VIII, subject to the limitations in Section 8.02(d)(i), Section 8.02(d)(ii) and Section 9.10(b), the Parties shall be entitled to an injunction or injunctions, specific performance and other equitable relief to prevent breaches or threatened breaches of this Agreement and to enforce specifically the performance of terms and provisions of this Agreement, including the right of a Party to cause each other Party to consummate the Merger and the other transactions contemplated by this Agreement on the terms and subject to the conditions of this Agreement in any court referred to in Section 9.11 without proof of actual damages (and each Party hereby waives any requirement for the securing or posting of any bond in connection with such remedy), this being in addition to any other remedy to which they are entitled at law or in equity. The Parties further agree not to assert that a remedy of specific enforcement is unenforceable, invalid, contrary to Law or inequitable or not appropriate for any reason, nor to assert that a remedy of monetary damages would provide an adequate remedy for any such breach. The Parties hereto agree that, notwithstanding any other provision of this Agreement to the contrary, but subject to Section 9.10(b), the Company shall be entitled to specific performance (or any other equitable relief) to cause Parent and Merger Sub to consummate the Closing on the terms set forth herein.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Alaska Communications Systems Group, Inc.\" and \"Project 8 MergerSub, Inc.\"; Where is the Closing Conditions: Regulatory Approvals clause",
+      "snippets": [
+        {
+          "file_path": "maud/Alaska Communications Systems Group, Inc._Investment Group.txt",
+          "span": [
+            249281,
+            250088
+          ],
+          "answer": "Subject to the terms and conditions of this Agreement, the Company and Parent shall use their reasonable best efforts to take, or cause to be taken, all actions and to do, or cause to be done, and to assist and cooperate with the other parties in doing, all things necessary, proper or advisable under Applicable Law to consummate the transactions contemplated by this Agreement, including (i) using reasonable best efforts to obtain all necessary actions or non-actions, waivers, consents and approvals from Governmental Authorities and the making of all necessary registrations and filings (including filings with Governmental Authorities, if any) and the taking of such steps as may be reasonably necessary to obtain an approval or waiver from, or to avoid a Proceeding by, any Governmental Authorities, "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"BancorpSouth Bank\" and \"Cadence Bancorporation\"; What are the Ordinary course of business covenants",
+      "snippets": [
+        {
+          "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
+          "span": [
+            202344,
+            203028
+          ],
+          "answer": "5 . 1        Conduct of Businesses Prior to the Effective Time. During the period from the date of this Agreement to the Effective Time or earlier termination of this Agreement, except as expressly contemplated or permitted by this Agreement (including as set forth in the Cadence Disclosure Schedule or the BancorpSouth Disclosure Schedule), required by law (including the Pandemic Measures) or as consented to in writing by the other party (such consent not to be unreasonably withheld, conditioned or delayed), each of BancorpSouth and Cadence shall, and shall cause each of its respective Subsidiaries to, (a) conduct its business in the ordinary course in all material respects, "
+        },
+        {
+          "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
+          "span": [
+            298189,
+            298440
+          ],
+          "answer": "(vi) the terms “ordinary course” and “ordinary course of business” with respect to either party, shall take into account the commercially reasonable actions taken by such party and its Subsidiaries in response to a Pandemic and the Pandemic Measures. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Project Quick Parent, LLC\" and Target \"QAD Inc.\"; What are the Ordinary course of business covenants",
+      "snippets": [
+        {
+          "file_path": "maud/QAD Inc._Thoma Bravo, L.P..txt",
+          "span": [
+            177283,
+            178568
+          ],
+          "answer": "Section 6.1    Conduct of Business by the Company.    During such period, and except (i) as expressly permitted or required by this Agreement, (ii) as may be required by applicable Law or pursuant to the terms of any Company Benefit Plan as in effect on the date hereof, (iii) for any actions taken reasonably and in good faith in response to COVID-19 or COVID-19 Measures, (iv) as set forth in Section 6.1 of the Company Disclosure Letter or (v) with the prior written consent of Parent (which consent will not be unreasonably withheld, conditioned or delayed):   (a)    the Company shall, and shall cause each Company Subsidiary to (A) use its reasonable best efforts to conduct its business and the business of the Company Subsidiaries in the ordinary course in all material respects, and, to the extent consistent therewith, (B) use commercially reasonable efforts to preserve intact its business organizations, goodwill and assets and maintain its rights, franchises and existing relations with customers, suppliers, officers, employees and business associates (it being agreed that no action or omission by the Company or any Company Subsidiary with respect to a matter specifically addressed by any provision of Section 6.1(b) will be deemed a breach of this Section 6.1(a)).   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"STERIS plc\" and Target \"Cantel Medical Corp.\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date",
+      "snippets": [
+        {
+          "file_path": "maud/Cantel Medical Corp._STERIS plc.pdf||Cantel Medical Corp._STERIS plc. Amendment No. 1.txt",
+          "span": [
+            83818,
+            84101
+          ],
+          "answer": "Section 3.10      Absence of Certain Changes or Events.   (a)       From July 31, 2020 through the date of this Agreement, there has not occurred any Effect that has had, or would reasonably be expected to have, individually or in the aggregate, a Company Material Adverse Effect.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Glacier Bancorp, Inc.\" and \"Altabancorp\"; What is the Definition of \"Material Adverse Effect\"",
+      "snippets": [
+        {
+          "file_path": "maud/Altabancorp_Glacier Bancorp, Inc..txt",
+          "span": [
+            22731,
+            25861
+          ],
+          "answer": "“Material Adverse Effect” with respect to a Person means an effect that: (a) is materially adverse to the business, financial condition or results of operations of the Person and its Subsidiaries taken as a whole; or (b) materially and adversely affects the ability of the Person to consummate the Merger on or by the Termination Date or to perform its material obligations under this Agreement; provided, however, that a Material Adverse Effect shall not be deemed to include the impact of or be deemed to occur as a result of, either alone or in combination, any effects to the extent attributable to: (i) any changes in Laws or other changes affecting depository institutions generally; (ii) any changes to GAAP or regulatory accounting requirements; (iii) any changes in general economic conditions; (iv) any changes in prevailing interest and deposit rates, or changes in financial, securities or credit markets; (v) any changes in national or international political or social conditions, including any outbreak or escalation of major hostilities or acts of terrorism which involves the United States, declarations of any national or global epidemic, pandemic or disease outbreak (including the Covid-19 virus), or the material worsening of such conditions threatened or existing as of the date of this Agreement; (vi) any modifications or changes to valuation policies and practices in connection with the Transactions or restructuring charges taken in connection with the Transactions, in each case in accordance with GAAP; (vii) (A) any actions taken or not taken or (B) modifications or changes made, or failure to make modifications or changes, by AB or the Bank to AB’s or the Bank’s general business, practices or policies, in each case, at the request of GBCI; (viii) the impact of the public announcement of, pendency of or completion of the Transactions on relationships with customers and employees; (ix) any failure, in and of itself, to meet internal projections or forecasts (except that the facts or circumstances giving rise or contributing to such failure may nonetheless constitute, or be taken into account in determining whether there has been, a Material Adverse Effect); (x) any actions or omissions of a party taken with the prior consent of the other, or which have been waived in writing by the other party, or in contemplation of the Transactions as required or permitted hereunder, or as required under any regulatory approval received in connection with the Transactions; or (xi) any changes in the trading price or trading volume of securities of such Person on the NASDAQ Global Select Market or NASDAQ Capital Market (except that the facts or circumstances giving rise or contributing to such failure may nonetheless constitute, or be taken into account in determining whether there has been, a Material Adverse Effect), as applicable, or any other securities trading market, except, in the case of clauses (i), (ii), (iii), (iv), and (v), to the extent such event does not have a materially more adverse effect on such party than experienced by similarly situated depository institutions. \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Graham Holdings Company\" and Target \"Leaf Group Ltd.\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date",
+      "snippets": [
+        {
+          "file_path": "maud/Leaf Group Ltd._Graham Holdings Company.txt",
+          "span": [
+            95366,
+            95833
+          ],
+          "answer": "Section 3.5.           Absence of Certain Changes.   (a)           Since the date of the Most Recent Balance Sheet through the date hereof, (i) the Acquired Companies have conducted their businesses in all material respects in the ordinary course of consistent with past practice and (ii) there has not been any Effect that has had or would reasonably be expected to have, individually or in the aggregate with all other Effects, a Company Material Adverse Effect.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Bonanza Creek Energy, Inc.\" and \"HighPoint Resources Corporation\"; What is the Definition of \"Interveining Event\"",
+      "snippets": [
+        {
+          "file_path": "maud/HighPoint Resources Corporation_Bonanza Creek Energy, Inc..pdf||HighPoint Resources Corporation_Bonanza Creek Energy, Inc. Amendment No. 1.txt",
+          "span": [
+            417272,
+            418003
+          ],
+          "answer": "“Company Intervening Event” means a development, event, effect, state of facts, condition, occurrence or change in circumstance that is material to the Company that occurs or arises after the date of this Agreement that was not known to or reasonably foreseeable by the Company Board as of the date of this Agreement (or if known, the magnitude or material consequences of which were not known by the Company Board as of the date of this Agreement); provided, however, that in no event shall the receipt, existence or terms of a Company Competing Proposal or any matter relating thereto or of consequence thereof constitute a Company Intervening Event. A Company Intervening Event may include an Involuntary Insolvency Event. \n\n\n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Banc of California, Inc.\" and Target \"Pacific Mercantile Bancorp\"; Is there a Tail provision for acquisition proposals",
+      "snippets": [
+        {
+          "file_path": "maud/Pacific Mercantile Bancorp_Banc of California, Inc..txt",
+          "span": [
+            230411,
+            230455
+          ],
+          "answer": "7.02 Effect of Termination and Abandonment. "
+        },
+        {
+          "file_path": "maud/Pacific Mercantile Bancorp_Banc of California, Inc..txt",
+          "span": [
+            231014,
+            231238
+          ],
+          "answer": "(b) (i) The Company shall pay a termination fee of $8,500,000 (the “Termination Fee”) to Parent payable by wire transfer of immediately available funds to an account specified by Parent in the event of any of the following: "
+        },
+        {
+          "file_path": "maud/Pacific Mercantile Bancorp_Banc of California, Inc..txt",
+          "span": [
+            231787,
+            231958
+          ],
+          "answer": "(3) within twelve (12) months of the termination of this Agreement, the Company enters into a definitive agreement with respect to or consummates an Acquisition Proposal; "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"BancorpSouth Bank\" and \"Cadence Bancorporation\"; What happens during a Breach of No-Shop clause",
+      "snippets": [
+        {
+          "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
+          "span": [
+            256281,
+            256363
+          ],
+          "answer": "6.14       Acquisition Proposals.   (a)         Each party agrees that it will not"
+        },
+        {
+          "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
+          "span": [
+            256610,
+            256746
+          ],
+          "answer": "(i) initiate, solicit, knowingly encourage or knowingly facilitate any inquiries or proposals with respect to any Acquisition Proposal, "
+        },
+        {
+          "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
+          "span": [
+            280397,
+            280594
+          ],
+          "answer": "8 . 1     Termination. This Agreement may be terminated at any time prior to the Effective Time, whether before or after receipt of the Requisite Cadence Vote or the Requisite BancorpSouth Vote:   "
+        },
+        {
+          "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
+          "span": [
+            283420,
+            283449
+          ],
+          "answer": "(f)      by BancorpSouth, if "
+        },
+        {
+          "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
+          "span": [
+            283542,
+            283716
+          ],
+          "answer": "(ii) Cadence or the Board of Directors of Cadence shall have breached its obligations under Section 6.4 or 6.14 in any material respect.   8.2       Effect of Termination.   "
+        },
+        {
+          "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
+          "span": [
+            286805,
+            287061
+          ],
+          "answer": "(ii)        I n the event that this Agreement is terminated by BancorpSouth pursuant to Section 8.1(f), then Cadence shall pay BancorpSouth, by wire transfer of same-day funds, the Termination Fee within two (2) business days of the date of termination.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Graham Holdings Company\" and Target \"Leaf Group Ltd.\"; Where is the No-Shop Clause",
+      "snippets": [
+        {
+          "file_path": "maud/Leaf Group Ltd._Graham Holdings Company.txt",
+          "span": [
+            191735,
+            192587
+          ],
+          "answer": "Section 5.2. No Solicitation.   (a)The Company will not, and shall cause each of its Subsidiaries not to, and will not authorize the Representatives of any Acquired Company to, in each case, directly or indirectly:   (i)    solicit, initiate, propose, knowingly encourage or knowingly take any action designed to facilitate the submission or announcement of any Acquisition Proposal or Acquisition Inquiry (including by approving any transaction, or approving any Person becoming an “interested stockholder,” for purposes of Section 203 of the DGCL);   (ii)furnish any information regarding the Acquired Companies or afford access to the business, properties, assets, books or records of any Acquired Company to any Third Party in connection with, for the purpose of encouraging, or in response to, an Acquisition Proposal or Acquisition Inquiry;   \n\n\n"
+        },
+        {
+          "file_path": "maud/Leaf Group Ltd._Graham Holdings Company.txt",
+          "span": [
+            192595,
+            193642
+          ],
+          "answer": "(iii)   engage in, continue or otherwise participate in any discussions or negotiations with any Person with respect to, or otherwise cooperate with, any Acquisition Proposal or Acquisition Inquiry; or   (iv)amend or grant any waiver or release under any standstill or similar agreement with respect to any class of Company Securities or Company Subsidiary Securities; provided, however, that if, and only if, the Company Board determines in good faith, after consultation with its outside legal counsel, that the failure to amend or grant any waiver or release under any such standstill or similar agreement would be inconsistent with the directors’ fiduciary duties under the DGCL, the Company may then amend or grant a waiver or release under such standstill or similar agreement, to the extent necessary to permit a Third Party to make, on a confidential basis to the Company Board, an Acquisition Proposal, conditioned upon such Third Party agreeing to disclosure of such Acquisition Proposal to Parent as contemplated by this Section 5.2;   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"American Tower Corporation\" and Target \"CoreSite Realty Corporation\"; Where is the Closing Conditions: Regulatory Approvals clause",
+      "snippets": [
+        {
+          "file_path": "maud/CoreSite_Realty_Corporation_American_Tower_Corporation.txt",
+          "span": [
+            197234,
+            198426
+          ],
+          "answer": "Section 6.2               Consents and Approvals.   (a)             Subject to the terms and conditions set forth in this Agreement, each of the Parties shall use reasonable best efforts to promptly take, or cause to be taken, all actions, and to promptly do, or cause to be done, and to assist and cooperate with the other parties in doing, all things necessary, proper or advisable under applicable Laws to consummate and make effective the Mergers and the other transactions contemplated by this Agreement as promptly as practicable after the date of this Agreement and in any event prior to the End Date, including (i) the obtaining of all necessary actions or nonactions, authorizations, permits, waivers, consents, clearances, approvals and expirations or terminations of waiting periods (collectively, “Consents”), including the Company Approvals and the Parent Approvals, from Governmental Entities and the making of all necessary registrations and filings and the taking of all steps as may be necessary to obtain an approval, clearance or waiver from, or to avoid an action or proceeding by, any Governmental Entity, (ii) the obtaining of all necessary Consents from third parties, "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"VENTAS, INC.\" and Target \"NEW SENIOR INVESTMENT GROUP INC.\"; Where is the Closing Conditions: Regulatory Approvals clause",
+      "snippets": [
+        {
+          "file_path": "maud/New Senior Investment Group Inc._Ventas, Inc..txt",
+          "span": [
+            182124,
+            184499
+          ],
+          "answer": "Section 5.3         Efforts; Notice of Certain Events.   (a)        Subject to the terms and conditions of this Agreement, each of Parent and the Company shall use its reasonable best efforts to take, or cause to be taken, all actions and to do promptly, or cause to be done promptly, and to assist and cooperate with each other in doing, all things necessary, proper or advisable under applicable Law to consummate and make effective the Merger and the other transactions contemplated by this Agreement, including preparing and filing as promptly as practicable all documentation to effect all necessary filings, notices, petitions, statements, registrations, submissions of information, applications and other documents necessary to consummate the Merger and the other transactions contemplated by this Agreement. In furtherance and not in limitation of the foregoing, each of Parent and the Company shall (i) use its reasonable best efforts to cooperate with the other Party in determining which filings are required to be made prior to the Closing with, and which consents, clearances, approvals, permits or authorizations are required to be obtained prior to the Closing from, any Governmental Entity or any other Person in connection with the execution and delivery of this Agreement and the consummation of the Merger and the other transactions contemplated by this Agreement and in timely making all such filings, (ii) promptly furnish the other Party, subject in appropriate cases to appropriate confidentiality agreements to limit disclosure to outside lawyers and consultants, with such information and reasonable assistance as such other Party may reasonably request in connection with their preparation of necessary filings, registrations and submissions of information to any Governmental Entity, (iii) supply as promptly as reasonably practicable any additional information and documentary material that may be requested pursuant to any applicable Laws by any Governmental Entity, and (iv) take or cause to be taken all other actions necessary, proper or advisable to obtain applicable clearances, consents, authorizations, approvals or waivers and cause the expiration or termination of the applicable waiting periods with respect to the Merger and the other transactions contemplated by this Agreement under any applicable Laws as promptly as practicable.   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"The Goodyear Tire & Rubber Company\" and Target \"Cooper Tire & Rubber Company\"; Is there a Tail provision for acquisition proposals",
+      "snippets": [
+        {
+          "file_path": "maud/Cooper Tire _ Rubber Company_The Goodyear Tire _ Rubber Company.txt",
+          "span": [
+            317660,
+            317717
+          ],
+          "answer": "Section 8.2 Effect of Termination; Financing Sources. \n\n\n"
+        },
+        {
+          "file_path": "maud/Cooper Tire _ Rubber Company_The Goodyear Tire _ Rubber Company.txt",
+          "span": [
+            319355,
+            319391
+          ],
+          "answer": "(b) If this Agreement is terminated "
+        },
+        {
+          "file_path": "maud/Cooper Tire _ Rubber Company_The Goodyear Tire _ Rubber Company.txt",
+          "span": [
+            319884,
+            320159
+          ],
+          "answer": "(B) at any time on or prior to the first anniversary of such termination the Company or any of its Subsidiaries enters into a definitive agreement with respect to any Company Takeover Proposal or any transactions contemplated by any Company Takeover Proposal are consummated "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"ASTRO STONE INTERMEDIATE HOLDING, LLC\" and Target \"SELECT INTERIOR CONCEPTS, INC.\"; What are the Ordinary course of business covenants",
+      "snippets": [
+        {
+          "file_path": "maud/Select_Interior_Concepts_Astro_Stone.txt",
+          "span": [
+            35861,
+            36112
+          ],
+          "answer": "With respect to an action taken or not taken by any Person, “ordinary course” means an action or inaction that is consistent in nature, scope, frequency, timing and magnitude with the ordinary course of business and the past practices of such Person. "
+        },
+        {
+          "file_path": "maud/Select_Interior_Concepts_Astro_Stone.txt",
+          "span": [
+            136209,
+            136669
+          ],
+          "answer": "Section 6.1 Conduct of the Company. Except as set forth in Section 6.1 of the Company Disclosure Schedule, from the date hereof until the Effective Time, the Company shall, and shall cause each of its Subsidiaries to, conduct its business in the ordinary course, and use commercially reasonable efforts to preserve intact its business organizations and relationships with third parties and to keep available the services of its present officers and employees. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Century Bancorp, Inc.\" and \"Eastern Bankshares, Inc.\"; What is the Definition of \"Superior Proposal\"",
+      "snippets": [
+        {
+          "file_path": "maud/Century Bancorp, Inc._Eastern Bankshares, Inc..txt",
+          "span": [
+            195354,
+            196263
+          ],
+          "answer": "As used in this Agreement, “Superior Proposal” shall mean a bona fide written Company Acquisition Proposal (with all of the percentages included in the definition of Company Acquisition Proposal increased to fifty percent (50%)) received after the date hereof that was not solicited or negotiated in breach of this Section 6.9, that the Board of Directors of Company determines in good faith, after receiving the advice of its outside counsel and, with respect to financial matters, its financial advisors, such proposal (A) is reasonably likely to be completed in accordance with its terms, taking into account all financial, legal, regulatory and other aspects of such proposal, including all conditions contained therein and the person making such proposal, and (B) would be more favorable to the shareholders of Company from a financial point of view than the transactions contemplated by this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Merger Agreement between \"Capstead Mortgage Corporation\" and \"Rodeo Sub I, LLC\"; What is the Definition of \"Knowledge\"",
+      "snippets": [
+        {
+          "file_path": "maud/Capstead_Mortgage_Corp_Benefit_Street_Partners.pdf||Capstead_Mortgage_Corp_Benefit_Street_Partners_Amendment No.1.txt",
+          "span": [
+            321704,
+            321851
+          ],
+          "answer": "“knowledge” means the actual knowledge of, (a) in the case of the Company, the individuals listed in Schedule 1.1 of the Company Disclosure Letter "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"ANALOG DEVICES, INC.\" and Target \"MAXIM INTEGRATED PRODUCTS, INC.\"; What happens during a Breach of Shareholder Meeting Covenant",
+      "snippets": [
+        {
+          "file_path": "maud/Maxim Integrated Products, Inc._Analog Devices, Inc..txt",
+          "span": [
+            186200,
+            186280
+          ],
+          "answer": "4.5    Meeting of the Company’s Stockholders; Company Change in Recommendation. "
+        },
+        {
+          "file_path": "maud/Maxim Integrated Products, Inc._Analog Devices, Inc..txt",
+          "span": [
+            281691,
+            281716
+          ],
+          "answer": "6.3    Termination Fees. "
+        },
+        {
+          "file_path": "maud/Maxim Integrated Products, Inc._Analog Devices, Inc..txt",
+          "span": [
+            282492,
+            282732
+          ],
+          "answer": "(c)    If this Agreement is terminated by Parent or the Company pursuant to Section 6.1(f) or by Parent pursuant to Section 6.1(h) (ii) as a result of a material breach of the covenants or agreements set forth in Section 4.2 or Section 4.5 "
+        },
+        {
+          "file_path": "maud/Maxim Integrated Products, Inc._Analog Devices, Inc..txt",
+          "span": [
+            284048,
+            284117
+          ],
+          "answer": "the Company shall cause to be paid to Parent the Termination Fee. \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Iconix Acquisition LLC\" and Target \"Iconix Brand Group, Inc.\"; What is the Definition of \"Knowledge\"",
+      "snippets": [
+        {
+          "file_path": "maud/Iconix_Brand_Group_Lancer Capital.txt",
+          "span": [
+            29295,
+            29529
+          ],
+          "answer": "“Knowledge of the Company” (or similar phrases) means the actual knowledge of any of the following individuals: Bob Galvin, Kyle Harmon, and John T. McClain, in each case, after reasonable inquiry of such individual’s direct reports. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Philips Holding USA Inc.\" and Target \"BioTelemetry, Inc.\"; What is the Definition of \"Knowledge\"",
+      "snippets": [
+        {
+          "file_path": "maud/BioTelemetry, Inc._Koninklijke Philips N.V..txt",
+          "span": [
+            32137,
+            32316
+          ],
+          "answer": "“Knowledge” or any similar phrase means (a) with respect to the Company, the actual knowledge of the individuals set forth in Section 1.01 of the Company Disclosure Schedule, and "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Elanco Animal Health Incorporated\" and Target \"Kindred Biosciences, Inc.\"; Where is the No-Shop Clause",
+      "snippets": [
+        {
+          "file_path": "maud/Kindred Biosciences, Inc._Elanco Animal Health Incorporated.pdf||Kindred_Biosciences_Inc_Elanco_Animal_Health_Incorporated Amendment No.1.txt",
+          "span": [
+            146261,
+            148983
+          ],
+          "answer": "Section 6.2.          Solicitation by the Company.   (a)               From and after the date of this Agreement until the earlier of the Effective Time and the date, if any, on which this Agreement is validly terminated pursuant to Section 9.1:   (i)                 the Company shall not (and shall cause each Company Subsidiary not to), and shall not authorize or knowingly permit its or any Company Subsidiary’s directors, officers, employees and other Representatives to, directly or indirectly: (1) solicit, initiate or knowingly encourage or knowingly facilitate any inquiry, proposal or offer, or the making, submission or announcement of any inquiry, proposal or offer, which constitutes or could reasonably be expected to lead to an Acquisition Proposal; (2) enter into, continue or otherwise participate in discussions or any negotiations regarding, furnish to any Person any nonpublic information relating to the Company or any Company Subsidiary in connection with, or afford access to the business, personnel, properties, assets, books or records of the Company or any Company Subsidiary in connection with, an Acquisition Proposal; (3) grant any waiver, amendment or release of or under, any confidentiality, standstill or similar agreement (or any confidentiality, standstill or similar provision of any other Contract) with respect to the Company Shares or all or any material portion of the assets of the Company and the Company Subsidiaries, provided, that if and only if the Company Board of Directors determines in good faith, after consultation with its outside legal counsel, that the failure to grant any waiver, or amend or release, under or of any such standstill or similar agreement would be inconsistent with the directors’ fiduciary duties under applicable Law, then the Company may waive, amend or release such standstill or similar agreement solely to the extent necessary to permit a Person to make, on a confidential basis to the Company Board of Directors, an Acquisition Proposal, provided that the Company is not restricted from disclosing such Acquisition Proposal to Parent as contemplated by this Section 6.2; (4) enter into any letter of intent, agreement, contract, commitment or agreement in principle with respect to an Acquisition Proposal or enter into any agreement, contract or commitment requiring the Company to abandon, terminate or fail to consummate the Transactions; (5) take any action or exempt any Person from the restriction on “business combinations” or any similar provision contained in applicable Takeover Statutes or the Company Governing Documents or grant a waiver under Section 203 of the DGCL, or (6) resolve, propose or agree to do any of the foregoing, "
+        },
+        {
+          "file_path": "maud/Kindred Biosciences, Inc._Elanco Animal Health Incorporated.pdf||Kindred_Biosciences_Inc_Elanco_Animal_Health_Incorporated Amendment No.1.txt",
+          "span": [
+            151958,
+            152211
+          ],
+          "answer": "Without limiting the foregoing, it is agreed that any violation of the foregoing restrictions by the Company Subsidiary or any Representative of the Company or the Company Subsidiary shall be deemed to be a breach of this Section 6.2(a) by the Company. "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"SPB Hospitality LLC\" and Target \"J. Alexander’s Holdings, Inc.\"; What is the Definition of \"Knowledge\"",
+      "snippets": [
+        {
+          "file_path": "maud/J_Alexander_s_Holdings_Inc_SPB_Hospitality_LLC.txt",
+          "span": [
+            292496,
+            292809
+          ],
+          "answer": "“Knowledge” means, with respect to the Company or Parent, the actual knowledge, and such knowledge that would be obtained after conducting a reasonable inquiry of such Person’s direct reports, of the Persons set forth in Section 8.12 of the Company Disclosure Schedule or the officers of Parent, respectively. \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Newport Holdings, LLC\" and Target \"The New Home Company Inc.\"; Information about the Fiduciary Termination Right Triggers for termination",
+      "snippets": [
+        {
+          "file_path": "maud/New_Home_Co_Apollo_Global_Management.txt",
+          "span": [
+            273596,
+            273861
+          ],
+          "answer": "8.1 Termination. This Agreement may be terminated and the transactions contemplated hereby may be abandoned (with respect to Sections 8.1(b) through 8.1(i), by written notice by the terminating party to the other party) at any time prior to the Acceptance Time: \n\n\n"
+        },
+        {
+          "file_path": "maud/New_Home_Co_Apollo_Global_Management.txt",
+          "span": [
+            276232,
+            276932
+          ],
+          "answer": "(e) by the Company, at any time prior to the Acceptance Time, in order to enter into a definitive agreement with respect to a Superior Company Proposal, but only if the Company has not breached, in any respect (other than a de minimis breach), its obligations under Section 6.3 with respect to such Superior Company Proposal; provided, that the Company (i) pays, or causes to be paid, to Parent the Company Termination Fee payable pursuant to Section 8.3(a) prior to or concurrently with such termination and (ii) immediately following or concurrently with such termination, enters into a definitive acquisition agreement that documents the terms and conditions of such Superior Company Proposal; \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"ANALOG DEVICES, INC.\" and Target \"MAXIM INTEGRATED PRODUCTS, INC.\"; What is the Definition of \"Knowledge\"",
+      "snippets": [
+        {
+          "file_path": "maud/Maxim Integrated Products, Inc._Analog Devices, Inc..txt",
+          "span": [
+            335918,
+            336084
+          ],
+          "answer": "“knowledge of the Company” shall mean the knowledge, after reasonable inquiry, of the individuals listed in Part “Definitions” of the Company Disclosure Schedule. \n\n\n"
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Elanco Animal Health Incorporated\" and Target \"Kindred Biosciences, Inc.\"; Information about the Fiduciary Termination Right Triggers for termination",
+      "snippets": [
+        {
+          "file_path": "maud/Kindred Biosciences, Inc._Elanco Animal Health Incorporated.pdf||Kindred_Biosciences_Inc_Elanco_Animal_Health_Incorporated Amendment No.1.txt",
+          "span": [
+            214582,
+            214763
+          ],
+          "answer": "Section 9.1.          Termination. This Agreement may be terminated and the Merger and the other Transactions may be abandoned, at any time before the Effective Time, as follows:   "
+        },
+        {
+          "file_path": "maud/Kindred Biosciences, Inc._Elanco Animal Health Incorporated.pdf||Kindred_Biosciences_Inc_Elanco_Animal_Health_Incorporated Amendment No.1.txt",
+          "span": [
+            220176,
+            221125
+          ],
+          "answer": "(h)               by the Company, at any time prior to obtaining the Requisite Company Vote, in order to enter into a Specified Agreement in connection with a Superior Proposal, provided, that (i) such Superior Proposal shall not have resulted from a breach of Section 6.2(e)(i), (ii) the Company Board of Directors, after satisfying all of the requirements set forth in Section 6.2(e)(i), shall have authorized the Company to enter into a binding written definitive acquisition agreement providing for the consummation of a transaction constituting a Superior Proposal (a “Specified Agreement”) and (ii) the Company shall have paid the Termination Fee (but payment of such fee may be delayed only if and until Parent shall have previously provided wire transfer instructions pursuant to Section 9.2(b)(iv)), and shall have entered into the Specified Agreement, concurrently with the termination of this Agreement pursuant to this Section 9.1(h).   "
+        }
+      ]
+    },
+    {
+      "query": "Consider the Acquisition Agreement between Parent \"Sky Parent Inc.\" and Target \"Cloudera, Inc.\"; Information about the Fiduciary Termination Right Triggers for termination",
+      "snippets": [
+        {
+          "file_path": "maud/Cloudera, Inc._Investment Group.txt",
+          "span": [
+            315819,
+            316129
+          ],
+          "answer": "8.1    Termination. This Agreement may be validly terminated, and the transactions contemplated by this Agreement may be abandoned, at any time prior to the Effective Time only as follows (it being understood and agreed that this Agreement may not be terminated for any other reason or on any other basis): \n\n\n"
+        },
+        {
+          "file_path": "maud/Cloudera, Inc._Investment Group.txt",
+          "span": [
+            321565,
+            322282
+          ],
+          "answer": "(h)    by the Company, at any time prior to receiving the Requisite Stockholder Approval, if (i) the Company has received a Superior Proposal; (ii) the Company Board (or a committee thereof) has authorized the Company to enter into a definitive Alternative Acquisition Agreement to consummate the Acquisition Transaction contemplated by that Superior Proposal in accordance with Section 5.3; (iii) the Company has complied in all material respects with its obligations under Section 5.3 with respect to such Superior Proposal; and (iv) substantially concurrently with (but no later than the date of) such termination the Company pays the Company Termination Fee due to Parent in accordance with Section 8.3(b); or \n\n\n"
+        }
+      ]
+    }
+  ]
+}
