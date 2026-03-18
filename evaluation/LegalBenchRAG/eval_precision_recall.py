@@ -68,14 +68,14 @@ from evaluation.LegalBenchRAG.loader import (
     BenchmarkTestCase,
     load_benchmark,
 )
-from evaluation.LegalBenchRAG.pipeline import INDEX_NAME
+from evaluation.LegalBenchRAG.pipeline import DEFAULT_INDEX_NAME
 
 logger = logging.getLogger(__name__)
 
 # ── Retrieval ─────────────────────────────────────────────────────────────────
 
 
-def build_retriever(top_k: int) -> OpenSearchRetriever:
+def build_retriever(top_k: int, index_name: str = DEFAULT_INDEX_NAME) -> OpenSearchRetriever:
     cfg = settings.opensearch
     lb_cfg = OpenSearchSettings(
         **{
@@ -84,11 +84,13 @@ def build_retriever(top_k: int) -> OpenSearchRetriever:
             "OPENSEARCH_USER": cfg.user,
             "OPENSEARCH_PASSWORD": cfg.password,
             "OPENSEARCH_USE_SSL": cfg.use_ssl,
-            "OPENSEARCH_INDEX_NAME": INDEX_NAME,
+            "OPENSEARCH_INDEX_NAME": index_name,
         }
     )
     embedder = build_embedder()
     os_client = OpenSearchClient(cfg=lb_cfg, embedding_dim=embedder.dim)
+    # Ensure the hybrid search pipeline exists (idempotent — safe to call every time)
+    os_client._ensure_hybrid_pipeline()
     return OpenSearchRetriever(os_client, embedder, mode="hybrid", top_k=top_k)
 
 
@@ -174,6 +176,7 @@ def aggregate(
     scores: list[QueryScore],
     benchmark_names: list[str],
     ks: list[int],
+    index_name: str = DEFAULT_INDEX_NAME,
 ) -> None:
     """Print a summary table: Recall@K and Precision@K per benchmark + overall."""
     per_bm: dict[str, list[QueryScore]] = defaultdict(list)
@@ -215,7 +218,7 @@ def aggregate(
         print(fmt_row("OVERALL", scores, metric))
 
     print(f"\n{'─' * width}")
-    print(f"  Index : {INDEX_NAME}  |  K values: {ks}")
+    print(f"  Index : {index_name}  |  K values: {ks}")
     print()
 
 
@@ -278,6 +281,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Rank cutoffs to evaluate (default: 1 5 10 20). Retrieves max(ks) chunks.",
     )
     parser.add_argument(
+        "--index-name",
+        default=DEFAULT_INDEX_NAME,
+        metavar="NAME",
+        help=(
+            f"OpenSearch index to query (default: {DEFAULT_INDEX_NAME}). "
+            "Must match the index used during ingestion."
+        ),
+    )
+    parser.add_argument(
         "--log-level",
         default="WARNING",
         choices=["DEBUG", "INFO", "WARNING", "ERROR"],
@@ -306,11 +318,11 @@ def main(argv: list[str] | None = None) -> None:
         print("No test cases found. Check --data-dir and --benchmarks.", file=sys.stderr)
         sys.exit(1)
 
-    retriever = build_retriever(top_k=top_k)
+    retriever = build_retriever(top_k=top_k, index_name=args.index_name)
 
     print(
         f"\nRunning evaluation: {len(tests)} queries, "
-        f"K={ks}, top_k={top_k}, index={INDEX_NAME} …"
+        f"K={ks}, top_k={top_k}, index={args.index_name} …"
     )
 
     scores: list[QueryScore] = []
@@ -320,7 +332,7 @@ def main(argv: list[str] | None = None) -> None:
         if i % 50 == 0:
             print(f"  {i}/{len(tests)} queries done …")
 
-    aggregate(scores, benchmark_names, ks=ks)
+    aggregate(scores, benchmark_names, ks=ks, index_name=args.index_name)
 
 
 if __name__ == "__main__":

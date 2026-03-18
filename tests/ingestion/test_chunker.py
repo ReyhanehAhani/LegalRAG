@@ -1,9 +1,9 @@
-"""Tests for HierarchicalChunker."""
+"""Tests for HierarchicalChunker and RecursiveCharacterTextSplitter."""
 
 import pytest
 
 from legalrag.core.models import LegalDocumentMetadata, RawDocument
-from legalrag.ingestion.chunker import HierarchicalChunker
+from legalrag.ingestion.chunker import HierarchicalChunker, RecursiveCharacterTextSplitter
 
 
 @pytest.fixture()
@@ -93,3 +93,107 @@ def test_doc_id_citation_differs_from_stem_fallback() -> None:
     citation_id = doc_id_from_citation("2010 BCCA 220", "/data/case.txt")
     stem_id = doc_id_from_citation(None, "/data/case.txt")
     assert citation_id != stem_id
+
+
+# ── RecursiveCharacterTextSplitter ────────────────────────────────────────────
+
+
+@pytest.fixture()
+def long_doc() -> RawDocument:
+    """A document long enough to produce multiple chunks at small chunk_size."""
+    text = (
+        "The accused was charged under s. 267 of the Criminal Code.\n\n"
+        "The trial judge found that the Crown had not proven intent beyond a reasonable doubt.\n\n"
+        "On appeal, the majority held that the standard of review for findings of credibility "
+        "is palpable and overriding error. The dissent would have ordered a new trial.\n\n"
+        "The Supreme Court dismissed the appeal in a unanimous decision. "
+        "Costs were awarded to the respondent."
+    )
+    metadata = LegalDocumentMetadata(source_path="/tmp/recursive_test.txt")
+    return RawDocument(metadata=metadata, text=text)
+
+
+def test_recursive_produces_flat_chunks(long_doc: RawDocument) -> None:
+    """All chunks must be flat (no parent/child hierarchy)."""
+    chunker = RecursiveCharacterTextSplitter(chunk_size=120, chunk_overlap=20)
+    chunks = chunker.chunk(long_doc)
+
+    assert len(chunks) >= 1
+    for chunk in chunks:
+        assert chunk.parent_chunk_id is None, "RecursiveCharacterTextSplitter must produce flat chunks"
+
+
+def test_recursive_chunks_respect_size_limit(long_doc: RawDocument) -> None:
+    """Each chunk must not exceed chunk_size characters."""
+    chunk_size = 100
+    chunker = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=10)
+    chunks = chunker.chunk(long_doc)
+
+    for chunk in chunks:
+        assert len(chunk.text) <= chunk_size, (
+            f"Chunk exceeds size limit: {len(chunk.text)} > {chunk_size}"
+        )
+
+
+def test_recursive_covers_full_text(long_doc: RawDocument) -> None:
+    """The union of all chunk spans must cover the full document text."""
+    chunker = RecursiveCharacterTextSplitter(chunk_size=120, chunk_overlap=20)
+    chunks = chunker.chunk(long_doc)
+    text = long_doc.text
+
+    covered = bytearray(len(text))
+    for chunk in chunks:
+        for i in range(chunk.char_start, chunk.char_end):
+            covered[i] = 1
+
+    assert all(covered), "Some characters are not covered by any chunk"
+
+
+def test_recursive_chunk_text_matches_offsets(long_doc: RawDocument) -> None:
+    """chunk.text must equal document.text[char_start:char_end]."""
+    chunker = RecursiveCharacterTextSplitter(chunk_size=120, chunk_overlap=20)
+    for chunk in chunker.chunk(long_doc):
+        expected = long_doc.text[chunk.char_start:chunk.char_end]
+        assert chunk.text == expected, "Chunk text does not match source offsets"
+
+
+def test_recursive_chunk_ids_are_stable(long_doc: RawDocument) -> None:
+    """Re-chunking the same document must produce identical chunk_ids."""
+    chunker = RecursiveCharacterTextSplitter(chunk_size=120, chunk_overlap=20)
+    ids1 = {c.chunk_id for c in chunker.chunk(long_doc)}
+    ids2 = {c.chunk_id for c in chunker.chunk(long_doc)}
+    assert ids1 == ids2
+
+
+def test_recursive_metadata_propagated(long_doc: RawDocument) -> None:
+    chunker = RecursiveCharacterTextSplitter(chunk_size=150, chunk_overlap=15)
+    for chunk in chunker.chunk(long_doc):
+        assert chunk.metadata.source_path == "/tmp/recursive_test.txt"
+
+
+def test_recursive_overlap_creates_shared_context(long_doc: RawDocument) -> None:
+    """Consecutive chunks must share at least some characters (overlap > 0)."""
+    chunker = RecursiveCharacterTextSplitter(chunk_size=120, chunk_overlap=30)
+    chunks = chunker.chunk(long_doc)
+
+    if len(chunks) < 2:
+        pytest.skip("Document too short to test overlap")
+
+    for a, b in zip(chunks, chunks[1:]):
+        assert b.char_start < a.char_end, (
+            f"Expected overlap between consecutive chunks: "
+            f"chunk[i] ends at {a.char_end}, chunk[i+1] starts at {b.char_start}"
+        )
+
+
+def test_recursive_short_doc_yields_single_chunk() -> None:
+    """A document shorter than chunk_size must produce exactly one chunk."""
+    text = "Short legal note."
+    metadata = LegalDocumentMetadata(source_path="/tmp/short.txt")
+    doc = RawDocument(metadata=metadata, text=text)
+
+    chunker = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    chunks = chunker.chunk(doc)
+
+    assert len(chunks) == 1
+    assert chunks[0].text == text

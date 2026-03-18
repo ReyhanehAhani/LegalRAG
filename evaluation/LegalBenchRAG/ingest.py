@@ -39,7 +39,7 @@ from evaluation.LegalBenchRAG.loader import (
     corpus_file_paths_for_tests,
     load_benchmark,
 )
-from evaluation.LegalBenchRAG.pipeline import LegalBenchRAGIngestionPipeline
+from evaluation.LegalBenchRAG.pipeline import DEFAULT_INDEX_NAME, LegalBenchRAGIngestionPipeline
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -86,6 +86,68 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "Overrides --benchmarks and --limit."
         ),
     )
+    # ── Chunker options ───────────────────────────────────────────────────────
+    parser.add_argument(
+        "--chunker",
+        default="hierarchical",
+        choices=["hierarchical", "recursive"],
+        help=(
+            "Chunking strategy. 'hierarchical' stores parent (~1500 chars) + child "
+            "chunks (default); 'recursive' produces flat chunks only."
+        ),
+    )
+    parser.add_argument(
+        "--chunk-size",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Child chunk size in characters "
+            "(default: CHUNK_SIZE from config, usually 512)."
+        ),
+    )
+    parser.add_argument(
+        "--chunk-overlap",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Character overlap between consecutive child chunks "
+            "(default: CHUNK_OVERLAP from config, usually 64)."
+        ),
+    )
+    parser.add_argument(
+        "--parent-size",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Parent chunk size in characters — hierarchical chunker only "
+            "(default: 1500)."
+        ),
+    )
+    # ── Embedding options ─────────────────────────────────────────────────────
+    parser.add_argument(
+        "--embedding-model",
+        default=None,
+        metavar="MODEL",
+        help=(
+            "HuggingFace sentence-transformers model name, e.g. "
+            "'BAAI/bge-large-en-v1.5'. Overrides EMBEDDING_MODEL in .env."
+        ),
+    )
+    # ── Index ─────────────────────────────────────────────────────────────────
+    parser.add_argument(
+        "--index-name",
+        default=DEFAULT_INDEX_NAME,
+        metavar="NAME",
+        help=(
+            f"OpenSearch index to ingest into (default: {DEFAULT_INDEX_NAME}). "
+            "Use a different name to keep experiments with different chunkers or "
+            "embedding models isolated without deleting the default index."
+        ),
+    )
+    # ── Logging ───────────────────────────────────────────────────────────────
     parser.add_argument(
         "--log-level",
         default="INFO",
@@ -129,6 +191,12 @@ def main(argv: list[str] | None = None) -> None:
     pipeline = LegalBenchRAGIngestionPipeline.build(
         corpus_dir=corpus_dir,
         file_paths=file_paths,
+        chunker=args.chunker,
+        chunk_size=args.chunk_size,
+        chunk_overlap=args.chunk_overlap,
+        parent_size=args.parent_size,
+        embedding_model=args.embedding_model,
+        index_name=args.index_name,
     )
     pipeline.run(file_paths=file_paths)
     logger.info("Done.")

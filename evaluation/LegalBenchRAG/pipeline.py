@@ -33,9 +33,10 @@ import logging
 from tqdm import tqdm
 
 from legalrag.core.config import settings
+from legalrag.core.interfaces import BaseChunker
 from legalrag.core.models import Chunk
-from legalrag.ingestion.chunker import HierarchicalChunker
-from legalrag.ingestion.embedder import build_embedder
+from legalrag.ingestion.chunker import HierarchicalChunker, RecursiveCharacterTextSplitter
+from legalrag.ingestion.embedder import SentenceTransformerEmbedder, build_embedder
 from legalrag.ingestion.indexer import OpenSearchIndexer
 from legalrag.opensearch.client import OpenSearchClient, OpenSearchSettings
 
@@ -43,13 +44,13 @@ from evaluation.LegalBenchRAG.loader import LegalBenchRAGCorpusLoader
 
 logger = logging.getLogger(__name__)
 
-INDEX_NAME = "legalrag-legalbenchrag"
+DEFAULT_INDEX_NAME = "legalrag-legalbenchrag"
 
 _BATCH_SIZE = 512   # embed + index this many child chunks at once
 
 
 class LegalBenchRAGIngestionPipeline:
-    """Ingests LegalBench-RAG corpus documents into ``legalrag-legalbenchrag``."""
+    """Ingests LegalBench-RAG corpus documents into a dedicated OpenSearch index."""
 
     def __init__(
         self,
@@ -68,8 +69,14 @@ class LegalBenchRAGIngestionPipeline:
         cls,
         corpus_dir: str,
         file_paths: list[str] | None = None,
+        chunker: str = "hierarchical",
+        chunk_size: int | None = None,
+        chunk_overlap: int | None = None,
+        parent_size: int | None = None,
+        embedding_model: str | None = None,
+        index_name: str = DEFAULT_INDEX_NAME,
     ) -> "LegalBenchRAGIngestionPipeline":
-        """Factory: build pipeline from global settings.
+        """Factory: build pipeline from global settings with optional overrides.
 
         Parameters
         ----------
@@ -78,6 +85,20 @@ class LegalBenchRAGIngestionPipeline:
         file_paths:
             Explicit list of relative file paths to load.  Pass ``None`` to
             discover and ingest all ``*.txt`` files under ``corpus_dir``.
+        chunker:
+            Chunker strategy: ``"hierarchical"`` (default) or ``"recursive"``.
+        chunk_size:
+            Child chunk size in characters (overrides config / env default).
+        chunk_overlap:
+            Overlap between consecutive child chunks in characters.
+        parent_size:
+            Parent chunk size in characters (hierarchical chunker only).
+        embedding_model:
+            HuggingFace model name for the sentence-transformers embedder,
+            e.g. ``"BAAI/bge-large-en-v1.5"``.  Overrides config / env default.
+        index_name:
+            OpenSearch index to ingest into (default: ``legalrag-legalbenchrag``).
+            Use a different name to keep multiple experiments isolated.
         """
         cfg = settings.opensearch
         lb_cfg = OpenSearchSettings(
@@ -87,16 +108,29 @@ class LegalBenchRAGIngestionPipeline:
                 "OPENSEARCH_USER": cfg.user,
                 "OPENSEARCH_PASSWORD": cfg.password,
                 "OPENSEARCH_USE_SSL": cfg.use_ssl,
-                "OPENSEARCH_INDEX_NAME": INDEX_NAME,
+                "OPENSEARCH_INDEX_NAME": index_name,
             }
         )
-        embedder = build_embedder()
+
+        chunker_obj: BaseChunker = _build_chunker(
+            chunker,
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            parent_size=parent_size,
+        )
+
+        embedder = (
+            SentenceTransformerEmbedder(model_name=embedding_model)
+            if embedding_model
+            else build_embedder()
+        )
+
         os_client = OpenSearchClient(cfg=lb_cfg, embedding_dim=embedder.dim)
         os_client.ensure_index()
 
         return cls(
             loader=LegalBenchRAGCorpusLoader(corpus_dir, file_paths=file_paths),
-            chunker=HierarchicalChunker(),
+            chunker=chunker_obj,
             embedder=embedder,
             indexer=OpenSearchIndexer(os_client),
         )
@@ -119,6 +153,8 @@ class LegalBenchRAGIngestionPipeline:
         total_docs = 0
         total_chunks = 0
 
+        hierarchical = self._chunker.is_hierarchical
+
         for doc in tqdm(self._loader.iter(), desc="Ingesting corpus", unit="doc"):
             chunks = self._chunker.chunk(doc)
 
@@ -127,12 +163,17 @@ class LegalBenchRAGIngestionPipeline:
                 if chunk.metadata is None:
                     chunk.metadata = doc.metadata
 
-            child_chunks = [c for c in chunks if c.parent_chunk_id is not None]
-            parent_chunks = [c for c in chunks if c.parent_chunk_id is None]
-
-            # Index parent chunks immediately (no embeddings needed)
-            if parent_chunks:
-                self._indexer.index(parent_chunks)
+            if hierarchical:
+                # Parent chunks: store text-only for context expansion
+                # Child chunks: embed and retrieve
+                child_chunks = [c for c in chunks if c.parent_chunk_id is not None]
+                parent_chunks = [c for c in chunks if c.parent_chunk_id is None]
+                if parent_chunks:
+                    self._indexer.index(parent_chunks)
+            else:
+                # Flat chunker: every chunk is a retrievable leaf — embed them all
+                child_chunks = chunks
+                parent_chunks = []
 
             # Buffer child chunks for batch embedding
             batch_chunks.extend(child_chunks)
@@ -160,4 +201,33 @@ class LegalBenchRAGIngestionPipeline:
         for chunk, emb in zip(chunks, embeddings):
             chunk.embedding = emb
         self._indexer.index(chunks)
+
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+
+def _build_chunker(
+    name: str,
+    chunk_size: int | None,
+    chunk_overlap: int | None,
+    parent_size: int | None,
+) -> BaseChunker:
+    """Instantiate a chunker by name with optional parameter overrides."""
+    if name == "hierarchical":
+        kwargs: dict = {}
+        if parent_size is not None:
+            kwargs["parent_size"] = parent_size
+        if chunk_size is not None:
+            kwargs["child_size"] = chunk_size
+        if chunk_overlap is not None:
+            kwargs["child_overlap"] = chunk_overlap
+        return HierarchicalChunker(**kwargs)
+    if name == "recursive":
+        kwargs = {}
+        if chunk_size is not None:
+            kwargs["chunk_size"] = chunk_size
+        if chunk_overlap is not None:
+            kwargs["chunk_overlap"] = chunk_overlap
+        return RecursiveCharacterTextSplitter(**kwargs)
+    raise ValueError(f"Unknown chunker: {name!r}. Choose 'hierarchical' or 'recursive'.")
 
