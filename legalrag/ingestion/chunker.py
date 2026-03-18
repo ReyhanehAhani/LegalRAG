@@ -1,18 +1,18 @@
-"""Hierarchical chunker for legal text.
+"""Chunkers for legal text.
 
-Strategy
---------
-Two-level hierarchy:
-  - Parent chunks  : large, semantically coherent sections (~parent_size chars),
-                     stored as-is.  Used for context expansion at generation time.
-  - Child chunks   : smaller overlapping windows (child_size / child_overlap)
-                     that are actually embedded and indexed.
+Available chunkers
+------------------
+HierarchicalChunker
+    Two-level hierarchy: parent chunks (~1500 chars) + overlapping child chunks
+    (~512 chars).  Child chunks are embedded and retrieved; parents are fetched at
+    generation time for richer context ("small-to-big retrieval").
 
-Each child chunk carries a reference (parent_chunk_id) to its parent so the
-generator can retrieve the full parent for richer context when needed.
-
-This approach follows the "small-to-big retrieval" pattern:
-  retrieve child (precise vector match) → expand to parent (full context).
+RecursiveCharacterTextSplitter
+    Flat chunker inspired by LangChain's RecursiveCharacterTextSplitter.  Tries to
+    split on progressively finer separators (paragraph → sentence → word →
+    character) so that each chunk stays under *chunk_size* characters while
+    preserving as much natural language structure as possible.  Consecutive chunks
+    share *chunk_overlap* characters so context is not abruptly lost at boundaries.
 
 Implementation note
 -------------------
@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import logging
 import re
+from typing import Sequence
 
 from legalrag.core.config import settings
 from legalrag.core.interfaces import BaseChunker
@@ -118,6 +119,10 @@ class HierarchicalChunker(BaseChunker):
         self._child_size = child_size or cfg.chunk_size
         self._child_overlap = child_overlap or cfg.chunk_overlap
 
+    @property
+    def is_hierarchical(self) -> bool:
+        return True
+
     def chunk(self, document: RawDocument) -> list[Chunk]:
         text = document.text
         doc_id = document.metadata.doc_id
@@ -189,3 +194,171 @@ class HierarchicalChunker(BaseChunker):
             pos += step
 
         return chunks
+
+
+# ── RecursiveCharacterTextSplitter ────────────────────────────────────────────
+
+#: Default separator ladder: paragraph → sentence end → whitespace → any char.
+_DEFAULT_SEPARATORS: tuple[str, ...] = (
+    "\n\n",   # paragraph break
+    "\n",     # line break
+    ". ",     # sentence boundary (period + space)
+    "! ",
+    "? ",
+    "; ",
+    ", ",
+    " ",      # word boundary
+    "",       # character-level fallback
+)
+
+
+class RecursiveCharacterTextSplitter(BaseChunker):
+    """Flat chunker that splits on progressively finer separators.
+
+    The algorithm mirrors LangChain's ``RecursiveCharacterTextSplitter`` but
+    operates on exact character offsets so ``char_start`` / ``char_end`` are
+    always consistent with the original document text.
+
+    All produced chunks have ``parent_chunk_id=None`` (flat, no hierarchy).
+    Consecutive chunks share *chunk_overlap* characters for context continuity.
+
+    Parameters
+    ----------
+    chunk_size:
+        Maximum character length of a single chunk (default from config).
+    chunk_overlap:
+        Number of characters shared between consecutive chunks (default from
+        config).
+    separators:
+        Ordered sequence of separator strings tried from coarsest to finest.
+        The splitter uses the first separator that keeps all pieces ≤
+        *chunk_size*; if none works, it falls back to the next until the
+        character-level fallback (empty string) is reached.
+    """
+
+    def __init__(
+        self,
+        chunk_size: int | None = None,
+        chunk_overlap: int | None = None,
+        separators: Sequence[str] = _DEFAULT_SEPARATORS,
+    ) -> None:
+        cfg = settings.retrieval
+        self._chunk_size = chunk_size or cfg.chunk_size
+        self._chunk_overlap = chunk_overlap or cfg.chunk_overlap
+        self._separators = list(separators)
+
+    # ── public API ────────────────────────────────────────────────────────────
+
+    def chunk(self, document: RawDocument) -> list[Chunk]:
+        text = document.text
+        doc_id = document.metadata.doc_id
+
+        # Collect (start, end) spans via the recursive split
+        spans = self._split_text(text, separators=self._separators)
+
+        # Merge short spans and apply overlap to build final windows
+        windows = self._merge_with_overlap(text, spans)
+
+        chunks: list[Chunk] = []
+        for char_start, char_end in windows:
+            chunks.append(
+                Chunk(
+                    chunk_id=stable_id(doc_id, str(char_start), str(char_end)),
+                    doc_id=doc_id,
+                    parent_chunk_id=None,
+                    text=text[char_start:char_end],
+                    char_start=char_start,
+                    char_end=char_end,
+                    metadata=document.metadata,
+                )
+            )
+
+        logger.debug(
+            "RecursiveCharacterTextSplitter: '%s' → %d chunks",
+            document.metadata.source_path,
+            len(chunks),
+        )
+        return chunks
+
+    # ── internals ─────────────────────────────────────────────────────────────
+
+    def _split_text(
+        self, text: str, separators: list[str]
+    ) -> list[tuple[int, int]]:
+        """Recursively split *text* into spans ≤ chunk_size using *separators*.
+
+        Returns a flat list of ``(start, end)`` spans (absolute offsets into
+        *text*) that together cover ``[0, len(text))``.
+        """
+        if not text:
+            return []
+
+        # If text already fits, return as-is
+        if len(text) <= self._chunk_size:
+            return [(0, len(text))]
+
+        sep = separators[0]
+        remaining_seps = separators[1:]
+
+        if sep == "":
+            # Character-level fallback: hard-cut at chunk_size
+            return [(i, min(i + self._chunk_size, len(text)))
+                    for i in range(0, len(text), self._chunk_size)]
+
+        # Split on this separator; keep the separator at the *end* of each
+        # piece so sentence punctuation stays with its sentence.
+        pattern = re.escape(sep)
+        pieces: list[tuple[int, int]] = []
+        prev = 0
+        for m in re.finditer(pattern, text):
+            end = m.end()
+            pieces.append((prev, end))
+            prev = end
+        if prev < len(text):
+            pieces.append((prev, len(text)))
+
+        # If every piece fits, we're done
+        if all(end - start <= self._chunk_size for start, end in pieces):
+            return pieces
+
+        # Otherwise recurse on pieces that are still too large
+        result: list[tuple[int, int]] = []
+        for start, end in pieces:
+            piece_len = end - start
+            if piece_len <= self._chunk_size:
+                result.append((start, end))
+            else:
+                sub = self._split_text(text[start:end], remaining_seps)
+                result.extend((start + s, start + e) for s, e in sub)
+        return result
+
+    def _merge_with_overlap(
+        self, text: str, spans: list[tuple[int, int]]
+    ) -> list[tuple[int, int]]:
+        """Merge spans into windows of ≤ chunk_size with chunk_overlap.
+
+        Adjacent spans are accumulated until adding the next one would exceed
+        *chunk_size*.  When a window is emitted, the next window starts
+        *chunk_overlap* characters before the current window end so context
+        is preserved across boundaries.
+        """
+        if not spans:
+            return []
+
+        windows: list[tuple[int, int]] = []
+        win_start = spans[0][0]
+        win_end = spans[0][1]
+
+        for span_start, span_end in spans[1:]:
+            candidate_len = span_end - win_start
+            if candidate_len <= self._chunk_size:
+                win_end = span_end
+            else:
+                windows.append((win_start, win_end))
+                # Next window begins chunk_overlap chars before current end
+                overlap_start = max(win_start, win_end - self._chunk_overlap)
+                win_start = overlap_start
+                win_end = span_end
+
+        windows.append((win_start, win_end))
+        return windows

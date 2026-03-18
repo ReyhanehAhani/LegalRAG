@@ -8,7 +8,7 @@
 
 services:
   opensearch:
-    image: opensearchproject/opensearch:2.14.0
+    image: opensearchproject/opensearch:3.4.0
     container_name: legalrag-opensearch
     environment:
       - cluster.name=legalrag-cluster
@@ -41,7 +41,7 @@ services:
       retries: 10
 
   opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:2.14.0
+    image: opensearchproject/opensearch-dashboards:3.4.0
     container_name: legalrag-dashboards
     environment:
       - OPENSEARCH_HOSTS=["http://opensearch:9200"]

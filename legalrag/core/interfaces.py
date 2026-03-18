@@ -38,6 +38,16 @@ class BaseChunker(ABC):
     def chunk(self, document: RawDocument) -> list[Chunk]:
         """Return ordered list of Chunks for *document*."""
 
+    @property
+    def is_hierarchical(self) -> bool:
+        """True if this chunker produces parent+child pairs.
+
+        When False (flat chunkers), all produced chunks should be embedded
+        and retrieved directly — none are treated as parents.
+        Subclasses override this; default is False.
+        """
+        return False
+
 
 class BaseMetadataExtractor(ABC):
     """Enriches chunk metadata using heuristics or an LLM."""

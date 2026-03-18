@@ -53,7 +53,7 @@ class OpenSearchRetriever(BaseRetriever):
             hits = self._client.bm25_search(query_text, k=self._top_k, filters=filters)
             return [self._hit_to_retrieved(h, lexical_score=h["_score"]) for h in hits]
 
-        # hybrid (default)
+        # hybrid (default) — native OpenSearch hybrid query with RRF pipeline
         vector = self._embedder.embed([query_text])[0]
         hits = self._client.hybrid_search(
             vector, query_text, k=self._top_k, filters=filters
@@ -61,8 +61,9 @@ class OpenSearchRetriever(BaseRetriever):
         return [
             self._hit_to_retrieved(
                 h,
-                semantic_score=h.get("_score"),
-                lexical_score=h.get("_score"),
+                # _score from the native pipeline is the combined RRF score;
+                # expose it as semantic_score so downstream rerankers can use it
+                semantic_score=h.get("_score") or h.get("_rrf_score"),
             )
             for h in hits
         ]

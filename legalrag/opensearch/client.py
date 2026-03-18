@@ -4,10 +4,11 @@ Responsibilities
 ----------------
 - Connection management (with retry)
 - Index creation with the correct mapping (kNN vector field + metadata fields)
+- Search pipeline creation (normalization processor for hybrid search)
 - Bulk upsert
-- kNN vector search
-- BM25 lexical search
-- Hybrid search (kNN + BM25 via OpenSearch hybrid query)
+- ANN (approximate nearest-neighbour) vector search via native knn query
+- BM25 lexical search via native match query
+- Hybrid search via OpenSearch native hybrid query + normalization pipeline (RRF)
 - Delete by doc_id
 """
 
@@ -23,6 +24,8 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from legalrag.core.config import OpenSearchSettings, settings
 
 logger = logging.getLogger(__name__)
+
+_HYBRID_PIPELINE_ID = "legalrag_hybrid_pipeline"
 
 
 class OpenSearchClient:
@@ -60,7 +63,8 @@ class OpenSearchClient:
     # ── Index management ──────────────────────────────────────────────────────
 
     def ensure_index(self) -> None:
-        """Create the index if it does not exist yet."""
+        """Create the index and search pipeline if they do not exist yet."""
+        self._ensure_hybrid_pipeline()
         if self._client.indices.exists(index=self.index_name):
             logger.debug("Index '%s' already exists.", self.index_name)
             return
@@ -74,11 +78,90 @@ class OpenSearchClient:
             else:
                 raise
 
+    def _ensure_hybrid_pipeline(self) -> None:
+        """Create the hybrid search pipeline if absent.
+
+        Tries pipeline formats in order of preference:
+          1. ``score-ranker-processor`` with RRF combination — native RRF, available
+             in OpenSearch 2.11+ (renamed from normalization-processor in 3.x).
+          2. ``normalization-processor`` with min-max + arithmetic_mean — wider
+             compatibility fallback for older OpenSearch 2.x clusters.
+
+        Both approaches combine ANN and BM25 result sets server-side in a single
+        request, avoiding the two-request manual RRF used as the final fallback.
+        """
+        try:
+            self._client.transport.perform_request(
+                "GET", f"/_search/pipeline/{_HYBRID_PIPELINE_ID}"
+            )
+            logger.debug("Search pipeline '%s' already exists.", _HYBRID_PIPELINE_ID)
+            return
+        except Exception:
+            pass  # pipeline not found — create it
+
+        # Attempt 1: score-ranker-processor (OpenSearch 2.11+ / 3.x RRF)
+        rrf_body = {
+            "description": "RRF hybrid pipeline for LegalRAG",
+            "phase_results_processors": [
+                {
+                    "score-ranker-processor": {
+                        "combination": {"technique": "rrf"},
+                    }
+                }
+            ],
+        }
+        try:
+            self._client.transport.perform_request(
+                "PUT",
+                f"/_search/pipeline/{_HYBRID_PIPELINE_ID}",
+                body=rrf_body,
+            )
+            logger.info(
+                "Created search pipeline '%s' (score-ranker-processor/RRF).",
+                _HYBRID_PIPELINE_ID,
+            )
+            return
+        except Exception as exc:
+            logger.debug("score-ranker-processor not available: %s — trying normalization-processor.", exc)
+
+        # Attempt 2: normalization-processor with min-max + arithmetic_mean (OpenSearch 2.x)
+        minmax_body = {
+            "description": "Hybrid pipeline for LegalRAG (min-max + arithmetic_mean)",
+            "phase_results_processors": [
+                {
+                    "normalization-processor": {
+                        "normalization": {"technique": "min_max"},
+                        "combination": {"technique": "arithmetic_mean"},
+                    }
+                }
+            ],
+        }
+        try:
+            self._client.transport.perform_request(
+                "PUT",
+                f"/_search/pipeline/{_HYBRID_PIPELINE_ID}",
+                body=minmax_body,
+            )
+            logger.info(
+                "Created search pipeline '%s' (normalization-processor/min-max).",
+                _HYBRID_PIPELINE_ID,
+            )
+        except Exception as exc:
+            logger.warning(
+                "Could not create search pipeline '%s': %s. "
+                "Hybrid search will fall back to manual RRF.",
+                _HYBRID_PIPELINE_ID,
+                exc,
+            )
+
     def _build_mapping(self) -> dict[str, Any]:
         return {
             "settings": {
                 "index": {
                     "knn": True,
+                    # ef_search controls recall at query time; 512 is a good balance
+                    # for legal text (can be tuned per-query via the knn query params)
+                    "knn.algo_param.ef_search": 512,
                 },
                 "analysis": {
                     "analyzer": {
@@ -107,7 +190,7 @@ class OpenSearchClient:
                     "court": {"type": "keyword"},
                     "citation": {"type": "keyword"},
                     "decision_date": {"type": "date", "format": "yyyy-MM-dd"},
-                    # Dense vector for kNN
+                    # Dense vector for ANN search
                     "embedding": {
                         "type": "knn_vector",
                         "dimension": self._embedding_dim,
@@ -148,25 +231,31 @@ class OpenSearchClient:
         vector: list[float],
         k: int = 20,
         filters: dict[str, Any] | None = None,
+        ef_search: int | None = None,
     ) -> list[dict[str, Any]]:
-        """k-nearest-neighbour search over child chunks (is_parent=false)."""
-        knn_query: dict[str, Any] = {
+        """Approximate nearest-neighbour search over child chunks (is_parent=false).
+
+        Uses OpenSearch's native knn query backed by the Lucene HNSW engine.
+        ``ef_search`` overrides the index-level default for this request only.
+        """
+        filter_clauses: list[dict] = [{"term": {"is_parent": False}}]
+        if filters:
+            filter_clauses.extend(
+                {"term": {field: val}} for field, val in filters.items() if val is not None
+            )
+
+        knn_clause: dict[str, Any] = {
             "vector": vector,
             "k": k,
+            "filter": {"bool": {"must": filter_clauses}},
         }
+        if ef_search is not None:
+            knn_clause["method_parameters"] = {"ef": ef_search}
+
         query: dict[str, Any] = {
             "size": k,
-            "query": {
-                "bool": {
-                    "must": [{"knn": {"embedding": knn_query}}],
-                    "filter": [{"term": {"is_parent": False}}],
-                }
-            },
+            "query": {"knn": {"embedding": knn_clause}},
         }
-        if filters:
-            query["query"]["bool"]["filter"].extend(
-                [{"term": {k: v}} for k, v in filters.items() if v is not None]
-            )
         resp = self._client.search(index=self.index_name, body=query)
         return resp["hits"]["hits"]
 
@@ -176,7 +265,7 @@ class OpenSearchClient:
         k: int = 20,
         filters: dict[str, Any] | None = None,
     ) -> list[dict[str, Any]]:
-        """BM25 full-text search over child chunks."""
+        """BM25 full-text search over child chunks using OpenSearch's native match query."""
         must: list[dict] = [
             {"match": {"text": {"query": query_text}}},
             {"term": {"is_parent": False}},
@@ -184,7 +273,7 @@ class OpenSearchClient:
         filter_clauses: list[dict] = []
         if filters:
             filter_clauses = [
-                {"term": {k: v}} for k, v in filters.items() if v is not None
+                {"term": {field: val}} for field, val in filters.items() if val is not None
             ]
         query: dict[str, Any] = {
             "size": k,
@@ -204,21 +293,63 @@ class OpenSearchClient:
         query_text: str,
         k: int = 20,
         filters: dict[str, Any] | None = None,
-        semantic_weight: float = 0.7,
     ) -> list[dict[str, Any]]:
-        """
-        Hybrid search combining kNN and BM25 via OpenSearch's hybrid query.
+        """Hybrid search using OpenSearch's native hybrid query + RRF normalization pipeline.
 
-        Uses a simple linear interpolation score: 
-            score = semantic_weight * kNN_score + (1 - semantic_weight) * BM25_score
-        Implemented as a rank-fusion over separate result sets for compatibility
-        with older OpenSearch versions that lack native hybrid query.
-        """
-        semantic_hits = self.knn_search(vector, k=k, filters=filters)
-        lexical_hits = self.bm25_search(query_text, k=k, filters=filters)
+        Sends a single request with both a knn sub-query and a BM25 match sub-query.
+        The ``legalrag_hybrid_pipeline`` search pipeline combines the two ranked lists
+        using Reciprocal Rank Fusion before returning results.
 
-        # Normalise scores, merge, and re-rank
-        return _reciprocal_rank_fusion(semantic_hits, lexical_hits, k=k)
+        Falls back to manual RRF if the pipeline is unavailable.
+        """
+        filter_clauses: list[dict] = [{"term": {"is_parent": False}}]
+        if filters:
+            filter_clauses.extend(
+                {"term": {field: val}} for field, val in filters.items() if val is not None
+            )
+        bool_filter = {"bool": {"must": filter_clauses}}
+
+        query: dict[str, Any] = {
+            "size": k,
+            "query": {
+                "hybrid": {
+                    "queries": [
+                        # Sub-query 1: ANN vector search
+                        {
+                            "knn": {
+                                "embedding": {
+                                    "vector": vector,
+                                    "k": k,
+                                    "filter": bool_filter,
+                                }
+                            }
+                        },
+                        # Sub-query 2: BM25 lexical search
+                        {
+                            "bool": {
+                                "must": [{"match": {"text": {"query": query_text}}}],
+                                "filter": filter_clauses,
+                            }
+                        },
+                    ]
+                }
+            },
+        }
+
+        try:
+            resp = self._client.search(
+                index=self.index_name,
+                body=query,
+                params={"search_pipeline": _HYBRID_PIPELINE_ID},
+            )
+            return resp["hits"]["hits"]
+        except Exception as exc:
+            logger.warning(
+                "Native hybrid search failed (%s); falling back to manual RRF.", exc
+            )
+            semantic_hits = self.knn_search(vector, k=k, filters=filters)
+            lexical_hits = self.bm25_search(query_text, k=k, filters=filters)
+            return _reciprocal_rank_fusion(semantic_hits, lexical_hits, k=k)
 
     def get_by_chunk_id(self, chunk_id: str) -> dict[str, Any] | None:
         """Fetch a single document by chunk_id."""
@@ -232,17 +363,15 @@ class OpenSearchClient:
         return self.get_by_chunk_id(parent_chunk_id)
 
 
-# ── Utilities ─────────────────────────────────────────────────────────────────
+# ── Fallback utility ──────────────────────────────────────────────────────────
 
 
 def _reciprocal_rank_fusion(
     list_a: list[dict], list_b: list[dict], k: int = 60
 ) -> list[dict]:
-    """
-    Combine two ranked lists via Reciprocal Rank Fusion.
+    """Manual RRF fallback used only when the native hybrid pipeline is unavailable.
 
-    Each document gets score = Σ 1/(rank + k) across all lists.
-    k=60 is the standard RRF constant.
+    Each document gets score = Σ 1/(rank + k) across all lists; k=60 is standard.
     """
     scores: dict[str, float] = {}
     docs: dict[str, dict] = {}

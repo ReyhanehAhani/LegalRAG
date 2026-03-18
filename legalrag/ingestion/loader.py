@@ -68,9 +68,14 @@ class TxtFileLoader(BaseLoader):
 
     def load(self, source: str) -> list[RawDocument]:
         path = Path(source)
-        if path.is_file():
+        try:
+            is_file = path.is_file()
+            is_dir = path.is_dir()
+        except PermissionError as exc:
+            raise FileNotFoundError(f"Source not accessible: {source}") from exc
+        if is_file:
             return [self._load_file(path)]
-        if path.is_dir():
+        if is_dir:
             files = sorted(path.rglob("*.txt"))
             logger.info("Found %d .txt files in %s", len(files), path)
             return [self._load_file(f) for f in files]

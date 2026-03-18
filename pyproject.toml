@@ -9,7 +9,7 @@ description = "Modular Legal RAG system backed by OpenSearch"
 requires-python = ">=3.11"
 dependencies = [
     # OpenSearch
-    "opensearch-py>=2.7.0",
+    "opensearch-py>=3.0.0",
     # LLM / embeddings
     "openai>=1.40.0",          # swappable LLM client (also used for Qwen via compatible API)
     "pydantic-ai>=1.0.0",      # structured LLM agent (formulator + generator)

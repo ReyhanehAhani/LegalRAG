@@ -23,8 +23,8 @@ from legalrag.core.interfaces import (
     BaseMetadataExtractor,
 )
 from legalrag.core.models import doc_id_from_citation
-from legalrag.ingestion.chunker import HierarchicalChunker
-from legalrag.ingestion.embedder import build_embedder
+from legalrag.ingestion.chunker import HierarchicalChunker, RecursiveCharacterTextSplitter
+from legalrag.ingestion.embedder import SentenceTransformerEmbedder, build_embedder
 from legalrag.ingestion.indexer import OpenSearchIndexer
 from legalrag.ingestion.loader import TxtFileLoader, clean_document_text
 from legalrag.ingestion.metadata_extractor import CanLIIMetadataExtractor
@@ -51,15 +51,48 @@ class IngestionPipeline:
         self.indexer = indexer
 
     @classmethod
-    def default(cls) -> "IngestionPipeline":
-        """Construct the pipeline from default config-driven components."""
-        os_client = OpenSearchClient.from_settings()
+    def default(
+        cls,
+        chunker: str = "hierarchical",
+        chunk_size: int | None = None,
+        chunk_overlap: int | None = None,
+        parent_size: int | None = None,
+        embedding_model: str | None = None,
+    ) -> "IngestionPipeline":
+        """Construct the pipeline from default config-driven components.
+
+        Parameters
+        ----------
+        chunker:
+            ``"hierarchical"`` (default) or ``"recursive"``.
+        chunk_size:
+            Child chunk size in characters (overrides config default).
+        chunk_overlap:
+            Overlap between consecutive chunks in characters.
+        parent_size:
+            Parent chunk size in characters — hierarchical only (default 1500).
+        embedding_model:
+            HuggingFace sentence-transformers model name.  Overrides config.
+        """
+        embedder = (
+            SentenceTransformerEmbedder(model_name=embedding_model)
+            if embedding_model
+            else build_embedder()
+        )
+        os_client = OpenSearchClient.from_settings(embedding_dim=embedder.dim)
         os_client.ensure_index()
-        embedder = build_embedder()
+
+        chunker_obj = _build_chunker(
+            chunker,
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            parent_size=parent_size,
+        )
+
         return cls(
             loader=TxtFileLoader(),
             extractor=CanLIIMetadataExtractor(),
-            chunker=HierarchicalChunker(),
+            chunker=chunker_obj,
             embedder=embedder,
             indexer=OpenSearchIndexer(os_client),
         )
@@ -88,8 +121,13 @@ class IngestionPipeline:
             # Step 4 – chunking
             chunks = self.chunker.chunk(doc)
 
-            # Step 5 – embed child chunks only (parents are stored as-is)
-            child_chunks = [c for c in chunks if c.parent_chunk_id is not None]
+            # Step 5 – embed retrievable chunks
+            # Hierarchical: only child chunks are embedded; parents stored text-only.
+            # Flat (recursive): every chunk is retrievable, embed them all.
+            if self.chunker.is_hierarchical:
+                child_chunks = [c for c in chunks if c.parent_chunk_id is not None]
+            else:
+                child_chunks = chunks
             if child_chunks:
                 texts = [c.text for c in child_chunks]
                 embeddings = self.embedder.embed(texts)
@@ -100,3 +138,32 @@ class IngestionPipeline:
             self.indexer.index(chunks)
 
         logger.info("Ingestion complete.")
+
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+
+def _build_chunker(
+    name: str,
+    chunk_size: int | None,
+    chunk_overlap: int | None,
+    parent_size: int | None,
+) -> BaseChunker:
+    """Instantiate a chunker by name with optional parameter overrides."""
+    if name == "hierarchical":
+        kwargs: dict = {}
+        if parent_size is not None:
+            kwargs["parent_size"] = parent_size
+        if chunk_size is not None:
+            kwargs["child_size"] = chunk_size
+        if chunk_overlap is not None:
+            kwargs["child_overlap"] = chunk_overlap
+        return HierarchicalChunker(**kwargs)
+    if name == "recursive":
+        kwargs = {}
+        if chunk_size is not None:
+            kwargs["chunk_size"] = chunk_size
+        if chunk_overlap is not None:
+            kwargs["chunk_overlap"] = chunk_overlap
+        return RecursiveCharacterTextSplitter(**kwargs)
+    raise ValueError(f"Unknown chunker: {name!r}. Choose 'hierarchical' or 'recursive'.")
