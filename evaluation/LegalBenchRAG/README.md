@@ -45,6 +45,11 @@ data/LegalBenchRAG/
 curl http://localhost:9200/_cluster/health
 ```
 
+```bash
+# check index
+curl -XGET "http://localhost:9200/_cat/indices?v&s=index"
+```
+
 If not running:
 
 ```bash
@@ -165,12 +170,14 @@ python -m evaluation.LegalBenchRAG.ingest \
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
     --index-name legalrag-lb-hierarchical \
-    --ks 20 40 60
+    --ks 10 20 30 40 60 80 \
+    --trace-file logs/eval/lbr_hier_50_original.jsonl
 
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
     --index-name legalrag-lb-recursive \
-    --ks 20 40 60
+    --ks 10 20 30 40 60 80 \
+    --trace-file logs/eval/lbr_hier_50_original.jsonl
 ```
 
 ---
@@ -238,21 +245,74 @@ python -m evaluation.LegalBenchRAG.ingest --data-dir data/LegalBenchRAG
 | `--limit N`             | None                     | Cap test cases per benchmark (for fast iteration)         |
 | `--ks K …`              | `1 5 10 20`              | Rank cutoffs; retrieves `max(ks)` chunks per query        |
 | `--index-name NAME`     | `legalrag-legalbenchrag` | OpenSearch index to query — must match ingestion          |
+| `--trace-file PATH`     | None                     | Write per-query JSONL retrieval trace (see below)         |
 | `--log-level`           | WARNING                  | Verbosity                                                 |
+| `--trace-file`          |                          | log file                                                  |
 
 
 ---
 
-## Baseline results (50-query subset, `nlpaueb/legal-bert-base-uncased`, seed=42)
+## Retrieval trace file
 
+Pass `--trace-file logs/eval_trace.jsonl` to write one JSON line per query. Useful for debugging low-scoring queries.
 
-|             | R@20      | R@40      | R@60      | P@20       | P@40       | P@60       |
-| ----------- | --------- | --------- | --------- | ---------- | ---------- | ---------- |
-| contractnli | 0.231     | 0.308     | 0.462     | 0.0154     | 0.0096     | 0.0090     |
-| cuad        | 0.154     | 0.333     | 0.641     | 0.0077     | 0.0135     | 0.0141     |
-| maud        | 0.083     | 0.125     | 0.167     | 0.0042     | 0.0063     | 0.0056     |
-| privacy_qa  | 0.313     | 0.563     | 0.646     | 0.0333     | 0.0229     | 0.0167     |
-| **OVERALL** | **0.195** | **0.332** | **0.482** | **0.0150** | **0.0130** | **0.0113** |
+```bash
+python -m evaluation.LegalBenchRAG.eval_precision_recall \
+    --data-dir data/LegalBenchRAG \
+    --benchmarks-dir data/LegalBenchRAG/benchmarks_subset \
+    --index-name legalrag-lb-hierarchical \
+    --ks 20 40 60 \
+    --trace-file logs/eval_trace.jsonl
+```
+
+Each line has this structure:
+
+```json
+{
+  "query_idx": 1,
+  "query": "Does the agreement include a limitation of liability clause?",
+  "tags": ["cuad"],
+  "ground_truth": [
+    {"file": "cuad/contract_001.txt", "span": [12400, 12850]}
+  ],
+  "total_gt_chars": 450,
+  "n_retrieved": 60,
+  "retrieved_all": [
+    {
+      "rank": 1, "file": "cuad/contract_001.txt",
+      "char_start": 12300, "char_end": 12812, "char_len": 512,
+      "score": 0.9821, "chunk_id": "abc123..."
+    }
+  ],
+  "metrics_by_k": [
+    {
+      "k": 20,
+      "char_recall": 0.8444,
+      "char_precision": 0.0211,
+      "intersection_chars": 380,
+      "gt_chars": 450,
+      "retrieved_chars": 9012,
+      "top_k_chunks": [
+        {"rank": 1, "file": "cuad/contract_001.txt", ..., "gt_overlap": true},
+        {"rank": 2, "file": "cuad/contract_002.txt", ..., "gt_overlap": false}
+      ]
+    }
+  ]
+}
+```
+
+Quick analysis with `jq`:
+
+```bash
+# Queries with zero recall at K=20
+jq 'select(.metrics_by_k[] | select(.k==20) | .char_recall == 0)' logs/eval_trace.jsonl
+
+# Top-5 retrieved chunks for a specific query
+jq 'select(.query_idx==3) | .retrieved_all[:5]' logs/eval_trace.jsonl
+
+# All queries where rank-1 chunk hit a GT span
+jq 'select(.metrics_by_k[0].top_k_chunks[0].gt_overlap == true) | .query' logs/eval_trace.jsonl
+```
 
 
 ---

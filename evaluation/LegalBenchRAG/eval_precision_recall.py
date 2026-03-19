@@ -14,9 +14,6 @@ the ground-truth (GT) snippet spans:
 that appear in both the GT spans and at least one retrieved chunk span are
 counted.  Characters from different files never mix.
 
-This is sensitive to how much of each GT snippet is actually covered and how
-much retrieved text is relevant, rather than just binary hit/miss per chunk.
-
 # ── Commented-out chunk-level methodology ────────────────────────────────────
 # (kept for reference; replaced by character-level metrics above)
 #
@@ -70,9 +67,11 @@ No extra packages needed beyond the main legalrag dependencies.
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 from collections import defaultdict
+from pathlib import Path
 from typing import NamedTuple
 
 from legalrag.core.config import settings
@@ -129,6 +128,20 @@ def spans_overlap(a: tuple[int, int], b: tuple[int, int]) -> bool:
     return a[0] < b[1] and b[0] < a[1]
 
 
+def _merge_spans(spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
+    """Merge a list of half-open [start, end) intervals into disjoint sorted spans."""
+    if not spans:
+        return []
+    sorted_spans = sorted(spans)
+    merged: list[tuple[int, int]] = [sorted_spans[0]]
+    for start, end in sorted_spans[1:]:
+        if start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+    return merged
+
+
 def span_intersection_chars(
     spans_a: list[tuple[int, int]],
     spans_b: list[tuple[int, int]],
@@ -139,20 +152,8 @@ def span_intersection_chars(
     file).  The intersection is computed pairwise; overlapping pairs within
     the same list are handled by merging each list before intersecting.
     """
-    def merge(spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
-        if not spans:
-            return []
-        sorted_spans = sorted(spans)
-        merged: list[tuple[int, int]] = [sorted_spans[0]]
-        for start, end in sorted_spans[1:]:
-            if start <= merged[-1][1]:
-                merged[-1] = (merged[-1][0], max(merged[-1][1], end))
-            else:
-                merged.append((start, end))
-        return merged
-
-    ma = merge(spans_a)
-    mb = merge(spans_b)
+    ma = _merge_spans(spans_a)
+    mb = _merge_spans(spans_b)
 
     total = 0
     j = 0
@@ -170,25 +171,15 @@ def span_intersection_chars(
 
 def span_total_chars(spans: list[tuple[int, int]]) -> int:
     """Return the total number of unique characters covered by a list of spans."""
-    def merge(spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
-        if not spans:
-            return []
-        sorted_spans = sorted(spans)
-        merged: list[tuple[int, int]] = [sorted_spans[0]]
-        for start, end in sorted_spans[1:]:
-            if start <= merged[-1][1]:
-                merged[-1] = (merged[-1][0], max(merged[-1][1], end))
-            else:
-                merged.append((start, end))
-        return merged
-
-    return sum(e - s for s, e in merge(spans))
+    return sum(e - s for s, e in _merge_spans(spans))
 
 
 def score_query(
     test: BenchmarkTestCase,
     retriever: OpenSearchRetriever,
     ks: list[int],
+    trace_fh=None,
+    query_idx: int = 0,
 ) -> QueryScore:
     """Run retrieval for one test case and return character-level Precision@K / Recall@K.
 
@@ -200,44 +191,21 @@ def score_query(
 
     Intersection is computed per-file: only characters in both GT spans and
     retrieved spans from the same file are counted.
-    """
-    # ── Commented-out chunk-level scoring ────────────────────────────────────
-    # (replaced by character-level metrics below)
-    #
-    # Recall@K    = fraction of GT snippets covered by ≥1 of the top-K chunks.
-    # Precision@K = fraction of the top-K chunks that overlap ≥1 GT snippet.
-    #
-    # for k in ks:
-    #     top_k = retrieved[:k]
-    #     n_gt_covered = sum(
-    #         1
-    #         for snippet in test.snippets
-    #         if any(
-    #             fp == snippet.file_path and spans_overlap((cs, ce), snippet.span)
-    #             for fp, cs, ce in top_k
-    #         )
-    #     )
-    #     n_retrieved_relevant = sum(
-    #         1
-    #         for fp, cs, ce in top_k
-    #         if any(
-    #             fp == snippet.file_path and spans_overlap((cs, ce), snippet.span)
-    #             for snippet in test.snippets
-    #         )
-    #     )
-    #     recall_at_k[k] = n_gt_covered / n_gt if n_gt > 0 else 0.0
-    #     precision_at_k[k] = n_retrieved_relevant / len(top_k) if top_k else 0.0
-    # ─────────────────────────────────────────────────────────────────────────
 
+    If ``trace_fh`` is provided, one JSON line is appended per query with the
+    full retrieval trace: query text, GT snippets, all retrieved chunks (ranked),
+    per-K metrics, and which retrieved chunks hit/missed at each K.
+    """
     sq = StructuredQuery(
         raw_query=test.query,
         reformulated_query=test.query,
     )
     results = retriever.retrieve(sq)
 
-    # Collect retrieved (file_path, char_start, char_end) in rank order
+    # Collect retrieved (file_path, char_start, char_end, score) in rank order
     retrieved: list[tuple[str, int, int]] = []
-    for r in results:
+    retrieved_meta: list[dict] = []
+    for rank, r in enumerate(results, start=1):
         chunk = r.chunk
         if chunk.char_start is None or chunk.char_end is None:
             continue
@@ -245,6 +213,15 @@ def score_query(
         if not file_path:
             continue
         retrieved.append((file_path, chunk.char_start, chunk.char_end))
+        retrieved_meta.append({
+            "rank": rank,
+            "file": file_path,
+            "char_start": chunk.char_start,
+            "char_end": chunk.char_end,
+            "char_len": chunk.char_end - chunk.char_start,
+            "score": r.semantic_score,
+            "chunk_id": chunk.chunk_id,
+        })
 
     # GT spans grouped by file
     gt_by_file: dict[str, list[tuple[int, int]]] = defaultdict(list)
@@ -255,8 +232,12 @@ def score_query(
     char_recall_at_k: dict[int, float] = {}
     char_precision_at_k: dict[int, float] = {}
 
+    # Per-K trace data
+    k_details: list[dict] = []
+
     for k in ks:
         top_k = retrieved[:k]
+        top_k_meta = retrieved_meta[:k]
 
         # Retrieved spans grouped by file
         ret_by_file: dict[str, list[tuple[int, int]]] = defaultdict(list)
@@ -267,12 +248,49 @@ def score_query(
         # Intersection: per-file overlap between GT and retrieved spans
         intersection_chars = sum(
             span_intersection_chars(gt_by_file[fp], ret_by_file[fp])
-            for fp in set(gt_by_file) | set(ret_by_file)
-            if fp in gt_by_file and fp in ret_by_file
+            for fp in set(gt_by_file) & set(ret_by_file)
         )
 
-        char_recall_at_k[k] = intersection_chars / total_gt_chars if total_gt_chars > 0 else 0.0
-        char_precision_at_k[k] = intersection_chars / total_ret_chars if total_ret_chars > 0 else 0.0
+        recall = intersection_chars / total_gt_chars if total_gt_chars > 0 else 0.0
+        precision = intersection_chars / total_ret_chars if total_ret_chars > 0 else 0.0
+        char_recall_at_k[k] = recall
+        char_precision_at_k[k] = precision
+
+        if trace_fh is not None:
+            # Mark which chunks at this K overlap any GT snippet
+            hits = []
+            for m in top_k_meta:
+                fp = m["file"]
+                span = (m["char_start"], m["char_end"])
+                gt_spans = gt_by_file.get(fp, [])
+                overlaps = any(spans_overlap(span, g) for g in gt_spans)
+                hits.append({**m, "gt_overlap": overlaps})
+            k_details.append({
+                "k": k,
+                "char_recall": round(recall, 6),
+                "char_precision": round(precision, 6),
+                "intersection_chars": intersection_chars,
+                "gt_chars": total_gt_chars,
+                "retrieved_chars": total_ret_chars,
+                "top_k_chunks": hits,
+            })
+
+    if trace_fh is not None:
+        record = {
+            "query_idx": query_idx,
+            "query": test.query,
+            "tags": test.tags,
+            "ground_truth": [
+                {"file": s.file_path, "span": list(s.span)}
+                for s in test.snippets
+            ],
+            "total_gt_chars": total_gt_chars,
+            "n_retrieved": len(retrieved),
+            "retrieved_all": retrieved_meta,
+            "metrics_by_k": k_details,
+        }
+        trace_fh.write(json.dumps(record) + "\n")
+        trace_fh.flush()
 
     return QueryScore(
         char_recall_at_k=char_recall_at_k,
@@ -317,6 +335,16 @@ def aggregate(
         vals = "  ".join(f"{avg_at_k(score_list, metric, k):>{col_w}.4f}" for k in ks)
         return f"  {label:<18}  {vals}  ({len(score_list)})"
 
+    def fmt_overall_row(label: str, bm_avgs: list[list[float]]) -> str:
+        """Average of per-benchmark averages (equal weight per benchmark)."""
+        n = len(bm_avgs)
+        vals = "  ".join(
+            f"{(sum(col[i] for col in bm_avgs) / n):>{col_w}.4f}"
+            for i in range(len(ks))
+        )
+        total_queries = sum(len(per_bm.get(name, [])) for name in benchmark_names)
+        return f"  {label:<18}  {vals}  ({total_queries})"
+
     k_labels = "  ".join(f"{'K='+str(k):>{col_w}}" for k in ks)
     width = 22 + (col_w + 2) * len(ks) + 6
 
@@ -324,6 +352,7 @@ def aggregate(
     print(f"  LegalBench-RAG Evaluation — character-level @K")
     print(f"  CharRecall@K    = intersection(GT, retrieved) / GT chars")
     print(f"  CharPrecision@K = intersection(GT, retrieved) / retrieved chars")
+    print(f"  OVERALL = macro-average of per-benchmark averages (equal benchmark weight)")
     print(f"{'─' * width}")
 
     for metric, label in [
@@ -333,13 +362,16 @@ def aggregate(
         print(f"\n  {label}")
         print(f"  {'Benchmark':<18}  {k_labels}   N")
         print(f"  {'─'*18}  {'  '.join(['─'*col_w]*len(ks))}  {'─'*5}")
+        bm_avgs: list[list[float]] = []
         for name in benchmark_names:
             bm_scores = per_bm.get(name, [])
             if not bm_scores:
                 continue
             print(fmt_row(name, bm_scores, metric))
+            bm_avgs.append([avg_at_k(bm_scores, metric, k) for k in ks])
         print(f"  {'─'*18}  {'  '.join(['─'*col_w]*len(ks))}  {'─'*5}")
-        print(fmt_row("OVERALL", scores, metric))
+        if bm_avgs:
+            print(fmt_overall_row("OVERALL", bm_avgs))
 
     print(f"\n{'─' * width}")
     print(f"  Index : {index_name}  |  K values: {ks}")
@@ -414,6 +446,18 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--trace-file",
+        default=None,
+        metavar="PATH",
+        help=(
+            "Write a per-query retrieval trace to this file in JSONL format. "
+            "Each line is a JSON object with: query, ground_truth spans, all "
+            "retrieved chunks (ranked with scores), and per-K metrics with "
+            "gt_overlap flags. Useful for debugging retrieval failures. "
+            "Default: no trace file written."
+        ),
+    )
+    parser.add_argument(
         "--log-level",
         default="WARNING",
         choices=["DEBUG", "INFO", "WARNING", "ERROR"],
@@ -449,12 +493,22 @@ def main(argv: list[str] | None = None) -> None:
         f"K={ks}, top_k={top_k}, index={args.index_name} …"
     )
 
+    trace_path = Path(args.trace_file) if args.trace_file else None
+    if trace_path:
+        trace_path.parent.mkdir(parents=True, exist_ok=True)
+
     scores: list[QueryScore] = []
-    for i, test in enumerate(tests, 1):
-        score = score_query(test, retriever, ks=ks)
-        scores.append(score)
-        if i % 50 == 0:
-            print(f"  {i}/{len(tests)} queries done …")
+    trace_fh = open(trace_path, "w", encoding="utf-8") if trace_path else None
+    try:
+        for i, test in enumerate(tests, 1):
+            score = score_query(test, retriever, ks=ks, trace_fh=trace_fh, query_idx=i)
+            scores.append(score)
+            if i % 50 == 0:
+                print(f"  {i}/{len(tests)} queries done …")
+    finally:
+        if trace_fh:
+            trace_fh.close()
+            print(f"  Trace written → {trace_path}")
 
     aggregate(scores, benchmark_names, ks=ks, index_name=args.index_name)
 

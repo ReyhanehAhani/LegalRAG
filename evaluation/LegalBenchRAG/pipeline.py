@@ -171,8 +171,8 @@ class LegalBenchRAGIngestionPipeline:
             if hierarchical:
                 # Parent chunks: store text-only for context expansion
                 # Child chunks: embed and retrieve; we search for child chunks only
-                child_chunks = [c for c in chunks if c.parent_chunk_id is not None]
-                parent_chunks = [c for c in chunks if c.parent_chunk_id is None]
+                child_chunks = [c for c in chunks if not c.is_parent]
+                parent_chunks = [c for c in chunks if c.is_parent]
                 if parent_chunks:
                     self._indexer.index(parent_chunks)
             else:
