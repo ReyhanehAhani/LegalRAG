@@ -1,18 +1,36 @@
-"""LegalBench-RAG evaluation — chunk-level Precision@K & Recall@K.
+"""LegalBench-RAG evaluation — character-level Precision@K & Recall@K.
 
 Evaluation methodology
 ----------------------
-Scoring is at the *chunk level* (binary hit/miss), evaluated at multiple
-rank cutoffs K simultaneously:
+Scoring is at the *character level*, evaluated at multiple rank cutoffs K
+simultaneously.  For each query, the top-K retrieved chunks are unioned into
+a single set of character spans per file.  Metrics are then computed against
+the ground-truth (GT) snippet spans:
 
-    Recall@K    = fraction of GT snippets covered by ≥1 of the top-K chunks
-    Precision@K = fraction of the top-K chunks that overlap ≥1 GT snippet
+    CharRecall@K    = |intersection(GT chars, retrieved chars)| / |GT chars|
+    CharPrecision@K = |intersection(GT chars, retrieved chars)| / |retrieved chars|
 
-A GT snippet is "covered" if any of the top-K retrieved chunks from the same
-file has a character span that overlaps the snippet span (non-empty intersection).
-A retrieved chunk "hits" if it overlaps at least one GT snippet.
+"Intersection" is computed span-by-span within the same file: only characters
+that appear in both the GT spans and at least one retrieved chunk span are
+counted.  Characters from different files never mix.
 
-This is insensitive to exact chunk boundary positions — only overlap matters.
+This is sensitive to how much of each GT snippet is actually covered and how
+much retrieved text is relevant, rather than just binary hit/miss per chunk.
+
+# ── Commented-out chunk-level methodology ────────────────────────────────────
+# (kept for reference; replaced by character-level metrics above)
+#
+# Scoring was at the *chunk level* (binary hit/miss), evaluated at multiple
+# rank cutoffs K simultaneously:
+#
+#     Recall@K    = fraction of GT snippets covered by ≥1 of the top-K chunks
+#     Precision@K = fraction of the top-K chunks that overlap ≥1 GT snippet
+#
+# A GT snippet was "covered" if any top-K chunk from the same file had a
+# character span that overlapped the snippet span (non-empty intersection).
+# A retrieved chunk "hit" if it overlapped at least one GT snippet.
+# This was insensitive to exact chunk boundary positions — only overlap mattered.
+# ─────────────────────────────────────────────────────────────────────────────
 
 Mapping retrieved chunks back to character positions
 -----------------------------------------------------
@@ -99,8 +117,10 @@ def build_retriever(top_k: int, index_name: str = DEFAULT_INDEX_NAME) -> OpenSea
 
 class QueryScore(NamedTuple):
     # Dicts keyed by K value, e.g. {1: 0.5, 5: 0.8, 10: 1.0}
-    recall_at_k: dict[int, float]
-    precision_at_k: dict[int, float]
+    # char_recall_at_k:    intersection(GT, retrieved) / GT chars
+    # char_precision_at_k: intersection(GT, retrieved) / retrieved chars
+    char_recall_at_k: dict[int, float]
+    char_precision_at_k: dict[int, float]
     tags: list[str]
 
 
@@ -109,19 +129,106 @@ def spans_overlap(a: tuple[int, int], b: tuple[int, int]) -> bool:
     return a[0] < b[1] and b[0] < a[1]
 
 
+def span_intersection_chars(
+    spans_a: list[tuple[int, int]],
+    spans_b: list[tuple[int, int]],
+) -> int:
+    """Return the total number of characters in the intersection of two span lists.
+
+    Each list is a set of half-open [start, end) intervals (within the same
+    file).  The intersection is computed pairwise; overlapping pairs within
+    the same list are handled by merging each list before intersecting.
+    """
+    def merge(spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
+        if not spans:
+            return []
+        sorted_spans = sorted(spans)
+        merged: list[tuple[int, int]] = [sorted_spans[0]]
+        for start, end in sorted_spans[1:]:
+            if start <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+            else:
+                merged.append((start, end))
+        return merged
+
+    ma = merge(spans_a)
+    mb = merge(spans_b)
+
+    total = 0
+    j = 0
+    for a_start, a_end in ma:
+        while j < len(mb) and mb[j][1] <= a_start:
+            j += 1
+        i = j
+        while i < len(mb) and mb[i][0] < a_end:
+            overlap_start = max(a_start, mb[i][0])
+            overlap_end = min(a_end, mb[i][1])
+            total += max(0, overlap_end - overlap_start)
+            i += 1
+    return total
+
+
+def span_total_chars(spans: list[tuple[int, int]]) -> int:
+    """Return the total number of unique characters covered by a list of spans."""
+    def merge(spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
+        if not spans:
+            return []
+        sorted_spans = sorted(spans)
+        merged: list[tuple[int, int]] = [sorted_spans[0]]
+        for start, end in sorted_spans[1:]:
+            if start <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+            else:
+                merged.append((start, end))
+        return merged
+
+    return sum(e - s for s, e in merge(spans))
+
+
 def score_query(
     test: BenchmarkTestCase,
     retriever: OpenSearchRetriever,
     ks: list[int],
 ) -> QueryScore:
-    """Run retrieval for one test case and return Precision@K / Recall@K scores.
+    """Run retrieval for one test case and return character-level Precision@K / Recall@K.
 
     A single retrieval pass fetches ``max(ks)`` chunks.  Metrics are then
     computed for every K by slicing the ranked list at position K.
 
-    Recall@K    = fraction of GT snippets covered by ≥1 of the top-K chunks.
-    Precision@K = fraction of the top-K chunks that overlap ≥1 GT snippet.
+    CharRecall@K    = intersection(GT chars, retrieved chars) / GT chars
+    CharPrecision@K = intersection(GT chars, retrieved chars) / retrieved chars
+
+    Intersection is computed per-file: only characters in both GT spans and
+    retrieved spans from the same file are counted.
     """
+    # ── Commented-out chunk-level scoring ────────────────────────────────────
+    # (replaced by character-level metrics below)
+    #
+    # Recall@K    = fraction of GT snippets covered by ≥1 of the top-K chunks.
+    # Precision@K = fraction of the top-K chunks that overlap ≥1 GT snippet.
+    #
+    # for k in ks:
+    #     top_k = retrieved[:k]
+    #     n_gt_covered = sum(
+    #         1
+    #         for snippet in test.snippets
+    #         if any(
+    #             fp == snippet.file_path and spans_overlap((cs, ce), snippet.span)
+    #             for fp, cs, ce in top_k
+    #         )
+    #     )
+    #     n_retrieved_relevant = sum(
+    #         1
+    #         for fp, cs, ce in top_k
+    #         if any(
+    #             fp == snippet.file_path and spans_overlap((cs, ce), snippet.span)
+    #             for snippet in test.snippets
+    #         )
+    #     )
+    #     recall_at_k[k] = n_gt_covered / n_gt if n_gt > 0 else 0.0
+    #     precision_at_k[k] = n_retrieved_relevant / len(top_k) if top_k else 0.0
+    # ─────────────────────────────────────────────────────────────────────────
+
     sq = StructuredQuery(
         raw_query=test.query,
         reformulated_query=test.query,
@@ -139,34 +246,39 @@ def score_query(
             continue
         retrieved.append((file_path, chunk.char_start, chunk.char_end))
 
-    n_gt = len(test.snippets)
-    recall_at_k: dict[int, float] = {}
-    precision_at_k: dict[int, float] = {}
+    # GT spans grouped by file
+    gt_by_file: dict[str, list[tuple[int, int]]] = defaultdict(list)
+    for snippet in test.snippets:
+        gt_by_file[snippet.file_path].append(snippet.span)
+    total_gt_chars = sum(span_total_chars(spans) for spans in gt_by_file.values())
+
+    char_recall_at_k: dict[int, float] = {}
+    char_precision_at_k: dict[int, float] = {}
 
     for k in ks:
         top_k = retrieved[:k]
 
-        n_gt_covered = sum(
-            1
-            for snippet in test.snippets
-            if any(
-                fp == snippet.file_path and spans_overlap((cs, ce), snippet.span)
-                for fp, cs, ce in top_k
-            )
-        )
-        n_retrieved_relevant = sum(
-            1
-            for fp, cs, ce in top_k
-            if any(
-                fp == snippet.file_path and spans_overlap((cs, ce), snippet.span)
-                for snippet in test.snippets
-            )
+        # Retrieved spans grouped by file
+        ret_by_file: dict[str, list[tuple[int, int]]] = defaultdict(list)
+        for fp, cs, ce in top_k:
+            ret_by_file[fp].append((cs, ce))
+        total_ret_chars = sum(span_total_chars(spans) for spans in ret_by_file.values())
+
+        # Intersection: per-file overlap between GT and retrieved spans
+        intersection_chars = sum(
+            span_intersection_chars(gt_by_file[fp], ret_by_file[fp])
+            for fp in set(gt_by_file) | set(ret_by_file)
+            if fp in gt_by_file and fp in ret_by_file
         )
 
-        recall_at_k[k] = n_gt_covered / n_gt if n_gt > 0 else 0.0
-        precision_at_k[k] = n_retrieved_relevant / len(top_k) if top_k else 0.0
+        char_recall_at_k[k] = intersection_chars / total_gt_chars if total_gt_chars > 0 else 0.0
+        char_precision_at_k[k] = intersection_chars / total_ret_chars if total_ret_chars > 0 else 0.0
 
-    return QueryScore(recall_at_k=recall_at_k, precision_at_k=precision_at_k, tags=test.tags)
+    return QueryScore(
+        char_recall_at_k=char_recall_at_k,
+        char_precision_at_k=char_precision_at_k,
+        tags=test.tags,
+    )
 
 
 # ── Aggregate results ─────────────────────────────────────────────────────────
@@ -178,7 +290,15 @@ def aggregate(
     ks: list[int],
     index_name: str = DEFAULT_INDEX_NAME,
 ) -> None:
-    """Print a summary table: Recall@K and Precision@K per benchmark + overall."""
+    """Print a summary table: character-level Recall@K and Precision@K per benchmark + overall.
+
+    # ── Commented-out chunk-level table header ────────────────────────────────
+    # Previously printed:
+    #   LegalBench-RAG Evaluation — chunk-level @K
+    # with metrics "recall_at_k" and "precision_at_k" (binary hit/miss per chunk).
+    # Replaced by character-level metrics below.
+    # ─────────────────────────────────────────────────────────────────────────
+    """
     per_bm: dict[str, list[QueryScore]] = defaultdict(list)
     for score in scores:
         for tag in score.tags:
@@ -191,7 +311,6 @@ def aggregate(
         vals = [getattr(s, metric)[k] for s in score_list]
         return sum(vals) / len(vals)
 
-    k_header = "  ".join(f"@{k:>2}" for k in ks)
     col_w = 7  # width per K column
 
     def fmt_row(label: str, score_list: list[QueryScore], metric: str) -> str:
@@ -202,10 +321,15 @@ def aggregate(
     width = 22 + (col_w + 2) * len(ks) + 6
 
     print(f"\n{'─' * width}")
-    print(f"  LegalBench-RAG Evaluation — chunk-level @K")
+    print(f"  LegalBench-RAG Evaluation — character-level @K")
+    print(f"  CharRecall@K    = intersection(GT, retrieved) / GT chars")
+    print(f"  CharPrecision@K = intersection(GT, retrieved) / retrieved chars")
     print(f"{'─' * width}")
 
-    for metric, label in [("recall_at_k", "Recall"), ("precision_at_k", "Precision")]:
+    for metric, label in [
+        ("char_recall_at_k", "CharRecall"),
+        ("char_precision_at_k", "CharPrecision"),
+    ]:
         print(f"\n  {label}")
         print(f"  {'Benchmark':<18}  {k_labels}   N")
         print(f"  {'─'*18}  {'  '.join(['─'*col_w]*len(ks))}  {'─'*5}")

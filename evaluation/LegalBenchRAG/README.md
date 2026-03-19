@@ -104,16 +104,16 @@ the parent is fetched at generation time for richer context
 python -m evaluation.LegalBenchRAG.ingest \
     --data-dir data/LegalBenchRAG \
     --chunker hierarchical \
-    --parent-size 1500 \
+    --parent-size 2048 \
     --chunk-size 512 \
     --chunk-overlap 64 \
-    --index-name legalrag-lb-hierarchical \
+    --index-name legalrag-lbr-hierarchical \
     --all
 
 # Evaluate against that index
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
-    --index-name legalrag-lb-hierarchical \
+    --index-name legalrag-lbr-hierarchical \
     --ks 20 40 60
 ```
 
@@ -132,16 +132,16 @@ every chunk is both ingested and retrieved directly.
 python -m evaluation.LegalBenchRAG.ingest \
     --data-dir data/LegalBenchRAG \
     --chunker recursive \
-    --chunk-size 512 \
-    --chunk-overlap 64 \
-    --index-name legalrag-lb-recursive \
+    --chunk-size 1048 \
+    --chunk-overlap 128 \
+    --index-name legalrag-lbr-recursive \
     --all
 
 
 # Evaluate against that index
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
-    --index-name legalrag-lb-recursive \
+    --index-name legalrag-lbr-recursive \
     --ks 20 40 60
 ```
 

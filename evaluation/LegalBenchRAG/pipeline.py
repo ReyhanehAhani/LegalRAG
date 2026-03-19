@@ -20,10 +20,15 @@ Usage
 
 Index
 -----
-``legalrag-legalbenchrag`` — separate from the CanLII ``legalrag`` index so
+``legalrag-lbr-hierarchical`` — separate from the CanLII ``legalrag`` index so
 that the two corpora never interfere.  Delete and re-create when re-ingesting::
 
-    curl -X DELETE http://localhost:9200/legalrag-legalbenchrag
+``legalrag-lbr-recursive`` — separate from the CanLII ``legalrag`` index so
+that the two corpora never interfere.  Delete and re-create when re-ingesting::
+
+To delete:
+    curl -X DELETE http://localhost:9200/legalrag-lbr-recursive
+
 """
 
 from __future__ import annotations
@@ -165,7 +170,7 @@ class LegalBenchRAGIngestionPipeline:
 
             if hierarchical:
                 # Parent chunks: store text-only for context expansion
-                # Child chunks: embed and retrieve
+                # Child chunks: embed and retrieve; we search for child chunks only
                 child_chunks = [c for c in chunks if c.parent_chunk_id is not None]
                 parent_chunks = [c for c in chunks if c.parent_chunk_id is None]
                 if parent_chunks:
