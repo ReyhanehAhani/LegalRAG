@@ -37,7 +37,7 @@ cp .env.example .env
 # All other defaults work for the standalone OpenSearch setup
 ```
 
-```
+```bash
 # label machine
 source /home/twa174/LegalRAG/.venv/bin/activate
 ```
