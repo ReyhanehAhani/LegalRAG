@@ -92,6 +92,7 @@ class Chunk(BaseModel):
     chunk_id: str = Field(default_factory=lambda: str(uuid4()))
     doc_id: str                          # foreign key → LegalDocumentMetadata.doc_id
     parent_chunk_id: str | None = None   # for hierarchical chunking: parent summary chunk
+    is_parent: bool = False              # True only for HierarchicalChunker parent chunks
     text: str
     char_start: int | None = None
     char_end: int | None = None

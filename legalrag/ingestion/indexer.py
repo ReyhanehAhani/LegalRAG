@@ -28,8 +28,8 @@ class OpenSearchIndexer(BaseIndexer):
         if not chunks:
             return
 
-        parents = [c for c in chunks if c.parent_chunk_id is None]
-        children = [c for c in chunks if c.parent_chunk_id is not None]
+        parents = [c for c in chunks if c.is_parent]
+        children = [c for c in chunks if not c.is_parent]
 
         if parents:
             self._bulk_upsert(parents, vector=False)
@@ -54,7 +54,7 @@ class OpenSearchIndexer(BaseIndexer):
                 "text": chunk.text,
                 "char_start": chunk.char_start,
                 "char_end": chunk.char_end,
-                "is_parent": not vector,
+                "is_parent": chunk.is_parent,
                 # Metadata fields (flattened for easy filtering)
                 "source_path": chunk.metadata.source_path,
                 "court": chunk.metadata.court,

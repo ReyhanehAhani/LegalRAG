@@ -4,7 +4,7 @@ Available chunkers
 ------------------
 HierarchicalChunker
     Two-level hierarchy: parent chunks (~1500 chars) + overlapping child chunks
-    (~512 chars).  Child chunks are embedded and retrieved; parents are fetched at
+    (~512 chars, 64-char overlap).  Child chunks are embedded and retrieved; parents are fetched at
     generation time for richer context ("small-to-big retrieval").
 
 RecursiveCharacterTextSplitter
@@ -138,6 +138,7 @@ class HierarchicalChunker(BaseChunker):
                 chunk_id=parent_id,
                 doc_id=doc_id,
                 parent_chunk_id=None,
+                is_parent=True,
                 text=parent_text,
                 char_start=p_start,
                 char_end=p_end,

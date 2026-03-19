@@ -65,8 +65,8 @@ class OpenSearchSettings(BaseSettings):
 
 
 class RetrievalSettings(BaseSettings):
-    top_k: int = Field(20, alias="RETRIEVAL_TOP_K")
-    rerank_top_k: int = Field(5, alias="RERANK_TOP_K")
+    top_k: int = Field(100, alias="RETRIEVAL_TOP_K")
+    rerank_top_k: int = Field(100, alias="RERANK_TOP_K")
     chunk_size: int = Field(512, alias="CHUNK_SIZE")
     chunk_overlap: int = Field(64, alias="CHUNK_OVERLAP")
     reranker_model: str = Field(
