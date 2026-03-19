@@ -1,0 +1,372 @@
+{
+  "metadata": {
+    "model": "Qwen/Qwen2.5-72B-Instruct",
+    "n_per_dataset": 4,
+    "seed": 42,
+    "datasets": [
+      "contractnli",
+      "cuad",
+      "maud",
+      "privacy_qa"
+    ],
+    "prompts": {
+      "v4_reddit_style": {
+        "system_prompt": "You rewrite formal legal questions into how a non-lawyer would actually ask them. Replace legal jargon with plain, everyday words. Use contractions (don't, it's, won't). Vary your phrasing — avoid repeating the same opening. Keep the exact same meaning. Output ONLY the rewritten query, nothing else.",
+        "user_prompt_template": "Rewrite this legal question as if a real person posted it on Reddit asking for help. Use plain language — replace legal jargon with everyday words. Be creative with how you start: mimic how real humans actually post — varied, natural, sometimes rambling, sometimes direct, never formulaic. Avoid repetitive openings. Keep the exact meaning.\n\nOriginal: {query}\n\nReddit-style question:"
+      }
+    },
+    "dataset": "contractnli"
+  },
+  "results": [
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Non-Disclosure Agreement between IGC and LSE; Does the document permit the Receiving Party to retain some Confidential Information even after its return or destruction?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Non-Disclosure Agreement between IGC and LSE. It's kind of confusing, but does it allow the receiving party to keep some of the confidential info even after they're supposed to return or destroy it?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider HNBA's Confidentiality Agreement; Does the document allow the Receiving Party to acquire information similar to the Confidential Information from a third party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Confidentiality Agreement from HNBA, and I'm trying to figure out if it lets the other side get similar info from someone else. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Grindrod SA's Non-Disclosure Agreement; Does the document state that Confidential Information shall only include technical information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Grindrod SA, and I'm trying to figure out if it says that Confidential Information is only supposed to cover technical stuff. Can anyone help me out with this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Non-Disclosure Agreement between DoiT and ICN; Does the document allow the Receiving Party to share some Confidential Information with third parties, including consultants, agents, and professional advisors?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Non-Disclosure Agreement between DoiT and ICN. It's kind of confusing, but does it say anywhere that one side can share confidential stuff with others, like consultants or lawyers?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Sony Pictures Television's Non-Disclosure Agreement; Does the document require that all Confidential Information be expressly identified by the Disclosing Party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Sony Pictures Television, and I'm wondering if they have to clearly label everything they consider confidential? Anyone know?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Excelerate's Non-Disclosure Agreement; Does the document allow the Receiving Party to share some Confidential Information with their employees?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Excelerate, and I'm wondering if it lets me share some of the confidential stuff with my own team. Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the VMware Certification Conduct Policy; Does the document restrict the use of Confidential Information to the purposes stated in the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at the VMware Certification Conduct Policy and I'm wondering if it limits how you can use the confidential info to only what's written in the agreement? Can someone clarify this for me? Thanks!"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider JBF's Non-Disclosure Agreement; Does the document allow the Receiving Party to share some Confidential Information with their employees?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Non-Disclosure Agreement (NDA) I'm looking at. It's from JBF. The NDA talks about keeping certain info confidential. My question is, does this agreement let the person receiving the info share it with their own employees? Any insights would be super helpful!"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider FullStory's Mutual Non-Disclosure Agreement; Does the document allow the Receiving Party to share some Confidential Information with their employees?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from FullStory. It's mutual, so both sides are supposed to keep each other's secrets. My question is, can the company that receives the confidential info share it with their own employees? Just trying to understand this part better. Thanks!"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Kerber's Non-Disclosure Agreement; Does the document allow verbally conveyed information to be considered as Confidential Information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Non-Disclosure Agreement I signed with Kerber. It's got me wondering—does the agreement cover stuff that was just said out loud, or does it only apply to things in writing? Any thoughts?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Non-Disclosure Agreement between CopAcc and ToP Mentors; Does the document allow the Receiving Party to acquire information similar to the Confidential Information from a third party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Non-Disclosure Agreement between CopAcc and ToP Mentors. It's kind of confusing, but basically, I'm trying to figure out if the receiving party is allowed to get info that's similar to the confidential stuff from someone else. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between thoughtbot and Unknown Party; Does the document permit the Receiving Party to create a copy of some Confidential Information under certain circumstances?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this mutual NDA between thoughtbot and another company. It's got me wondering—does this agreement allow the receiving side to make copies of some of the confidential stuff under specific conditions? Any insights would be super helpful!"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Data Use Agreement in New York City; Does the document allow the Receiving Party to share some Confidential Information with their employees?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Data Use Agreement in NYC and I'm wondering if it lets the company that receives the info share some of the confidential stuff with their own workers? Can someone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider FNHA's Non-Disclosure Agreement; Does the document require that all Confidential Information be expressly identified by the Disclosing Party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from FNHA and I'm wondering if it says that all the confidential stuff has to be clearly labeled as secret by the person sharing it? Can anyone help me out with this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider FNHA's Non-Disclosure Agreement; Does the document restrict the use of Confidential Information to the purposes stated in the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Non-Disclosure Agreement from FNHA, and I'm wondering if it limits how I can use the confidential info to only what's written in the agreement? Can someone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider RROI's Confidentiality Agreement; Does the document permit the Receiving Party to create a copy of some Confidential Information under certain circumstances?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this confidentiality agreement from RROI and I'm wondering if it allows the receiving side to make copies of some of the confidential info in specific situations? Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider JBF's Non-Disclosure Agreement; Does the document state that Confidential Information shall only include technical information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from JBF, and I'm wondering if it says that the confidential stuff only includes technical info? Can someone help me out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Employer's Non-Disclosure Agreement; Does the document indicate that the Agreement does not grant the Receiving Party any rights to the Confidential Information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking over this Non-Disclosure Agreement my employer gave me, and I'm wondering if it says anywhere that signing it doesn't give me any rights to the confidential info they're sharing. Can someone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Data Use and Non-Disclosure Agreement between MDCH Trauma Registry; Does the document restrict the use of Confidential Information to the purposes stated in the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Data Use and Non-Disclosure Agreement with the MDCH Trauma Registry, and I'm trying to figure out if it limits how I can use the confidential info to only what's written in the agreement. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between The Knights of Unity; Does the document allow the Receiving Party to share some Confidential Information with third parties, including consultants, agents, and professional advisors?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Mutual Non-Disclosure Agreement between The Knights of Unity, and I'm trying to figure out if it lets the receiving side share confidential stuff with others like consultants or lawyers. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between The Knights of Unity; Does the document allow the Receiving Party to share some Confidential Information with their employees?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Mutual Non-Disclosure Agreement between The Knights of Unity. It's kind of confusing, but does it say anywhere if the Receiving Party can share some of the confidential stuff with their own employees? Thanks in advance!"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Oceaneering's Non-Disclosure Agreement; Does the document restrict the use of Confidential Information to the purposes stated in the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Oceaneering and I'm wondering if it limits how I can use the confidential info to only what's spelled out in the agreement? Can someone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider JBF's Non-Disclosure Agreement; Does the document permit the Receiving Party to retain some Confidential Information even after its return or destruction?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Non-Disclosure Agreement (NDA) from JBF. It's got me wondering if the person who gets the confidential info is allowed to keep some of it even after they're supposed to return or destroy everything else. Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Confidentiality Agreement between Tazza and CAFFE; Does the document state that Confidential Information shall only include technical information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this confidentiality agreement between Tazza and CAFFE, and I'm wondering if it says that the confidential info is only supposed to be technical stuff. Can anyone help me out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider ROI Corporation's Non-Disclosure Agreement; Does the document require that all Confidential Information be expressly identified by the Disclosing Party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from ROI Corporation, and I'm wondering if it says that all the confidential stuff has to be clearly labeled by the person sharing it? Can someone help me out with this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Simply Fashion's Non-Disclosure Agreement; Does the document require the Receiving Party to notify the Disclosing Party if they are required by law, regulation, or judicial process to disclose any Confidential Information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Simply Fashion, and I'm wondering if it says I have to let them know if I'm legally forced to share any of their confidential info. Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Fintricity's Non-Disclosure Agreement; Does the document specify whether the Receiving Party is required to destroy or return Confidential Information upon the termination of the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Fintricity, and I'm trying to figure out if I have to destroy or give back any confidential info once the agreement ends. Can anyone help me understand this part?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Sony Pictures Television's Non-Disclosure Agreement; Does the document state that Confidential Information shall only include technical information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Sony Pictures Television, and I'm trying to figure out if it says that Confidential Information is only supposed to be about technical stuff. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Non-Disclosure Agreement between DoiT and ICN; Does the document mention that some obligations of the Agreement may survive the termination of the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement between DoiT and ICN, and I'm wondering if it says anything about some duties sticking around even after the agreement ends. Can anyone help me out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Non-Disclosure Agreement between IGC and LSE; Does the document include a clause that prevents the Receiving Party from disclosing the fact that the Agreement was agreed upon or negotiated?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement between IGC and LSE, and I'm wondering if there's anything in there that stops the other side from talking about the fact that they even signed or talked about this agreement? Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Tabun Kitchen Investments' Non-Disclosure Agreement; Does the document state that Confidential Information shall only include technical information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Tabun Kitchen Investments, and I'm wondering if it says that the Confidential Information is only supposed to be technical stuff. Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Aspiegel's Non-Disclosure Agreement; Does the document indicate that the Agreement does not grant the Receiving Party any rights to the Confidential Information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Aspiegel, and I'm trying to figure out if it says anywhere that signing it doesn't give me any rights to the confidential info they're sharing. Can someone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Non-Disclosure Agreement between DoiT and ICN; Does the document specify whether the Receiving Party is required to destroy or return Confidential Information upon the termination of the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Non-Disclosure Agreement between DoiT and ICN. It's driving me nuts trying to figure out if the party that gets the confidential info has to destroy or give it back when the agreement ends. Can anyone help me out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider WECC's Non-Disclosure Agreement; Does the document allow the Receiving Party to share some Confidential Information with third parties, including consultants, agents, and professional advisors?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from WECC, and I'm wondering if it lets the receiving side share confidential stuff with others like consultants or lawyers. Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between Bosch and Automotive Service Solutions; Does the document allow verbally conveyed information to be considered as Confidential Information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Mutual Non-Disclosure Agreement between Bosch and Automotive Service Solutions. It's kind of confusing, but does this agreement count verbal info as confidential stuff too?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider AfriGIS's Non-Disclosure Agreement; Does the document allow the Receiving Party to acquire information similar to the Confidential Information from a third party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from AfriGIS and I'm wondering if it lets the receiving side get similar info from someone else without breaking the agreement? Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between Wayne Fueling Systems and Unknown Party; Does the document require that all Confidential Information be expressly identified by the Disclosing Party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Mutual Non-Disclosure Agreement between Wayne Fueling Systems and another company, and I'm trying to figure out if it says that all the confidential stuff has to be clearly labeled as secret by the party sharing it. Can anyone help me out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between Inventor and Product Development Experts, Inc.; Does the document allow verbally conveyed information to be considered as Confidential Information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Mutual Non-Disclosure Agreement with a company called Product Development Experts, and I'm wondering if it covers info that's shared out loud, not just in writing. Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Kenway's Non-Disclosure Agreement; Does the document allow the Receiving Party to share some Confidential Information with third parties, including consultants, agents, and professional advisors?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Kenway, and I'm wondering if it lets the other side share confidential stuff with third parties like consultants or lawyers. Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider JBF's Non-Disclosure Agreement; Does the document allow the Receiving Party to share some Confidential Information with third parties, including consultants, agents, and professional advisors?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Non-Disclosure Agreement from JBF, and I'm trying to figure out if it lets me share some of the confidential stuff with outside people like consultants or lawyers. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider ROI Corporation's Non-Disclosure Agreement; Does the document allow the Receiving Party to share some Confidential Information with their employees?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Non-Disclosure Agreement from ROI Corporation. It's kind of confusing, but does it let the person who gets the info share it with their own team members? Thanks in advance!"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Non-Disclosure Agreement between Stony Hill and Buyer; Does the document specify whether the Receiving Party is required to destroy or return Confidential Information upon the termination of the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Non-Disclosure Agreement between Stony Hill and another company. It's kind of confusing, but I'm trying to figure out if the party that received the confidential info has to give it back or destroy it when the agreement ends. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Non-Disclosure Agreement between Hochschule Furtwangen University and Thesis Participants; Does the document indicate that the Agreement does not grant the Receiving Party any rights to the Confidential Information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement between Hochschule Furtwangen University and some thesis participants. Can anyone tell me if it says the receiving party doesn't get any rights to the confidential info?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Inaturals's Non-Disclosure Agreement; Does the document allow the Receiving Party to acquire information similar to the Confidential Information from a third party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Inaturals. It's got me wondering—does this paper let the other side get info that's like the confidential stuff from someone else?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between Bosch and Automotive Service Solutions; Does the document allow the Receiving Party to acquire information similar to the Confidential Information from a third party?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Mutual Non-Disclosure Agreement between Bosch and Automotive Service Solutions. It's kind of confusing, but basically, I'm trying to figure out if the receiving party is allowed to get similar info to what's considered confidential from someone else. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider FullStory's Mutual Non-Disclosure Agreement; Does the document permit the Receiving Party to create a copy of some Confidential Information under certain circumstances?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from FullStory, and I'm wondering if it allows the receiving side to make copies of some confidential info in specific situations? Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between Wayne Fueling Systems and Unknown Party; Does the document state that Confidential Information shall only include technical information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Mutual Non-Disclosure Agreement between Wayne Fueling Systems and someone else, and I'm trying to figure out if it says that the confidential stuff can only be technical info. Can anyone help me understand this?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider FNHA's Non-Disclosure Agreement; Does the document allow verbally conveyed information to be considered as Confidential Information?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I'm looking at this Non-Disclosure Agreement from FNHA and I'm wondering if it counts stuff that's said out loud as confidential info? Can anyone help me figure this out?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider Axial's Non-Disclosure Agreement; Does the document specify whether the Receiving Party is required to destroy or return Confidential Information upon the termination of the Agreement?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got this Non-Disclosure Agreement from Axial, and I'm trying to figure out if I have to destroy or give back any confidential info once the agreement ends. Can anyone help me find where it talks about that?"
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "original": "Consider the Mutual Non-Disclosure Agreement between Roundhouse and Creative; Does the document allow the Receiving Party to share some Confidential Information with their employees?",
+      "rewrites": {
+        "v4_reddit_style": "Hey everyone, I've got a question about this Mutual Non-Disclosure Agreement between Roundhouse and Creative. It's kind of confusing, but does it say anywhere if the company that receives the confidential info can share it with their own employees? Thanks in advance!"
+      }
+    }
+  ]
+}
