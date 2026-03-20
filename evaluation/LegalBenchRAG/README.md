@@ -112,14 +112,16 @@ python -m evaluation.LegalBenchRAG.ingest \
     --parent-size 2048 \
     --chunk-size 512 \
     --chunk-overlap 64 \
-    --index-name legalrag-lbr-hierarchical \
+    --index-name lbr-hier-all-mpnet-base-v2 \
     --all
 
 # Evaluate against that index
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
-    --index-name legalrag-lbr-hierarchical \
-    --ks 20 40 60
+    --index-name lbr-hier-all-mpnet-base-v2 \
+    --ks 2 4 6 10 15 20 40 60 \
+    --trace-file logs/eval/lbr_hier_all-mpnet-base-v2.jsonl \
+    --benchmarks-dir data/LegalBenchRAG/benchmarks_50
 ```
 
 ### `recursive`
@@ -137,8 +139,8 @@ every chunk is both ingested and retrieved directly.
 python -m evaluation.LegalBenchRAG.ingest \
     --data-dir data/LegalBenchRAG \
     --chunker recursive \
-    --chunk-size 1048 \
-    --chunk-overlap 128 \
+    --chunk-size 512 \
+    --chunk-overlap 64 \
     --index-name legalrag-lbr-recursive \
     --all
 
@@ -147,40 +149,8 @@ python -m evaluation.LegalBenchRAG.ingest \
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
     --index-name legalrag-lbr-recursive \
-    --ks 20 40 60
+    --ks 2 4 6 10 15 20 40 60
 ```
-
-### Comparing both chunkers side-by-side
-
-Use separate named indices so neither experiment is overwritten:
-
-```bash
-# 1. Ingest both
-python -m evaluation.LegalBenchRAG.ingest \
-    --data-dir data/LegalBenchRAG \
-    --chunker hierarchical \
-    --index-name legalrag-lb-hierarchical
-
-python -m evaluation.LegalBenchRAG.ingest \
-    --data-dir data/LegalBenchRAG \
-    --chunker recursive \
-    --index-name legalrag-lb-recursive
-
-# 2. Evaluate both
-python -m evaluation.LegalBenchRAG.eval_precision_recall \
-    --data-dir data/LegalBenchRAG \
-    --index-name legalrag-lb-hierarchical \
-    --ks 10 20 30 40 60 80 \
-    --trace-file logs/eval/lbr_hier_50_original.jsonl
-
-python -m evaluation.LegalBenchRAG.eval_precision_recall \
-    --data-dir data/LegalBenchRAG \
-    --index-name legalrag-lb-recursive \
-    --ks 10 20 30 40 60 80 \
-    --trace-file logs/eval/lbr_hier_50_original.jsonl
-```
-
----
 
 ## Evaluate a single sub-benchmark
 
