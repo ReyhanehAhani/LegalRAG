@@ -1,0 +1,828 @@
+{
+  "metadata": {
+    "schema": "LegalBench-RAG benchmark (same as benchmarks_50)",
+    "source_benchmark_dir": "benchmarks_50",
+    "rewrite_dir": "benchmark_50_reformated/qwen72b",
+    "rewrite_variant": "v4_reddit_style",
+    "dataset": "contractnli",
+    "model": "qwen72b",
+    "stats": {
+      "total": 50,
+      "rewritten": 50,
+      "fallback_original": 0
+    },
+    "generator": "scripts/build_benchmark_50_reformated_processed.py"
+  },
+  "tests": [
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Tabun Kitchen Investments, and I'm wondering if it says that the Confidential Information is only supposed to be technical stuff. Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/TabunKitchenInvestments-NDA.txt",
+          "span": [
+            1292,
+            1347
+          ],
+          "answer": "Confidential Information includes, without limitation, "
+        },
+        {
+          "file_path": "contractnli/TabunKitchenInvestments-NDA.txt",
+          "span": [
+            1572,
+            1772
+          ],
+          "answer": "(ii) forecasts, business plans, strategies, and financial statements, records and information, (iii) customer lists or requirements, and (iv) other business or technical information or trade secrets. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Grindrod SA, and I'm trying to figure out if it says that Confidential Information is only supposed to cover technical stuff. Can anyone help me out with this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Grindrod%20SA%20Confidentiality%20and%20Non-Disclosure%20Undertaking.txt",
+          "span": [
+            757,
+            1492
+          ],
+          "answer": "1.1 “Confidential Information” means; all technical, commercial, procurement requirements, purchasing, manufacturing, customer lists, investors, employees, business and contractual relationships, business forecasts, sales and merchandising, and marketing plans business or personnel information disclosed or otherwise made available in any format and/or physical manner by Grindrod SA or becoming available, before, during and/or after the execution of an interaction, duty or obligation including all information that makes itself known to the Vendor or comes into being as a result of the rendering, production and/or delivery of an agreement/understanding/request for quotation/contract or Purchase Order, or any other interaction. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Data Use Agreement in NYC and I'm wondering if it lets the company that receives the info share some of the confidential stuff with their own workers? Can someone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Data Use Agreement New York City.txt",
+          "span": [
+            6985,
+            7273
+          ],
+          "answer": "1. Only the Data Recipient’s employees and/or consultants required to use the Data to perform the functions of this Agreement that are set forth in Attachment B, and so designated by Data Recipient as “Authorized Users” in Attachment C to this Agreement, will be given access to the Data."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Mutual Non-Disclosure Agreement between Wayne Fueling Systems and another company, and I'm trying to figure out if it says that all the confidential stuff has to be clearly labeled as secret by the party sharing it. Can anyone help me out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/wayne-fueling-systems-mutual-non-disclosure-agreement-final.txt",
+          "span": [
+            968,
+            1267
+          ],
+          "answer": "Confidential Information also includes, but is not limited to, personal data as defined in this Agreement or by applicable law, whichever is broader, and personal data shall not be required to be marked “Confidential” or “Proprietary” to be treated as Confidential Information under this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from FullStory, and I'm wondering if it allows the receiving side to make copies of some confidential info in specific situations? Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/helpjuice_production%2Fuploads%2Fupload%2Fimage%2F2329%2Fdirect%2F1526996160411-FullStory+Mutual+Non-Disclosure+Agreement+2018.txt",
+          "span": [
+            3230,
+            3396
+          ],
+          "answer": "Recipient agrees not to copy or reverse engineer, or attempt to derive the composition or underlying information, structure or ideas of any Confidential Information. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Non-Disclosure Agreement I signed with Kerber. It's got me wondering—does the agreement cover stuff that was just said out loud, or does it only apply to things in writing? Any thoughts?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Kerber_Non_Disclosure_Agreement.txt",
+          "span": [
+            1242,
+            1482
+          ],
+          "answer": "Information initially furnished orally and identified by the disclosing party as confidential or proprietary at the time of disclosure will be confirmed by the disclosing party as Confidential Information in writing within thirty (30) days."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Non-Disclosure Agreement (NDA) I'm looking at. It's from JBF. The NDA talks about keeping certain info confidential. My question is, does this agreement let the person receiving the info share it with their own employees? Any insights would be super helpful!",
+      "snippets": [
+        {
+          "file_path": "contractnli/JBF_NDA_rev-2017033-1.txt",
+          "span": [
+            3676,
+            4377
+          ],
+          "answer": "The Receiving Party shall not disclose, allow access to, transmit or transfer the Confidential Information to any third party without the Disclosing Party’s prior written consent, provided however that the Receiving Party may disclose the Confidential Information to those of its directors, officers and employees (\"Representatives\") who have a need to know the Confidential Information for the Purpose provided that the Receiving Party shall ensure that such Representatives treat the Confidential Information as confidential and at all times in a manner consistent with this Agreement and the Receiving Party shall be liable for any loss or damage resulting from any Representative failing to do so."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Confidentiality Agreement from HNBA, and I'm trying to figure out if it lets the other side get similar info from someone else. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/HNBA-2017-18-Confidentiality-Agreement.txt",
+          "span": [
+            5669,
+            5791
+          ],
+          "answer": "3. The HNBA agrees that the Board Member shall not be liable for any disclosure or use of any Confidential Information if:"
+        },
+        {
+          "file_path": "contractnli/HNBA-2017-18-Confidentiality-Agreement.txt",
+          "span": [
+            5954,
+            6123
+          ],
+          "answer": "(b) Such Confidential Information is lawfully obtained by the Board Member from a third- party or parties independent of the HNBA prior to the Board Member’s disclosure;"
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at the VMware Certification Conduct Policy and I'm wondering if it limits how you can use the confidential info to only what's written in the agreement? Can someone clarify this for me? Thanks!",
+      "snippets": [
+        {
+          "file_path": "contractnli/vmw-certification-conduct-policy.txt",
+          "span": [
+            1236,
+            1429
+          ],
+          "answer": "Recipient expressly agrees not to use the Confidential Information for purposes other than those necessary to consider the possibility of entering into a business relationship with the Company."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement between Hochschule Furtwangen University and some thesis participants. Can anyone tell me if it says the receiving party doesn't get any rights to the confidential info?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Geheimhaltungsvereinbarung_Abschlussarbeiten_HFU_englisch.txt",
+          "span": [
+            3838,
+            4025
+          ],
+          "answer": "This agreement does not confer any rights, in particular property, licencing or replication rights, rights of use or any other commercial protected rights or options between the parties. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from WECC, and I'm wondering if it lets the receiving side share confidential stuff with others like consultants or lawyers. Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/WECC_Confidentiality_Agreement.txt",
+          "span": [
+            1618,
+            1758
+          ],
+          "answer": "b. Data Recipient agrees to not make available, disclose, provide or communicate Non-Public Information to any entity or individual, except:"
+        },
+        {
+          "file_path": "contractnli/WECC_Confidentiality_Agreement.txt",
+          "span": [
+            2104,
+            2408
+          ],
+          "answer": "ii. Contractors of Data Recipient who (1) have signed a non-disclosure agreement that covers the Non-Public Information and is at least as restrictive as this Agreement, and (2) need the Non-Public Information for the work being performed subject to the limitation on Market Sensitive Information below. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Mutual Non-Disclosure Agreement between Wayne Fueling Systems and someone else, and I'm trying to figure out if it says that the confidential stuff can only be technical info. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/wayne-fueling-systems-mutual-non-disclosure-agreement-final.txt",
+          "span": [
+            968,
+            1267
+          ],
+          "answer": "Confidential Information also includes, but is not limited to, personal data as defined in this Agreement or by applicable law, whichever is broader, and personal data shall not be required to be marked “Confidential” or “Proprietary” to be treated as Confidential Information under this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Mutual Non-Disclosure Agreement with a company called Product Development Experts, and I'm wondering if it covers info that's shared out loud, not just in writing. Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Mutual-Non-Disclosure-Agreement-Inventor-Product-Development-Experts-Inc..txt",
+          "span": [
+            728,
+            1482
+          ],
+          "answer": "\"Confidential Information\" means any information disclosed by either party to the other party, either directly or indirectly, in writing, orally or by inspection of tangible objects, including without limitation documents, prototypes, samples, plant and equipment, research, product plans, products, services, customer lists, software, developments, inventions, processes, designs, drawings, engineering, hardware configuration, marketing materials or finances, which is designated as \"Confidential,\" \"Proprietary\" or some similar designation. Information communicated orally shall be considered Confidential Information if such information is confirmed in writing as being Confidential Information within a reasonable time after the initial disclosure. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this confidentiality agreement from RROI and I'm wondering if it allows the receiving side to make copies of some of the confidential info in specific situations? Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/RROI_Confidentiality_Agreement_Final.txt",
+          "span": [
+            4774,
+            4871
+          ],
+          "answer": "2. Only for Intended Purpose: The Recipient agrees and shall cause its Representatives to agree: "
+        },
+        {
+          "file_path": "contractnli/RROI_Confidentiality_Agreement_Final.txt",
+          "span": [
+            5193,
+            5346
+          ],
+          "answer": "(iv) not copy or reproduce any written materials comprising a part of the Evaluation Material, without the prior written consent of the Disclosing Party."
+        },
+        {
+          "file_path": "contractnli/RROI_Confidentiality_Agreement_Final.txt",
+          "span": [
+            7348,
+            7500
+          ],
+          "answer": "Furthermore, it is acknowledged that the Recipient’s computer system may automatically back-up Evaluation Material disclosed to it under the Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Excelerate, and I'm wondering if it lets me share some of the confidential stuff with my own team. Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/ExcelerateStandardNDAFormat.txt",
+          "span": [
+            4770,
+            5571
+          ],
+          "answer": "7. Notwithstanding anything to the contrary in Paragraph 4 hereof, Proprietary Information may be disclosed by a receiving Party to those of its employees and consultants who require knowledge thereof in connection with their duties in conducting the aforesaid purpose of this Agreement and who are obligated by written agreement to hold such Proprietary Information in confidence and restrict its use consistent with the receiving Party's obligations under this Agreement; and Proprietary Information may be disclosed to a legislative, judicial, or regulatory body requiring its disclosure, provided that, prior to such disclosure, the receiving Party has notified the disclosing Party of the requirement with an opportunity for the disclosing Party to object or seek an appropriate protective order."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Sony Pictures Television, and I'm wondering if they have to clearly label everything they consider confidential? Anyone know?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Sony%20Pictures%20Television%20NDA%20(Executed).txt",
+          "span": [
+            1054,
+            1935
+          ],
+          "answer": "1. Definition of Confidential Information. “Confidential Information” shall mean all information disclosed, directly or indirectly, through any means of communication or observation, by or on behalf of one party hereto (the \"Disclosing Party\") to the other party hereto (the \"Receiving Party\") on or after the date hereof, that relates to or is derived from the Disclosing Party’s business, strategic, marketing, technological or creative affairs, or to any other matter that the Receiving Party is advised or has reason to know is the confidential or proprietary information of the Disclosing Party. Any material provided by either party to the other which is clearly designated \"Confidential\" (or other similar legend) will be presumed to be Confidential Information; the absence of any such legend, however, will not preclude the same from being deemed Confidential Information."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Non-Disclosure Agreement from ROI Corporation. It's kind of confusing, but does it let the person who gets the info share it with their own team members? Thanks in advance!",
+      "snippets": [
+        {
+          "file_path": "contractnli/NDA-ROI-Corporation.txt",
+          "span": [
+            2435,
+            2723
+          ],
+          "answer": "The Receiving Party shall take all practical steps to keep the Disclosing Party’s Confidential Information confidential and shall restrict access to the Confidential Information to those agents and professional advisers to whom disclosure is necessary in pursuit of the Approved Purpose. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Non-Disclosure Agreement between DoiT and ICN. It's kind of confusing, but does it say anywhere that one side can share confidential stuff with others, like consultants or lawyers?",
+      "snippets": [
+        {
+          "file_path": "contractnli/DoiT-ICN-NonDisclosure-Agreement.txt",
+          "span": [
+            829,
+            1111
+          ],
+          "answer": "Vendor shall restrict disclosure of such CONFIDENTIAL INFORMATION to its employees with a need to know (and advise such employees of the obligations assumed herein), and shall not disclose such CONFIDENTIAL INFORMATION to any third party without prior written approval of the State."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement between DoiT and ICN, and I'm wondering if it says anything about some duties sticking around even after the agreement ends. Can anyone help me out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/DoiT-ICN-NonDisclosure-Agreement.txt",
+          "span": [
+            2479,
+            2887
+          ],
+          "answer": "5. The obligations of this Agreement with respect to the disclosure and use of CONFIDENTIAL INFORMATION shall survive for a period of three (3) years from the date of last disclosure.\n6. The parties recognize and agree that the obligations under paragraphs 1 and 6 of this Agreement shall survive the termination of this Agreement, and the parties shall be bound by such obligations after termination hereof."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from FNHA and I'm wondering if it counts stuff that's said out loud as confidential info? Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/FNHA-2019RFP-02-NDA-form.txt",
+          "span": [
+            933,
+            1448
+          ],
+          "answer": "1. Definition. \"Confidential Information\" means any information identified as confidential by the FNHA that is part of the FNHA’s request for proposal number 2019RFP-02, Architectural & Design Team Consultants for Metro Vancouver Office Project (“RFP”) whether in oral, written electronic or any other form or medium whatsoever, including but not limited to Appendix B of the RFP, questions answered or information disclosed by FNHA related to confidential aspects of the RFP or discussions held related to the RFP."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Non-Disclosure Agreement (NDA) from JBF. It's got me wondering if the person who gets the confidential info is allowed to keep some of it even after they're supposed to return or destroy everything else. Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/JBF_NDA_rev-2017033-1.txt",
+          "span": [
+            5665,
+            6059
+          ],
+          "answer": "7. The Receiving Party shall upon request immediately return to the Disclosing Party or destroy, as directed by the Disclosing Party, the Confidential Information and all copies thereof in any form whatsoever under the power or control of the Receiving Party or its Representatives and immediately destroy all compilations, analysis or derivative work relating to the Confidential Information. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Kenway, and I'm wondering if it lets the other side share confidential stuff with third parties like consultants or lawyers. Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Kenway-NDA-Form-Blank.txt",
+          "span": [
+            4259,
+            4364
+          ],
+          "answer": "“Representative”: means employees, agents, officers, advisers and other representatives of the Recipient."
+        },
+        {
+          "file_path": "contractnli/Kenway-NDA-Form-Blank.txt",
+          "span": [
+            6525,
+            6710
+          ],
+          "answer": "The Recipient may disclose the Disclosing Party's Confidential Information to those of its Representatives who need to know this Confidential Information for the Purpose, provided that:"
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Oceaneering and I'm wondering if it limits how I can use the confidential info to only what's spelled out in the agreement? Can someone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/oceaneering-non-disclosure-agreement.txt",
+          "span": [
+            1468,
+            1755
+          ],
+          "answer": "2. With respect to all Confidential Information disclosed hereunder, Recipient agrees that from and after the date of this Agreement, Recipient shall not:\na. use the Confidential Information except for purposes of its business relationship with Oceaneering (the “Authorized Purpose”); or"
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Non-Disclosure Agreement from Axial, and I'm trying to figure out if I have to destroy or give back any confidential info once the agreement ends. Can anyone help me find where it talks about that?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Standard%20NDA%20by%20Axial.txt",
+          "span": [
+            6508,
+            7114
+          ],
+          "answer": "Upon the expiration or termination of this Agreement, or at the Disclosing Party's request at any time during the term of this Agreement, the Recipient and its Representatives shall promptly return to the Disclosing Party all copies, whether in written, electronic or other form or media, of the Disclosing Party's Confidential Information, or destroy all such copies and confirm the same in writing to the Disclosing Party; provided, that the Recipient and its Representatives may retain such Confidential Information as is necessary to enable it to comply with its reasonable document retention policies."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Non-Disclosure Agreement between DoiT and ICN. It's driving me nuts trying to figure out if the party that gets the confidential info has to destroy or give it back when the agreement ends. Can anyone help me out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/DoiT-ICN-NonDisclosure-Agreement.txt",
+          "span": [
+            2270,
+            2403
+          ],
+          "answer": "3. All CONFIDENTIAL INFORMATION furnished hereunder shall be returned at the conclusion of each meeting between Vendor and the State."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Mutual Non-Disclosure Agreement between Roundhouse and Creative. It's kind of confusing, but does it say anywhere if the company that receives the confidential info can share it with their own employees? Thanks in advance!",
+      "snippets": [
+        {
+          "file_path": "contractnli/Roundhouse-Creative-Mutual-NDA.txt",
+          "span": [
+            2378,
+            2650
+          ],
+          "answer": "The Recipient shall ensure that each of its employees, officers, directors, or agents who has access to Confidential Information disclosed under this Agreement is informed of its proprietary and confidential nature and is required to abide by the terms of this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Inaturals. It's got me wondering—does this paper let the other side get info that's like the confidential stuff from someone else?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Inaturals_NDA.txt",
+          "span": [
+            1496,
+            1579
+          ],
+          "answer": "The obligation of confidentiality and non-use shall not apply to information which:"
+        },
+        {
+          "file_path": "contractnli/Inaturals_NDA.txt",
+          "span": [
+            1950,
+            2201
+          ],
+          "answer": "c) Information received by either party from a third party which, to the receiving party’s knowledge, was not under an obligation to maintain the confidentiality of the information and did not acquire such information from either Client or Company, or"
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this mutual NDA between thoughtbot and another company. It's got me wondering—does this agreement allow the receiving side to make copies of some of the confidential stuff under specific conditions? Any insights would be super helpful!",
+      "snippets": [
+        {
+          "file_path": "contractnli/thoughtbot-mutual-nda.txt",
+          "span": [
+            3151,
+            3302
+          ],
+          "answer": "The Receiving Party shall not make any cop-ies of Confidential Information unless the same are previously approved in writing by the Disclosing Party. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this confidentiality agreement between Tazza and CAFFE, and I'm wondering if it says that the confidential info is only supposed to be technical stuff. Can anyone help me out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Tazza-CAFFE-Confidentiality-Agreement.txt",
+          "span": [
+            2930,
+            3147
+          ],
+          "answer": "(b) “Confidential information” refers to and encompasses any information acquired or received by the potential Franchisee from or concerning the Franchisor, including, without limiting the generality of the foregoing:"
+        },
+        {
+          "file_path": "contractnli/Tazza-CAFFE-Confidentiality-Agreement.txt",
+          "span": [
+            3336,
+            3411
+          ],
+          "answer": "iii. any financial information concerning the Franchise and the Franchisor;"
+        },
+        {
+          "file_path": "contractnli/Tazza-CAFFE-Confidentiality-Agreement.txt",
+          "span": [
+            5018,
+            5456
+          ],
+          "answer": "All documents, letters, reports, protocols, notes, journals, drawings, plans, maps, sketches, spreadsheets, data, and any other written material, correspondence, archive, or e-mail (including any electronic material) containing confidential information, as well as any copies of these materials, must be returned by the potential Franchisee upon written request to do so from the Franchisor or at any time at the Franchisor’s discretion. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Non-Disclosure Agreement between Stony Hill and another company. It's kind of confusing, but I'm trying to figure out if the party that received the confidential info has to give it back or destroy it when the agreement ends. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/stony_hill_buyer_nda.txt",
+          "span": [
+            2718,
+            3038
+          ],
+          "answer": "(f) If Buyer decides does not purchase the Business, Buyer will promptly return to Broker all Information previously furnished by Broker or Seller, including any and all reproductions of same, and further, shall destroy any and all analyses, compilations or other material that incorporates any part of said Information."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from ROI Corporation, and I'm wondering if it says that all the confidential stuff has to be clearly labeled by the person sharing it? Can someone help me out with this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/NDA-ROI-Corporation.txt",
+          "span": [
+            529,
+            666
+          ],
+          "answer": "For the purposes of this Agreement, “Confidential Information” shall mean information that is used in Disclosing Party's business and is:"
+        },
+        {
+          "file_path": "contractnli/NDA-ROI-Corporation.txt",
+          "span": [
+            922,
+            1284
+          ],
+          "answer": "(iii) designated as Confidential Information by Disclosing Party, or from all the relevant circumstances should reasonably be assumed by Receiving Party to be confidential and proprietary to Disclosing Party including information and documentation clearly and conspicuously marked with a legend identifying its Confidential, Classified and Proprietary in nature:"
+        },
+        {
+          "file_path": "contractnli/NDA-ROI-Corporation.txt",
+          "span": [
+            3269,
+            4297
+          ],
+          "answer": "In addition, the Receiving Party acknowledges that the following specific Confidential Information, namely:\nKnowledge of the identity of the Disclosing Party, coupled with the fact that that the Disclosing Party’s practice(s) are for sale, or that the Disclosing Party has commissioned appraisal(s) for the possible sale of same would, if disclosed by the Receiving Party and such information thereby came to the knowledge of STAFF (either employees or associates) of the practices, cause significant damages to the Disclosing Party though departure of STAFF and/or Patients, which damages would be difficult to quantify. Accordingly, Receiving Party acknowledges that a breach of this confidentiality agreement with respect to this specific Confidential Information which results in such information becoming known to STAFF and/or Patients will entitle Disclosing Party to liquidated damages in the sum of $250,000.00, it being expressly understood and agreed that such sum is a genuine pre-estimate of damages and not penalty."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Non-Disclosure Agreement from JBF, and I'm trying to figure out if it lets me share some of the confidential stuff with outside people like consultants or lawyers. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/JBF_NDA_rev-2017033-1.txt",
+          "span": [
+            3676,
+            4377
+          ],
+          "answer": "The Receiving Party shall not disclose, allow access to, transmit or transfer the Confidential Information to any third party without the Disclosing Party’s prior written consent, provided however that the Receiving Party may disclose the Confidential Information to those of its directors, officers and employees (\"Representatives\") who have a need to know the Confidential Information for the Purpose provided that the Receiving Party shall ensure that such Representatives treat the Confidential Information as confidential and at all times in a manner consistent with this Agreement and the Receiving Party shall be liable for any loss or damage resulting from any Representative failing to do so."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking over this Non-Disclosure Agreement my employer gave me, and I'm wondering if it says anywhere that signing it doesn't give me any rights to the confidential info they're sharing. Can someone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/nda-employee-template.txt",
+          "span": [
+            4553,
+            4770
+          ],
+          "answer": "All Confidential Information disclosed under this Agreement (including without limitation information in computer software or held in electronic storage media) shall be and remain in the property of Disclosing Party. "
+        },
+        {
+          "file_path": "contractnli/nda-employee-template.txt",
+          "span": [
+            5237,
+            5427
+          ],
+          "answer": "No intellectual property rights, including but not limited to, licenses or rights under any patent, copyright, trademark or trade secret, are granted or are to be implied by this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Sony Pictures Television, and I'm trying to figure out if it says that Confidential Information is only supposed to be about technical stuff. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Sony%20Pictures%20Television%20NDA%20(Executed).txt",
+          "span": [
+            1097,
+            1655
+          ],
+          "answer": "“Confidential Information” shall mean all information disclosed, directly or indirectly, through any means of communication or observation, by or on behalf of one party hereto (the \"Disclosing Party\") to the other party hereto (the \"Receiving Party\") on or after the date hereof, that relates to or is derived from the Disclosing Party’s business, strategic, marketing, technological or creative affairs, or to any other matter that the Receiving Party is advised or has reason to know is the confidential or proprietary information of the Disclosing Party. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from FullStory. It's mutual, so both sides are supposed to keep each other's secrets. My question is, can the company that receives the confidential info share it with their own employees? Just trying to understand this part better. Thanks!",
+      "snippets": [
+        {
+          "file_path": "contractnli/helpjuice_production%2Fuploads%2Fupload%2Fimage%2F2329%2Fdirect%2F1526996160411-FullStory+Mutual+Non-Disclosure+Agreement+2018.txt",
+          "span": [
+            2743,
+            3111
+          ],
+          "answer": "Recipient will disclose Discloser’s Confidential Information only to those of Recipient’s employees, consultants, and contractors who have a “need to know” the information to assist Recipient with respect to the Purpose and who are legally bound by terms and conditions substantially similar to those terms and conditions applicable to Recipient under this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Aspiegel, and I'm trying to figure out if it says anywhere that signing it doesn't give me any rights to the confidential info they're sharing. Can someone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Aspiegel_NDA_template.txt",
+          "span": [
+            8550,
+            8757
+          ],
+          "answer": "5.1 Each Party acknowledges and agrees that it shall not acquire by implication or otherwise any right or licence on or title to any Confidential Information communicated by or acquired from the other Party;"
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Data Use and Non-Disclosure Agreement with the MDCH Trauma Registry, and I'm trying to figure out if it limits how I can use the confidential info to only what's written in the agreement. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/Data_Use_and_Non_Disclosure_Data_Disclosed_to_MDCH_Trauma_Registry_Final_465518_7.txt",
+          "span": [
+            1032,
+            1237
+          ],
+          "answer": "The data provided to MDHHS will be used only for purposes of the Michigan Trauma Registry, consistent with Part 209 of the Public Health Code and the Michigan Administrative Code R 325.125 through 325.138."
+        },
+        {
+          "file_path": "contractnli/Data_Use_and_Non_Disclosure_Data_Disclosed_to_MDCH_Trauma_Registry_Final_465518_7.txt",
+          "span": [
+            1588,
+            1691
+          ],
+          "answer": "1. Use and disclose the data only in accordance with this Agreement, or as otherwise authorized by law;"
+        },
+        {
+          "file_path": "contractnli/Data_Use_and_Non_Disclosure_Data_Disclosed_to_MDCH_Trauma_Registry_Final_465518_7.txt",
+          "span": [
+            2007,
+            2130
+          ],
+          "answer": "4. Use appropriate safeguards to prevent the use or disclosure of the information other than as provided by this Agreement;"
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Non-Disclosure Agreement between CopAcc and ToP Mentors. It's kind of confusing, but basically, I'm trying to figure out if the receiving party is allowed to get info that's similar to the confidential stuff from someone else. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/CopAcc_NDA-and-ToP-Mentors_2.0_2017.txt",
+          "span": [
+            8016,
+            8058
+          ],
+          "answer": "Confidential Information does not include:"
+        },
+        {
+          "file_path": "contractnli/CopAcc_NDA-and-ToP-Mentors_2.0_2017.txt",
+          "span": [
+            8242,
+            8326
+          ],
+          "answer": "> information received from a third party who was free to disclose such information."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Mutual Non-Disclosure Agreement between Bosch and Automotive Service Solutions. It's kind of confusing, but does this agreement count verbal info as confidential stuff too?",
+      "snippets": [
+        {
+          "file_path": "contractnli/01_Bosch-Automotive-Service-Solutions-Mutual-Non-Disclosure-Agreement-7-12-17.txt",
+          "span": [
+            1184,
+            1594
+          ],
+          "answer": "The term “Confidential Information” as used herein means all nonpublic information relating to the Subject Matter that is disclosed by either party, its Affiliates (as defined below), or their agents (where applicable, collectively referred to as the “Disclosing Party”), directly or indirectly, in writing, orally or by inspection of premises or tangible objects to the other party (the “Recipient”) that is: "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from AfriGIS and I'm wondering if it lets the receiving side get similar info from someone else without breaking the agreement? Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/AfriGIS_Client-NDA_Template_2019.txt",
+          "span": [
+            13207,
+            13345
+          ],
+          "answer": "The obligations of the Receiving Party pursuant to the provisions of this Agreement shall not apply to any Confidential Information that –"
+        },
+        {
+          "file_path": "contractnli/AfriGIS_Client-NDA_Template_2019.txt",
+          "span": [
+            14511,
+            14630
+          ],
+          "answer": "8.6 is received from a third party in circumstances that do not result in a breach of the provisions of this Agreement."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Non-Disclosure Agreement between IGC and LSE. It's kind of confusing, but does it allow the receiving party to keep some of the confidential info even after they're supposed to return or destroy it?",
+      "snippets": [
+        {
+          "file_path": "contractnli/IGC-Non-Disclosure-Agreement-LSE-Sample.txt",
+          "span": [
+            9090,
+            9150
+          ],
+          "answer": "At the request of the Disclosing Party, the Recipient shall:"
+        },
+        {
+          "file_path": "contractnli/IGC-Non-Disclosure-Agreement-LSE-Sample.txt",
+          "span": [
+            9498,
+            9979
+          ],
+          "answer": "(c) Certify in writing to the Disclosing Party that it has complied with the requirements of this clause, provided that a Recipient may retain documents and materials containing, reflecting, incorporating, or based on the Disclosing Party's Confidential Information to the extent required by law or any applicable governmental or regulatory authority and to the extent reasonable to permit the Recipient to keep evidence that it has performed its obligations under this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Simply Fashion, and I'm wondering if it says I have to let them know if I'm legally forced to share any of their confidential info. Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/simply-fashion---standard-nda.txt",
+          "span": [
+            4860,
+            5387
+          ],
+          "answer": "4. In the event that Potential Purchaser, its Affiliated Entities, and/or its Representatives receive a request or are required to disclose any of the Evaluation Materials, pursuant to any applicable law, rule, regulation, regulatory authority, subpoena, order, summons, lawsuit, or other applicable judicial or governmental order, or any other legal process, Potential Purchaser shall provide the Company with prompt notice so that the Company may seek a protective order or other appropriate remedy at the Company’s expense. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Mutual Non-Disclosure Agreement between The Knights of Unity. It's kind of confusing, but does it say anywhere if the Receiving Party can share some of the confidential stuff with their own employees? Thanks in advance!",
+      "snippets": [
+        {
+          "file_path": "contractnli/MutualNDA_The_Knights_of_Unity.txt",
+          "span": [
+            3964,
+            4383
+          ],
+          "answer": "4. Confidential Information may be disclosed by the receiving party to its employees, directors, officers, advisors, attorneys, auditors and agents only on a need-to-know basis in connection with the Opportunity, and each employee, director, officer, advisor, attorney, auditor or agent to whom Confidential Information is disclosed shall treat such Confidential Information in a manner consistent with this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement between IGC and LSE, and I'm wondering if there's anything in there that stops the other side from talking about the fact that they even signed or talked about this agreement? Can anyone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/IGC-Non-Disclosure-Agreement-LSE-Sample.txt",
+          "span": [
+            2636,
+            3052
+          ],
+          "answer": "Confidential Information means all confidential information (however recorded, preserved or disclosed) disclosed by a party or its Representatives to the other party and that party's Representatives including but not limited to:\n(a) The fact that discussions and negotiations are taking place concerning the Purpose and the status of those discussions and negotiations;\n(b) The existence and terms of this Agreement;"
+        },
+        {
+          "file_path": "contractnli/IGC-Non-Disclosure-Agreement-LSE-Sample.txt",
+          "span": [
+            8385,
+            9060
+          ],
+          "answer": "No party shall make, or permit any person to make, any public announcement concerning this Agreement, the Purpose or its prospective interest in the Purpose without the prior written consent of the other party (such consent not to be unreasonably withheld or delayed) except as required by law or any governmental or regulatory authority (including, without limitation, any relevant securities exchange) or by any court or other authority of competent jurisdiction. No party shall make use of the other party's name or any information acquired through its dealings with the other party for publicity or marketing purposes without the prior written consent of the other party."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from JBF, and I'm wondering if it says that the confidential stuff only includes technical info? Can someone help me out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/JBF_NDA_rev-2017033-1.txt",
+          "span": [
+            1457,
+            2441
+          ],
+          "answer": "1. For the purposes of this Agreement, \"Confidential Information\" shall mean any and all information provided by, or on behalf of, the Disclosing Party to the Receiving Party prior to or following the execution of this Agreement and in any way relating to the Purpose (including, without limitation, any and all intellectual property, business secrets, business information, business plans, financial and pricing information, business practices, financial statements and reports, project specifications, projections, schematics and drawings, trade secrets, processes, materials, customer lists, supplier lists, sales volume, territories, markets, current, future or potential acquisitions, technical, production, operational, marketing or sales information disclosed hereunder) provided in connection therewith, regardless of form or format, provided however that Confidential Information shall not include information which the Receiving Party can establish through written records: "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got a question about this Mutual Non-Disclosure Agreement between Bosch and Automotive Service Solutions. It's kind of confusing, but basically, I'm trying to figure out if the receiving party is allowed to get similar info to what's considered confidential from someone else. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/01_Bosch-Automotive-Service-Solutions-Mutual-Non-Disclosure-Agreement-7-12-17.txt",
+          "span": [
+            4578,
+            4670
+          ],
+          "answer": "Recipient shall have no obligation of confidentiality with respect to any information which:"
+        },
+        {
+          "file_path": "contractnli/01_Bosch-Automotive-Service-Solutions-Mutual-Non-Disclosure-Agreement-7-12-17.txt",
+          "span": [
+            5042,
+            5143
+          ],
+          "answer": "5.3. is rightfully acquired from others who did not obtain it under obligation of confidentiality; or"
+        },
+        {
+          "file_path": "contractnli/01_Bosch-Automotive-Service-Solutions-Mutual-Non-Disclosure-Agreement-7-12-17.txt",
+          "span": [
+            10607,
+            10813
+          ],
+          "answer": "Disclosing Party understands that Recipient may develop or have developed information internally, or receive or have received information from other parties that is similar to the Confidential Information. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Mutual Non-Disclosure Agreement between The Knights of Unity, and I'm trying to figure out if it lets the receiving side share confidential stuff with others like consultants or lawyers. Can anyone help me understand this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/MutualNDA_The_Knights_of_Unity.txt",
+          "span": [
+            3964,
+            4383
+          ],
+          "answer": "4. Confidential Information may be disclosed by the receiving party to its employees, directors, officers, advisors, attorneys, auditors and agents only on a need-to-know basis in connection with the Opportunity, and each employee, director, officer, advisor, attorney, auditor or agent to whom Confidential Information is disclosed shall treat such Confidential Information in a manner consistent with this Agreement. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from FNHA and I'm wondering if it says that all the confidential stuff has to be clearly labeled as secret by the person sharing it? Can anyone help me out with this?",
+      "snippets": [
+        {
+          "file_path": "contractnli/FNHA-2019RFP-02-NDA-form.txt",
+          "span": [
+            933,
+            1448
+          ],
+          "answer": "1. Definition. \"Confidential Information\" means any information identified as confidential by the FNHA that is part of the FNHA’s request for proposal number 2019RFP-02, Architectural & Design Team Consultants for Metro Vancouver Office Project (“RFP”) whether in oral, written electronic or any other form or medium whatsoever, including but not limited to Appendix B of the RFP, questions answered or information disclosed by FNHA related to confidential aspects of the RFP or discussions held related to the RFP."
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I'm looking at this Non-Disclosure Agreement from Fintricity, and I'm trying to figure out if I have to destroy or give back any confidential info once the agreement ends. Can anyone help me understand this part?",
+      "snippets": [
+        {
+          "file_path": "contractnli/NDA-Fintricity-Blank.txt",
+          "span": [
+            7398,
+            7821
+          ],
+          "answer": "Upon the completion or termination of the Business Purpose, each recipient shall promptly deliver up to the disclosing party all Materials supplied by the disclosing party incorporating any Confidential Information of that party and all copies thereof and destroy or erase any Confidential Information contained in any materials and documentation prepared by or on behalf of the recipient or recorded in any memory device. "
+        }
+      ]
+    },
+    {
+      "query": "Hey everyone, I've got this Non-Disclosure Agreement from FNHA, and I'm wondering if it limits how I can use the confidential info to only what's written in the agreement? Can someone help me figure this out?",
+      "snippets": [
+        {
+          "file_path": "contractnli/FNHA-2019RFP-02-NDA-form.txt",
+          "span": [
+            1596,
+            1696
+          ],
+          "answer": "Company will not use the Confidential Information for any purpose other than responding to the RFP. "
+        }
+      ]
+    }
+  ]
+}
