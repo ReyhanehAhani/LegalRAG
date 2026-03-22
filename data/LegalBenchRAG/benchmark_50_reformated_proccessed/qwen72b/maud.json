@@ -8,14 +8,14 @@
     "model": "qwen72b",
     "stats": {
       "total": 50,
-      "rewritten": 25,
-      "fallback_original": 25
+      "rewritten": 50,
+      "fallback_original": 0
     },
     "generator": "scripts/build_benchmark_50_reformated_processed.py"
   },
   "tests": [
     {
-      "query": "Consider the Merger Agreement between \"Sanofi\" and \"Kadmon Holdings, Inc.\"; What is the Definition of \"Interveining Event\"",
+      "query": "Hey everyone, I'm looking at this Merger Agreement between Sanofi and Kadmon Holdings, Inc., and I'm stuck on what they mean by \"Intervening Event.\" Can someone explain it in simpler terms? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Kadmon_Holdings_Sanofi_SA_Merger_Agreement.txt",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Vulcan Materials Company\" and Target \"U.S. Concrete, Inc.\"; I want information about the Limitations on Antitrust Efforts",
+      "query": "Hey everyone, I'm looking at this deal where Vulcan Materials Company is buying U.S. Concrete, Inc. Can anyone explain what the agreement says about limits on antitrust efforts? I'm trying to understand if there are any restrictions on what they can do to avoid antitrust issues. Thanks!",
       "snippets": [
         {
           "file_path": "maud/U.S. Concrete, Inc._Vulcan Materials Company.txt",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Electronic Arts Inc.\" and Target \"Glu Mobile Inc.\"; What is the Type of Consideration",
+      "query": "Hey everyone, I'm looking at this deal where Electronic Arts Inc. is buying Glu Mobile Inc. Can someone explain what they're giving in return for the company?",
       "snippets": [
         {
           "file_path": "maud/Glu Mobile Inc._Electronic Arts Inc..txt",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "query": "Consider the Merger Agreement between \"Perspecta Inc.\" and \"Jaguar Parentco Inc.\"; What is the Definition of \"Material Adverse Effect\"",
+      "query": "Hey everyone, I'm looking at this Merger Agreement between Perspecta Inc. and Jaguar Parentco Inc., and I'm trying to figure out what they mean by \"Material Adverse Effect.\" Can anyone break it down for me in simpler terms? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Perspecta Inc._Veritas Capital.txt",
@@ -109,7 +109,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"MERCK SHARP & DOHME CORP.\" and Target \"PANDION THERAPEUTICS, INC.\"; What are the Ordinary course of business covenants",
+      "query": "Hey everyone, I'm looking at this deal between Merck Sharp & Dohme Corp. and Pandion Therapeutics, Inc. Can someone explain what the \"ordinary course of business\" promises mean in their agreement? I'm a bit lost on what that part is all about. Thanks!",
       "snippets": [
         {
           "file_path": "maud/Pandion Therapeutics, Inc._Merck _ Co., Inc..txt",
@@ -169,7 +169,7 @@
       ]
     },
     {
-      "query": "Consider the Merger Agreement between \"Merck Sharp & Dohme Corp.\" and \"Acceleron Pharma Inc.\"; Where is the Closing Conditions: Regulatory Approvals clause",
+      "query": "Hey everyone, I'm looking at this Merger Agreement between Merck Sharp & Dohme Corp. and Acceleron Pharma Inc., and I can't seem to find where they talk about the conditions for closing, specifically the part about getting regulatory approvals. Can anyone point me in the right direction? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Acceleron_Pharma_Inc_Merck_Co.txt",
@@ -182,7 +182,7 @@
       ]
     },
     {
-      "query": "Consider the Merger Agreement between \"Sterling Bancorp\" and \"Webster Financial Corporation\"; Information about the Closing Condition: Compliance with Covenants",
+      "query": "Hey everyone, I'm trying to understand something about the deal between Sterling Bancorp and Webster Financial Corporation. The agreement talks about a \"Closing Condition\" that says they have to follow certain promises or rules. Can someone explain what this means in simpler terms? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Sterling_Bancorp_Webster_Financial_Corporation.txt",
@@ -203,7 +203,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Viasat, Inc.\" and Target \"RigNet, Inc.\"; Where is the Closing Conditions: Regulatory Approvals clause",
+      "query": "Hey everyone, I'm looking at this deal between Viasat, Inc. and RigNet, Inc., and I can't seem to find where they talk about needing regulatory approvals before the deal goes through. Can anyone point me in the right direction?",
       "snippets": [
         {
           "file_path": "maud/RigNet, Inc._Viasat, Inc..txt",
@@ -237,7 +237,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"ASTRO STONE INTERMEDIATE HOLDING, LLC\" and Target \"SELECT INTERIOR CONCEPTS, INC.\"; What is the Type of Consideration",
+      "query": "Hey everyone, I'm looking at this deal where ASTRO STONE INTERMEDIATE HOLDING, LLC bought SELECT INTERIOR CONCEPTS, INC. Can anyone tell me what they gave or promised in return for the purchase? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Select_Interior_Concepts_Astro_Stone.txt",
@@ -284,7 +284,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"SUPERNUS PHARMACEUTICALS, INC.\" and Target \"ADAMAS PHARMACEUTICALS, INC.\"; What are the Ordinary course of business covenants",
+      "query": "Hey everyone, I'm looking at this deal between Supernus Pharmaceuticals and Adamas Pharmaceuticals. Can someone explain what the \"ordinary course of business\" promises mean in their agreement? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Adamas_Pharmaceuticals_Supernus_Pharmaceuticals.txt",
@@ -297,7 +297,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Gray Television, Inc.\" and Target \"Meredith Corporation\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date",
+      "query": "Hey everyone, I'm looking at this deal where Gray Television, Inc. is buying Meredith Corporation. Can someone explain what Meredith is saying about not having any big problems that could mess up the company by a certain date? It's in the agreement, but I'm not sure what it means exactly. Thanks!",
       "snippets": [
         {
           "file_path": "maud/Meredith Corporation_Gray Television, Inc..pdf||Meredith Corporation_Gray Television, Inc. Amendment No.1.txt",
@@ -310,7 +310,7 @@
       ]
     },
     {
-      "query": "Consider the Merger Agreement between \"Bridge Bancorp, Inc.\" and \"Dime Community Bancshares, Inc.\"; What is the Type of Consideration",
+      "query": "Hey everyone, I'm looking at this deal where Bridge Bancorp and Dime Community Bancshares are merging. Can someone explain what they're giving each other in return? I'm a bit lost on the details. Thanks!",
       "snippets": [
         {
           "file_path": "maud/Dime Community Bancshares, Inc._Bridge Bancorp, Inc..txt",
@@ -336,7 +336,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Covert Intermediate, Inc.\" and Target \"Covanta Holding Corporation\"; What are the Ordinary course of business covenants",
+      "query": "Hey everyone, I'm looking at this deal where Covert Intermediate, Inc. is buying Covanta Holding Corporation. Can someone explain what the \"ordinary course of business\" promises mean in their agreement? I'm trying to understand what exactly the companies are agreeing to do or not do during the process. Thanks!",
       "snippets": [
         {
           "file_path": "maud/Covanta_Holding_Corporation_EQT_Holdings_AB.txt",
@@ -349,7 +349,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"The Progressive Corporation\" and Target \"Protective Insurance Corporation\"; What are the Ordinary course of business covenants",
+      "query": "Hey everyone, I'm looking at this deal between The Progressive Corporation and Protective Insurance Corporation. Can someone explain what they mean by \"ordinary course of business\" stuff in their agreement? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Protective Insurance Corporation_The Progressive Corporation.txt",
@@ -409,7 +409,7 @@
       ]
     },
     {
-      "query": "Consider the Merger Agreement between \"BancorpSouth Bank\" and \"Cadence Bancorporation\"; What are the Ordinary course of business covenants",
+      "query": "Hey everyone, I'm looking at this deal between BancorpSouth Bank and Cadence Bancorporation. Can someone explain what they mean by \"ordinary course of business\" stuff in their merger agreement? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
@@ -443,7 +443,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"STERIS plc\" and Target \"Cantel Medical Corp.\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date",
+      "query": "Hey everyone, I'm looking at this deal between STERIS plc and Cantel Medical Corp. Can someone explain what Cantel is saying about not having any major issues up until a certain date in their agreement? It's all pretty confusing to me. Thanks!",
       "snippets": [
         {
           "file_path": "maud/Cantel Medical Corp._STERIS plc.pdf||Cantel Medical Corp._STERIS plc. Amendment No. 1.txt",
@@ -469,7 +469,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Graham Holdings Company\" and Target \"Leaf Group Ltd.\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date",
+      "query": "Hey everyone, I'm looking at this deal between Graham Holdings Company and Leaf Group Ltd. Can someone explain what Leaf Group promised about not having any big negative changes up until a certain date? It's in the agreement somewhere, but I can't quite figure out what they're saying. Thanks!",
       "snippets": [
         {
           "file_path": "maud/Leaf Group Ltd._Graham Holdings Company.txt",
@@ -495,7 +495,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Banc of California, Inc.\" and Target \"Pacific Mercantile Bancorp\"; Is there a Tail provision for acquisition proposals",
+      "query": "Hey everyone, I'm looking at this deal between Banc of California, Inc. and Pacific Mercantile Bancorp. Does anyone know if there's a clause that covers other offers after the deal is signed? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Pacific Mercantile Bancorp_Banc of California, Inc..txt",
@@ -524,7 +524,7 @@
       ]
     },
     {
-      "query": "Consider the Merger Agreement between \"BancorpSouth Bank\" and \"Cadence Bancorporation\"; What happens during a Breach of No-Shop clause",
+      "query": "Hey everyone, I'm trying to understand what goes down when one side breaks the no-shop rule in the deal between BancorpSouth Bank and Cadence Bancorporation. Can someone explain what usually happens in simple terms? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Cadence Bancorporation_BancorpSouth Bank.pdf||Cadence_Bancorporation_BancorpSouth_Bank_Amendment No.1.txt",
@@ -653,7 +653,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"ASTRO STONE INTERMEDIATE HOLDING, LLC\" and Target \"SELECT INTERIOR CONCEPTS, INC.\"; What are the Ordinary course of business covenants",
+      "query": "Hey everyone, I'm looking at this deal where ASTRO STONE INTERMEDIATE HOLDING, LLC is buying SELECT INTERIOR CONCEPTS, INC. Can someone explain what the \"ordinary course of business\" promises mean in their agreement? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Select_Interior_Concepts_Astro_Stone.txt",
@@ -687,7 +687,7 @@
       ]
     },
     {
-      "query": "Consider the Merger Agreement between \"Capstead Mortgage Corporation\" and \"Rodeo Sub I, LLC\"; What is the Definition of \"Knowledge\"",
+      "query": "Hey everyone, I'm looking at this Merger Agreement between Capstead Mortgage Corporation and Rodeo Sub I, LLC, and I'm trying to figure out what they mean by \"Knowledge.\" Can anyone help me understand this?",
       "snippets": [
         {
           "file_path": "maud/Capstead_Mortgage_Corp_Benefit_Street_Partners.pdf||Capstead_Mortgage_Corp_Benefit_Street_Partners_Amendment No.1.txt",
@@ -737,7 +737,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Iconix Acquisition LLC\" and Target \"Iconix Brand Group, Inc.\"; What is the Definition of \"Knowledge\"",
+      "query": "Hey everyone, I'm looking at this deal between Iconix Acquisition LLC and Iconix Brand Group, Inc., and I'm trying to figure out what they mean by \"Knowledge.\" Can anyone break it down for me?",
       "snippets": [
         {
           "file_path": "maud/Iconix_Brand_Group_Lancer Capital.txt",
@@ -763,7 +763,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Elanco Animal Health Incorporated\" and Target \"Kindred Biosciences, Inc.\"; Where is the No-Shop Clause",
+      "query": "Hey everyone, I'm looking at this deal between Elanco Animal Health and Kindred Biosciences. Can anyone tell me where the part is that says Kindred can't shop around for better offers? Thanks!",
       "snippets": [
         {
           "file_path": "maud/Kindred Biosciences, Inc._Elanco Animal Health Incorporated.pdf||Kindred_Biosciences_Inc_Elanco_Animal_Health_Incorporated Amendment No.1.txt",
@@ -797,7 +797,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"Newport Holdings, LLC\" and Target \"The New Home Company Inc.\"; Information about the Fiduciary Termination Right Triggers for termination",
+      "query": "Hey everyone, I'm looking at this deal between Newport Holdings, LLC and The New Home Company Inc., and I'm trying to figure out what situations would let one side back out of the agreement without getting in trouble. Can anyone explain the triggers for something called the Fiduciary Termination Right? Thanks!",
       "snippets": [
         {
           "file_path": "maud/New_Home_Co_Apollo_Global_Management.txt",
@@ -818,7 +818,7 @@
       ]
     },
     {
-      "query": "Consider the Acquisition Agreement between Parent \"ANALOG DEVICES, INC.\" and Target \"MAXIM INTEGRATED PRODUCTS, INC.\"; What is the Definition of \"Knowledge\"",
+      "query": "Hey everyone, I'm looking at this deal between Analog Devices and Maxim Integrated. Can someone explain what they mean by \"Knowledge\" in their agreement? It sounds super vague to me. Thanks!",
       "snippets": [
         {
           "file_path": "maud/Maxim Integrated Products, Inc._Analog Devices, Inc..txt",

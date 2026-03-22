@@ -8,14 +8,14 @@
     "model": "qwen72b",
     "stats": {
       "total": 50,
-      "rewritten": 32,
-      "fallback_original": 18
+      "rewritten": 50,
+      "fallback_original": 0
     },
     "generator": "scripts/build_benchmark_50_reformated_processed.py"
   },
   "tests": [
     {
-      "query": "Consider \"Wordscapes\"'s privacy policy; does the app show targeted advertisements?",
+      "query": "Hey everyone, I'm looking at the privacy policy for Wordscapes and I'm wondering if they use it to show me ads that are tailored to my interests. Does anyone know?",
       "snippets": [
         {
           "file_path": "privacy_qa/Wordscapes.txt",
@@ -153,7 +153,7 @@
       ]
     },
     {
-      "query": "Consider \"Wordscapes\"'s privacy policy; does it record my location information?",
+      "query": "Hey everyone, I'm curious about Wordscapes' privacy policy. Does it track where I am when I play?",
       "snippets": [
         {
           "file_path": "privacy_qa/Wordscapes.txt",
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "query": "Consider \"Groupon\"'s privacy policy; what security system do you have in place for the app?",
+      "query": "Hey everyone, I'm looking at Groupon's privacy policy and was wondering, what kind of security measures do they use to protect user data in their app? Anyone know?",
       "snippets": [
         {
           "file_path": "privacy_qa/Groupon.txt",
@@ -213,7 +213,7 @@
       ]
     },
     {
-      "query": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; who has access to whatever i create using this?",
+      "query": "Hey everyone, I'm using this app called TickTick for my to-do lists and daily planning. I was just wondering, who can see or access the stuff I create on there? Thanks!",
       "snippets": [
         {
           "file_path": "privacy_qa/TickTick: To Do List with Reminder, Day Planner.txt",
@@ -294,7 +294,7 @@
       ]
     },
     {
-      "query": "Consider \"Keep\"'s privacy policy; will my workout data be given to anyone else or shared with anyone (i.e. insurance companies)?",
+      "query": "Hey everyone, I'm using this app called Keep for my workouts. I was just wondering, does their privacy policy say they'll share my workout info with other people or companies, like insurance firms? Just trying to keep my data safe!",
       "snippets": [
         {
           "file_path": "privacy_qa/Keep.txt",
@@ -415,7 +415,7 @@
       ]
     },
     {
-      "query": "Consider \"Viber Messenger\"'s privacy policy; are my call logs recorded?",
+      "query": "Hey everyone, I'm using Viber Messenger and was wondering, do they keep a record of my call logs or not?",
       "snippets": [
         {
           "file_path": "privacy_qa/Viber Messenger.txt",
@@ -510,7 +510,7 @@
       ]
     },
     {
-      "query": "Consider \"Wordscapes\"'s privacy policy; does this app need access to any of my social media accounts?",
+      "query": "Hey everyone, I'm looking at the privacy policy for Wordscapes and I'm wondering, do they need to get into my social media accounts or something? It's kind of confusing. Thoughts?",
       "snippets": [
         {
           "file_path": "privacy_qa/Wordscapes.txt",
@@ -712,7 +712,7 @@
       ]
     },
     {
-      "query": "Consider \"Viber Messenger\"'s privacy policy; are there other people who can access my information?",
+      "query": "Hey everyone, I'm using Viber Messenger and was wondering, is there anyone else who might be able to see my info besides me? Just trying to understand their privacy policy better. Thoughts?",
       "snippets": [
         {
           "file_path": "privacy_qa/Viber Messenger.txt",
@@ -749,7 +749,7 @@
       ]
     },
     {
-      "query": "Consider \"Groupon\"'s privacy policy; is my data safe",
+      "query": "Hey everyone, I just signed up for Groupon and I'm a bit worried about their privacy policy. Does anyone know if they keep your personal info safe?",
       "snippets": [
         {
           "file_path": "privacy_qa/Groupon.txt",
@@ -762,7 +762,7 @@
       ]
     },
     {
-      "query": "Consider \"Viber Messenger\"'s privacy policy; will viber comply to government information request?",
+      "query": "Hey everyone, I'm trying to figure out if Viber Messenger would give my info to the government if asked. Anyone know what their privacy policy says about that?",
       "snippets": [
         {
           "file_path": "privacy_qa/Viber Messenger.txt",
@@ -775,7 +775,7 @@
       ]
     },
     {
-      "query": "Consider \"Groupon\"'s privacy policy; what type of permissions does the app need to operate?",
+      "query": "Hey everyone, I'm looking at Groupon's privacy policy and I'm wondering, what kind of permissions does their app need to work properly? Any insights would be super helpful!",
       "snippets": [
         {
           "file_path": "privacy_qa/Groupon.txt",
@@ -898,7 +898,7 @@
       ]
     },
     {
-      "query": "Consider \"Keep\"'s privacy policy; how is my information protected?",
+      "query": "Hey everyone, I'm looking at the privacy policy for this app called \"Keep\" and I'm trying to figure out how they're protecting my personal info. Can anyone break it down for me?",
       "snippets": [
         {
           "file_path": "privacy_qa/Keep.txt",
@@ -911,7 +911,7 @@
       ]
     },
     {
-      "query": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; will the application make money off of the info i enter in the app?",
+      "query": "Hey everyone, I'm using this app called TickTick for my to-do lists and daily planning. I was just wondering, does anyone know if they use the info I put in there to make money somehow? Thanks!",
       "snippets": [
         {
           "file_path": "privacy_qa/TickTick: To Do List with Reminder, Day Planner.txt",
@@ -945,7 +945,7 @@
       ]
     },
     {
-      "query": "Consider \"Groupon\"'s privacy policy; does it need location services while not using it?",
+      "query": "Hey everyone, I'm a bit confused about Groupon's privacy policy. It mentions something about needing location services even when I'm not actively using the app. Does anyone know if this is true or necessary? Thanks!",
       "snippets": [
         {
           "file_path": "privacy_qa/Groupon.txt",
@@ -979,7 +979,7 @@
       ]
     },
     {
-      "query": "Consider \"Keep\"'s privacy policy; do you sell my data",
+      "query": "Hey everyone, I'm looking at Keep's privacy policy and I'm wondering, do they sell my personal info or not?",
       "snippets": [
         {
           "file_path": "privacy_qa/Keep.txt",
@@ -1000,7 +1000,7 @@
       ]
     },
     {
-      "query": "Consider \"Viber Messenger\"'s privacy policy; does the app offer a password service where i am required to input a password when i want to access it?",
+      "query": "Hey everyone, I'm trying to figure out if Viber Messenger has a password feature that makes me type in a password every time I want to use the app. Can anyone help?",
       "snippets": [
         {
           "file_path": "privacy_qa/Viber Messenger.txt",
@@ -1029,7 +1029,7 @@
       ]
     },
     {
-      "query": "Consider \"Wordscapes\"'s privacy policy; does this app track my gps location?",
+      "query": "Hey everyone, I'm curious about the \"Wordscapes\" app. Does their privacy policy say they track your GPS location? Just wondering if I should be concerned about my privacy while playing.",
       "snippets": [
         {
           "file_path": "privacy_qa/Wordscapes.txt",
@@ -1050,7 +1050,7 @@
       ]
     },
     {
-      "query": "Consider \"Keep\"'s privacy policy; can people see what workout list i'm using?",
+      "query": "Hey everyone, I've been using this app called \"Keep\" for my workouts, and I was wondering if other people can see which exercises I'm doing? The privacy policy is a bit confusing, so any help would be great!",
       "snippets": [
         {
           "file_path": "privacy_qa/Keep.txt",
