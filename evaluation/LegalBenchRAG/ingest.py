@@ -86,6 +86,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "Overrides --benchmarks and --limit."
         ),
     )
+    parser.add_argument(
+        "--corpus-dir",
+        default=None,
+        metavar="PATH",
+        help=(
+            "Override the corpus directory (default: <data-dir>/corpus). "
+            "Use this to point at a custom corpus subset, e.g. data/LegalBenchRAG/corpus_50."
+        ),
+    )
     # ── Chunker options ───────────────────────────────────────────────────────
     parser.add_argument(
         "--chunker",
@@ -128,12 +137,24 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     # ── Embedding options ─────────────────────────────────────────────────────
     parser.add_argument(
+        "--embedding-provider",
+        default=None,
+        choices=["sentence_transformers", "huggingface", "openai"],
+        metavar="PROVIDER",
+        help=(
+            "Embedding provider: sentence_transformers, huggingface, or openai. "
+            "Overrides EMBEDDING_PROVIDER in .env. "
+            "Use 'huggingface' for models not packaged as sentence-transformers "
+            "(e.g. jhu-clsp/BERT-DPR-CLERC-ft)."
+        ),
+    )
+    parser.add_argument(
         "--embedding-model",
         default=None,
         metavar="MODEL",
         help=(
-            "HuggingFace sentence-transformers model name, e.g. "
-            "'BAAI/bge-large-en-v1.5'. Overrides EMBEDDING_MODEL in .env."
+            "Embedding model name. Overrides EMBEDDING_MODEL in .env. "
+            "Provider is taken from --embedding-provider or EMBEDDING_PROVIDER in .env."
         ),
     )
     # ── Index ─────────────────────────────────────────────────────────────────
@@ -163,7 +184,7 @@ def main(argv: list[str] | None = None) -> None:
     logger = logging.getLogger(__name__)
 
     data_dir = args.data_dir.rstrip("/")
-    corpus_dir = f"{data_dir}/corpus"
+    corpus_dir = args.corpus_dir.rstrip("/") if args.corpus_dir else f"{data_dir}/corpus"
     benchmarks_dir = f"{data_dir}/benchmarks"
 
     if args.ingest_all:
@@ -196,6 +217,7 @@ def main(argv: list[str] | None = None) -> None:
         chunk_overlap=args.chunk_overlap,
         parent_size=args.parent_size,
         embedding_model=args.embedding_model,
+        embedding_provider=args.embedding_provider,
         index_name=args.index_name,
     )
     pipeline.run(file_paths=file_paths)

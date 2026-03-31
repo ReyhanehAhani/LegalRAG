@@ -92,7 +92,12 @@ logger = logging.getLogger(__name__)
 # ── Retrieval ─────────────────────────────────────────────────────────────────
 
 
-def build_retriever(top_k: int, index_name: str = DEFAULT_INDEX_NAME) -> OpenSearchRetriever:
+def build_retriever(
+    top_k: int,
+    index_name: str = DEFAULT_INDEX_NAME,
+    embedding_model: str | None = None,
+    embedding_provider: str | None = None,
+) -> OpenSearchRetriever:
     cfg = settings.opensearch
     lb_cfg = OpenSearchSettings(
         **{
@@ -104,7 +109,7 @@ def build_retriever(top_k: int, index_name: str = DEFAULT_INDEX_NAME) -> OpenSea
             "OPENSEARCH_INDEX_NAME": index_name,
         }
     )
-    embedder = build_embedder()
+    embedder = build_embedder(model_name=embedding_model, provider=embedding_provider)
     os_client = OpenSearchClient(cfg=lb_cfg, embedding_dim=embedder.dim)
     # Ensure the hybrid search pipeline exists (idempotent — safe to call every time)
     os_client._ensure_hybrid_pipeline()
@@ -378,6 +383,32 @@ def aggregate(
     print()
 
 
+# ── Tee stdout → trace file ───────────────────────────────────────────────────
+
+
+class _Tee:
+    """Write to both the real stdout and a secondary file handle."""
+
+    def __init__(self, primary, secondary):
+        self._primary = primary
+        self._secondary = secondary
+
+    def write(self, data: str) -> int:
+        self._primary.write(data)
+        return self._secondary.write(data)
+
+    def flush(self) -> None:
+        self._primary.flush()
+        self._secondary.flush()
+
+    def fileno(self) -> int:
+        return self._primary.fileno()
+
+    # Delegate everything else (isatty, etc.) to the primary stream
+    def __getattr__(self, name):
+        return getattr(self._primary, name)
+
+
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 
@@ -446,6 +477,27 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--embedding-provider",
+        default=None,
+        choices=["sentence_transformers", "huggingface", "openai"],
+        metavar="PROVIDER",
+        help=(
+            "Embedding provider: sentence_transformers, huggingface, or openai. "
+            "Overrides EMBEDDING_PROVIDER in .env. "
+            "Must match the provider used during ingestion."
+        ),
+    )
+    parser.add_argument(
+        "--embedding-model",
+        default=None,
+        metavar="MODEL",
+        help=(
+            "Override the query embedding model (default: EMBEDDING_MODEL in .env). "
+            "Must match the model used during ingestion. "
+            "Provider is taken from --embedding-provider or EMBEDDING_PROVIDER in .env."
+        ),
+    )
+    parser.add_argument(
         "--trace-file",
         default=None,
         metavar="PATH",
@@ -486,11 +538,11 @@ def main(argv: list[str] | None = None) -> None:
         print("No test cases found. Check --data-dir and --benchmarks.", file=sys.stderr)
         sys.exit(1)
 
-    retriever = build_retriever(top_k=top_k, index_name=args.index_name)
-
-    print(
-        f"\nRunning evaluation: {len(tests)} queries, "
-        f"K={ks}, top_k={top_k}, index={args.index_name} …"
+    retriever = build_retriever(
+        top_k=top_k,
+        index_name=args.index_name,
+        embedding_model=args.embedding_model,
+        embedding_provider=args.embedding_provider,
     )
 
     trace_path = Path(args.trace_file) if args.trace_file else None
@@ -499,18 +551,25 @@ def main(argv: list[str] | None = None) -> None:
 
     scores: list[QueryScore] = []
     trace_fh = open(trace_path, "w", encoding="utf-8") if trace_path else None
+    _real_stdout = sys.stdout
+    if trace_fh:
+        sys.stdout = _Tee(_real_stdout, trace_fh)
     try:
+        print(
+            f"\nRunning evaluation: {len(tests)} queries, "
+            f"K={ks}, top_k={top_k}, index={args.index_name} …"
+        )
         for i, test in enumerate(tests, 1):
             score = score_query(test, retriever, ks=ks, trace_fh=trace_fh, query_idx=i)
             scores.append(score)
             if i % 50 == 0:
                 print(f"  {i}/{len(tests)} queries done …")
+        aggregate(scores, benchmark_names, ks=ks, index_name=args.index_name)
     finally:
+        sys.stdout = _real_stdout
         if trace_fh:
             trace_fh.close()
             print(f"  Trace written → {trace_path}")
-
-    aggregate(scores, benchmark_names, ks=ks, index_name=args.index_name)
 
 
 if __name__ == "__main__":

@@ -78,6 +78,15 @@ python -m evaluation.LegalBenchRAG.ingest \
     --limit 10
 ```
 
+To ingest from a custom corpus subset (e.g. `corpus_50`):
+
+```bash
+python -m evaluation.LegalBenchRAG.ingest \
+    --data-dir data/LegalBenchRAG \
+    --corpus-dir data/LegalBenchRAG/corpus_50 \
+    --all
+```
+
 ### Step 2 — Evaluate
 
 ```bash
@@ -169,6 +178,61 @@ python -m evaluation.LegalBenchRAG.eval_precision_recall \
 
 ---
 
+## Embedding Providers
+
+The `EMBEDDING_PROVIDER` in `.env` controls which embedder class is used. The `--embedding-model` flag (on both `ingest` and `eval_precision_recall`) overrides only the model name — the provider is always taken from `.env`.
+
+| `EMBEDDING_PROVIDER`    | Class                        | Use when                                                                 |
+| ----------------------- | ---------------------------- | ------------------------------------------------------------------------ |
+| `sentence_transformers` | `SentenceTransformerEmbedder`| Model has a `sentence_transformers` config on HF (e.g. `all-mpnet-base-v2`, `legal-bert-base-uncased`, `Legal-Embed-bge-base-en-v1.5`) |
+| `huggingface`           | `HuggingFaceEmbedder`        | Raw `AutoModel` + `AutoTokenizer` with mean pooling — for models not packaged as sentence-transformers (e.g. `jhu-clsp/BERT-DPR-CLERC-ft`) |
+| `openai`                | `OpenAIEmbedder`             | OpenAI API or compatible endpoint                                        |
+
+`HuggingFaceEmbedder` mean-pools the last hidden state over non-padding tokens and L2-normalises the result. It is GPU-aware (uses CUDA if available).
+
+Example — ingest and evaluate with `jhu-clsp/BERT-DPR-CLERC-ft`:
+
+```bash
+# .env
+EMBEDDING_PROVIDER=huggingface
+EMBEDDING_MODEL=jhu-clsp/BERT-DPR-CLERC-ft
+EMBEDDING_DIM=768
+
+# Ingest
+python -m evaluation.LegalBenchRAG.ingest \
+    --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-clerc \
+    --all
+
+# Evaluate
+python -m evaluation.LegalBenchRAG.eval_precision_recall \
+    --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-clerc \
+    --ks 20 40 60
+```
+
+Or override both on the command line without touching `.env`:
+
+```bash
+# Ingest
+python -m evaluation.LegalBenchRAG.ingest \
+    --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-clerc \
+    --embedding-provider huggingface \
+    --embedding-model jhu-clsp/BERT-DPR-CLERC-ft \
+    --all
+
+# Evaluate
+python -m evaluation.LegalBenchRAG.eval_precision_recall \
+    --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-clerc \
+    --embedding-provider huggingface \
+    --embedding-model jhu-clsp/BERT-DPR-CLERC-ft \
+    --ks 20 40 60
+```
+
+---
+
 ## Re-ingestion
 
 Delete the index and re-run ingestion when you change the embedding model or chunk size:
@@ -195,11 +259,13 @@ python -m evaluation.LegalBenchRAG.ingest --data-dir data/LegalBenchRAG
 | `--benchmarks NAME …`     | all four                 | Restrict which sub-benchmarks determine which corpus files to ingest   |
 | `--limit N`               | None                     | Cap test cases per benchmark when selecting corpus files               |
 | `--all`                   | false                    | Ingest every `*.txt` under `corpus/` (ignores benchmark filter)        |
+| `--corpus-dir PATH`       | `<data-dir>/corpus`      | Override the corpus directory (e.g. `data/LegalBenchRAG/corpus_50`)    |
 | `--chunker`               | `hierarchical`           | Chunking strategy: `hierarchical` or `recursive`                       |
 | `--chunk-size N`          | 512 (config)             | Child chunk size in characters                                         |
 | `--chunk-overlap N`       | 64 (config)              | Character overlap between consecutive chunks                           |
 | `--parent-size N`         | 1500                     | Parent chunk size — hierarchical only                                  |
-| `--embedding-model MODEL` | config                   | HuggingFace sentence-transformers model name                           |
+| `--embedding-provider PROVIDER` | `EMBEDDING_PROVIDER` in `.env` | Embedding provider: `sentence_transformers`, `huggingface`, or `openai` |
+| `--embedding-model MODEL` | `EMBEDDING_MODEL` in `.env` | Override the embedding model name                                      |
 | `--index-name NAME`       | `legalrag-legalbenchrag` | OpenSearch index to ingest into                                        |
 | `--log-level`             | INFO                     | Verbosity                                                              |
 
@@ -207,17 +273,18 @@ python -m evaluation.LegalBenchRAG.ingest --data-dir data/LegalBenchRAG
 ### Evaluation options (`evaluation.LegalBenchRAG.eval_precision_recall`)
 
 
-| Flag                    | Default                  | Description                                               |
-| ----------------------- | ------------------------ | --------------------------------------------------------- |
-| `--data-dir PATH`       | required                 | Root of downloaded data dir                               |
-| `--benchmarks-dir PATH` | `<data-dir>/benchmarks`  | Override benchmarks directory (e.g. for a sampled subset) |
-| `--benchmarks NAME …`   | all four                 | Sub-benchmarks to evaluate                                |
-| `--limit N`             | None                     | Cap test cases per benchmark (for fast iteration)         |
-| `--ks K …`              | `1 5 10 20`              | Rank cutoffs; retrieves `max(ks)` chunks per query        |
-| `--index-name NAME`     | `legalrag-legalbenchrag` | OpenSearch index to query — must match ingestion          |
-| `--trace-file PATH`     | None                     | Write per-query JSONL retrieval trace (see below)         |
-| `--log-level`           | WARNING                  | Verbosity                                                 |
-| `--trace-file`          |                          | log file                                                  |
+| Flag                      | Default                     | Description                                               |
+| ------------------------- | --------------------------- | --------------------------------------------------------- |
+| `--data-dir PATH`         | required                    | Root of downloaded data dir                               |
+| `--benchmarks-dir PATH`   | `<data-dir>/benchmarks`     | Override benchmarks directory (e.g. for a sampled subset) |
+| `--benchmarks NAME …`     | all four                    | Sub-benchmarks to evaluate                                |
+| `--limit N`               | None                        | Cap test cases per benchmark (for fast iteration)         |
+| `--ks K …`                | `1 5 10 20`                 | Rank cutoffs; retrieves `max(ks)` chunks per query        |
+| `--index-name NAME`       | `legalrag-legalbenchrag`    | OpenSearch index to query — must match ingestion          |
+| `--embedding-provider PROVIDER` | `EMBEDDING_PROVIDER` in `.env` | Embedding provider: `sentence_transformers`, `huggingface`, or `openai`. Must match ingest. |
+| `--embedding-model MODEL` | `EMBEDDING_MODEL` in `.env` | Override the query embedding model. Must match ingest.                 |
+| `--trace-file PATH`       | None                        | Write per-query JSONL retrieval trace (see below)         |
+| `--log-level`             | WARNING                     | Verbosity                                                 |
 
 
 ---

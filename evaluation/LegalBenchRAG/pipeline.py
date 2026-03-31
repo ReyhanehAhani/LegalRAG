@@ -41,7 +41,7 @@ from legalrag.core.config import settings
 from legalrag.core.interfaces import BaseChunker
 from legalrag.core.models import Chunk
 from legalrag.ingestion.chunker import HierarchicalChunker, RecursiveCharacterTextSplitter
-from legalrag.ingestion.embedder import SentenceTransformerEmbedder, build_embedder
+from legalrag.ingestion.embedder import build_embedder
 from legalrag.ingestion.indexer import OpenSearchIndexer
 from legalrag.opensearch.client import OpenSearchClient, OpenSearchSettings
 
@@ -79,6 +79,7 @@ class LegalBenchRAGIngestionPipeline:
         chunk_overlap: int | None = None,
         parent_size: int | None = None,
         embedding_model: str | None = None,
+        embedding_provider: str | None = None,
         index_name: str = DEFAULT_INDEX_NAME,
     ) -> "LegalBenchRAGIngestionPipeline":
         """Factory: build pipeline from global settings with optional overrides.
@@ -124,11 +125,7 @@ class LegalBenchRAGIngestionPipeline:
             parent_size=parent_size,
         )
 
-        embedder = (
-            SentenceTransformerEmbedder(model_name=embedding_model)
-            if embedding_model
-            else build_embedder()
-        )
+        embedder = build_embedder(model_name=embedding_model, provider=embedding_provider)
 
         os_client = OpenSearchClient(cfg=lb_cfg, embedding_dim=embedder.dim)
         os_client.ensure_index()
