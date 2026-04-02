@@ -8,6 +8,7 @@ Benchmark JSONs in the **same shape as** [`benchmarks_50`](../benchmarks_50): ea
 benchmark_50_reformated_proccessed/
 ├── mistral/     # one JSON per dataset (50 tests each)
 ├── qwen72b/
+├── qwen35_9b/
 └── README.md
 ```
 
@@ -19,7 +20,7 @@ From repo root:
 
 ```bash
 python3 scripts/build_benchmark_50_reformated_processed.py
-python3 scripts/build_benchmark_50_reformated_processed.py --models mistral qwen72b
+python3 scripts/build_benchmark_50_reformated_processed.py --models mistral qwen72b qwen35_9b
 python3 scripts/build_benchmark_50_reformated_processed.py --variant v4_reddit_style
 ```
 
