@@ -1,0 +1,352 @@
+[
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "Can anyone help me find where the Ventas and New Senior Investment Group buyout paperwork talks about the government sign-offs they need before the deal is officially done?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"VENTAS, INC.\" and Target \"NEW SENIOR INVESTMENT GROUP INC.\"; Where is the Closing Conditions: Regulatory Approvals clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging into the paperwork from when SPB Hospitality LLC bought out J. Alexander\u2019s Holdings, Inc. and I\u2019m trying to figure out the fine print. What exactly does the contract mean when it talks about \"Knowledge\"?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"SPB Hospitality LLC\" and Target \"J. Alexander\u2019s Holdings, Inc.\"; What is the Definition of \"Knowledge\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m digging through the buyout paperwork between Mirasol Parent and RealPage and I keep seeing the term \"Intervening Event.\" Can someone explain how they actually define that in the contract? What exactly counts as one of those events according to their agreement?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Mirasol Parent, LLC\" and Target \"RealPage, Inc.\"; What is the Definition of \"Interveining Event\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging through the merger paperwork between STERIS and Cantel Medical, and I'm stuck on some of the fine print. Does anyone know how they actually defined a \"Superior Proposal\" in the contract? Basically, what would've counted as a good enough offer from another company to let Cantel back out of the deal?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"STERIS plc\" and Target \"Cantel Medical Corp.\"; What is the Definition of \"Superior Proposal\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been looking at the deal where Analog Devices is buying Maxim Integrated. What actually happens if they don\u2019t follow through on the part where they're supposed to hold a meeting for the shareholders? If they blow off that promise to have the vote, what's the penalty?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"ANALOG DEVICES, INC.\" and Target \"MAXIM INTEGRATED PRODUCTS, INC.\"; What happens during a Breach of Shareholder Meeting Covenant"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m digging into the merger deal between Bonanza Creek Energy and HighPoint Resources and trying to make sense of the fine print. Does anyone know what actually counts as an \"intervening event\" under their agreement? I'm trying to figure out how they're defining that."
+    },
+    "original": "Consider the Merger Agreement between \"Bonanza Creek Energy, Inc.\" and \"HighPoint Resources Corporation\"; What is the Definition of \"Interveining Event\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone know where to find the section in the Alaska Communications and Project 8 merger deal that talks about what government sign-offs they need before they can finish the sale? I'm looking for the specific part that lists the \"regulatory approvals\" needed to close the deal."
+    },
+    "original": "Consider the Merger Agreement between \"Alaska Communications Systems Group, Inc.\" and \"Project 8 MergerSub, Inc.\"; Where is the Closing Conditions: Regulatory Approvals clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m digging through the paperwork for when Elanco Animal Health bought Kindred Biosciences, and I\u2019m trying to figure out the \"get out of jail free\" cards. What exactly would've had to happen for the board to legally back out of the merger if they got a better offer or decided it wasn't right for their shareholders anymore? Looking for the specific stuff that triggers their right to kill the deal."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Elanco Animal Health Incorporated\" and Target \"Kindred Biosciences, Inc.\"; Information about the Fiduciary Termination Right Triggers for termination"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m digging into the paperwork for the merger between Glacier Bancorp and Altabancorp and I\u2019m a bit stuck on the fine print. Does anyone know what the contract actually counts as a \"material adverse effect\"? I'm trying to find the specific definition for what kind of huge disaster or major setback would be big enough to officially ruin the deal."
+    },
+    "original": "Consider the Merger Agreement between \"Glacier Bancorp, Inc.\" and \"Altabancorp\"; What is the Definition of \"Material Adverse Effect\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m digging through the buyout papers for Tribune Enterprises taking over Tribune Publishing. Can anyone tell me what the contract says about how much they actually have to do to get the deal past the government? I\u2019m looking for the part that talks about the limits on how hard they have to fight those antitrust or monopoly regulators."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Tribune Enterprises, LLC\" and Target \"Tribune Publishing Company\"; I want information about the Limitations on Antitrust Efforts"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging through the merger deal between Kite Realty and Retail Properties of America, but I can't find the section that stops them from looking for other buyers. Does anyone know where the \"no-shop\" clause is actually located in the paperwork?"
+    },
+    "original": "Consider the Merger Agreement between \"Kite Realty Group Trust\" and \"Retail Properties of America, Inc.\"; Where is the No-Shop Clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to wrap my head around the deal where Microsoft's buying Nuance. In their contract, what exactly counts as a \"Superior Proposal\"? Like, what would a different company have to offer to actually beat Microsoft's bid?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Microsoft Corporation\" and Target \"Nuance Communications, Inc.\"; What is the Definition of \"Superior Proposal\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "Hey, I'm trying to find the part of the Gray Television and Meredith Corp buyout agreement that talks about the government sign-offs they need before the deal can actually go through. Anyone know which section that's in?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Gray Television, Inc.\" and Target \"Meredith Corporation\"; Where is the Closing Conditions: Regulatory Approvals clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging through the merger papers for American Tower buying CoreSite and I'm totally lost\u2014can someone tell me which section lists all the government sign-offs they need before the deal can actually cross the finish line?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"American Tower Corporation\" and Target \"CoreSite Realty Corporation\"; Where is the Closing Conditions: Regulatory Approvals clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m digging through the paperwork for the deal where Graham Holdings Company bought Leaf Group Ltd. Does anyone know which part of the contract says Leaf isn\u2019t allowed to go looking for other buyers or talk to different bidders? I can't find that \"no-shop\" section anywhere."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Graham Holdings Company\" and Target \"Leaf Group Ltd.\"; Where is the No-Shop Clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging through the merger deal between Century Bancorp and Eastern Bankshares and keep seeing the term \"Superior Proposal.\" Does anyone know what actually counts as a better offer according to their contract? Like, what's the specific definition they used?"
+    },
+    "original": "Consider the Merger Agreement between \"Century Bancorp, Inc.\" and \"Eastern Bankshares, Inc.\"; What is the Definition of \"Superior Proposal\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging into the merger paperwork between Project Quick Parent, LLC and QAD Inc. and I'm trying to find the \"business as usual\" rules. What were the specific things QAD had to keep doing (or wasn't allowed to change) while they were waiting for the sale to officially close?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Project Quick Parent, LLC\" and Target \"QAD Inc.\"; What are the Ordinary course of business covenants"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to make sense of the buyout deal between Philips Holding USA and BioTelemetry. Can anyone explain how they're actually defining \"knowledge\" in the contract? Like, who specifically counts as \"knowing\" something for the sake of the agreement?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Philips Holding USA Inc.\" and Target \"BioTelemetry, Inc.\"; What is the Definition of \"Knowledge\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking at the buyout deal between Chesapeake Energy and Vine Energy and I\u2019m a bit confused by the term \"Superior Proposal.\" Does anyone know how they actually define that in their contract? Like, what specifically would've counted as a better offer that could\u2019ve topped the deal?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Chesapeake Energy Corporation\" and Target \"Vine Energy Inc.\"; What is the Definition of \"Superior Proposal\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking into the deal where Kimco Realty is buying Weingarten Realty. I know there\u2019s a rule saying Weingarten isn't allowed to go out and look for other buyers, but is there a legal loophole that lets them check out a better offer if they\u2019re worried about doing right by their shareholders?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Kimco Realty Corporation\" and Target \"Weingarten Realty Investors\"; What about the Fiduciary exception to the No-Shop Clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019ve been looking into the buyout deal between Paloma Partners and Goodrich Petroleum, and I\u2019m trying to figure out how they can get out of it. Does anyone know what the specific \"deal-breaker\" triggers are that would let Goodrich cancel the sale? I\u2019m basically looking for the rules that let the board back out if they decide they have a legal duty to walk away."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Paloma Partners VI Holdings, LLC\" and Target \"Goodrich Petroleum Corporation\"; Information about the Fiduciary Termination Right Triggers for termination"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m looking into the deal where Sky Parent Inc. is buying Cloudera, Inc. Does anyone know what specifically has to happen for Cloudera\u2019s board to be allowed to back out? I\u2019m trying to find the exact triggers that let them cancel the merger if they decide it\u2019s their legal duty to shareholders to walk away."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Sky Parent Inc.\" and Target \"Cloudera, Inc.\"; Information about the Fiduciary Termination Right Triggers for termination"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to figure out the details of the Goodyear and Cooper Tire merger. If the deal had fallen apart, was there a \"tail\" rule in the contract that covered what happens if another company tried to swoop in with a different offer shortly after?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"The Goodyear Tire & Rubber Company\" and Target \"Cooper Tire & Rubber Company\"; Is there a Tail provision for acquisition proposals"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m looking through the paperwork for the merger between Cabot Oil & Gas and Cimarex Energy Co. and keep getting stuck on one part. Does anyone know how they\u2019re actually defining \"knowledge\" in this deal? Like, what counts as them officially knowing something according to the contract?"
+    },
+    "original": "Consider the Merger Agreement between \"Cabot Oil & Gas Corporation\" and \"Cimarex Energy Co.\"; What is the Definition of \"Knowledge\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging through the merger papers for when Gibraltar Acquisition Holdings LLC bought W. R. Grace & Co. and I can\u2019t find the part about \"specific performance.\" Does anyone know which section says they can actually force the deal to go through if someone tries to bail?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Gibraltar Acquisition Holdings LLC\" and Target \"W. R. Grace & Co.\"; Where is the Specific Performance clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone know the specifics on the merger between Vulcan Materials and U.S. Concrete? I'm trying to find the part of the contract that talks about the limits on how hard they have to work to get past the government's monopoly rules. Like, what's the cutoff for what they're actually required to do to get the deal cleared by regulators?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Vulcan Materials Company\" and Target \"U.S. Concrete, Inc.\"; I want information about the Limitations on Antitrust Efforts"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m looking into EA\u2019s buyout of Glu Mobile and I\u2019m curious\u2014how did they actually pay for it? Was it an all-cash deal, or did the Glu owners get EA stock instead?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Electronic Arts Inc.\" and Target \"Glu Mobile Inc.\"; What is the Type of Consideration"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m digging through the sale paperwork between Iconix Acquisition LLC and Iconix Brand Group and I'm a bit stuck. Can someone explain how they\u2019re defining \"knowledge\" in this deal? I need to know what specifically counts as \"knowing\" something according to the contract."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Iconix Acquisition LLC\" and Target \"Iconix Brand Group, Inc.\"; What is the Definition of \"Knowledge\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to wrap my head around the merger between Analog Devices and Maxim Integrated. Does anyone know how the contract actually defines the word \"knowledge\"? Like, what does it legally count as someone \"knowing\" something in this specific deal?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"ANALOG DEVICES, INC.\" and Target \"MAXIM INTEGRATED PRODUCTS, INC.\"; What is the Definition of \"Knowledge\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "Hey, I\u2019m looking through the paperwork for that merger between Perspecta and Jaguar Parentco. Can someone explain what they mean by a \"Material Adverse Effect\" in plain English? Basically, how bad do things have to get for the deal to fall apart?"
+    },
+    "original": "Consider the Merger Agreement between \"Perspecta Inc.\" and \"Jaguar Parentco Inc.\"; What is the Definition of \"Material Adverse Effect\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to wrap my head around the buyout deal between Newport Holdings and The New Home Company Inc. Does anyone know what specific \"triggers\" let the company being bought back out of the contract? Like, what exactly has to happen for the board to be legally allowed to kill the deal if they find a better offer or decide it\u2019s in the best interest of the shareholders to walk away?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Newport Holdings, LLC\" and Target \"The New Home Company Inc.\"; Information about the Fiduciary Termination Right Triggers for termination"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I was digging through the BancorpSouth and Cadence Bank merger paperwork and I'm stuck on the \"business as usual\" part. What are the specific rules they have to follow to keep things running normally while the deal is still in progress?"
+    },
+    "original": "Consider the Merger Agreement between \"BancorpSouth Bank\" and \"Cadence Bancorporation\"; What are the Ordinary course of business covenants"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "Trying to make sense of the Viasat and RigNet buyout papers\u2014where\u2019s the part about all the government approvals they need? I can\u2019t find the section that spells out the regulatory green lights required before they can actually close the deal."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Viasat, Inc.\" and Target \"RigNet, Inc.\"; Where is the Closing Conditions: Regulatory Approvals clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to wrap my head around the Supernus and Adamas buyout deal. What does the contract actually say about how Adamas is supposed to keep running their day-to-day operations while the sale is pending? I\u2019m looking for the rules on how they have to keep things \"business as usual\" until the deal is officially done."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"SUPERNUS PHARMACEUTICALS, INC.\" and Target \"ADAMAS PHARMACEUTICALS, INC.\"; What are the Ordinary course of business covenants"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging through the merger agreement between Astro Stone Intermediate Holding and Select Interior Concepts and I'm stuck on one part. What's the \"type of consideration\" they're using? Basically, I'm just trying to figure out if the payout is cash, stock, or a mix of both."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"ASTRO STONE INTERMEDIATE HOLDING, LLC\" and Target \"SELECT INTERIOR CONCEPTS, INC.\"; What is the Type of Consideration"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking through the buyout paperwork between Astro Stone Intermediate Holding and Select Interior Concepts. Can anyone tell me what the \"business as usual\" rules are? Basically, what does the contract say about how Select Interior has to keep things running normally until the deal is officially done?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"ASTRO STONE INTERMEDIATE HOLDING, LLC\" and Target \"SELECT INTERIOR CONCEPTS, INC.\"; What are the Ordinary course of business covenants"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I'm looking into Progressive buying Protective Insurance. Does anyone know what the deal says about how Protective has to keep running their business as usual until everything\u2019s final? Like, what are the specific rules they have to follow for their day-to-day operations while the sale is pending?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"The Progressive Corporation\" and Target \"Protective Insurance Corporation\"; What are the Ordinary course of business covenants"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been looking into the merger between BancorpSouth and Cadence, and I noticed they have a \"no-shop\" rule in their agreement. What actually happens if one of them breaks that and starts looking for a better deal from someone else?"
+    },
+    "original": "Consider the Merger Agreement between \"BancorpSouth Bank\" and \"Cadence Bancorporation\"; What happens during a Breach of No-Shop clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to make sense of the merger paperwork between Sanofi and Kadmon, but I keep hitting a wall with the term \"Intervening Event.\" Can someone explain what that actually means in their contract? Like, what kind of big, unexpected surprise are they actually talking about there?"
+    },
+    "original": "Consider the Merger Agreement between \"Sanofi\" and \"Kadmon Holdings, Inc.\"; What is the Definition of \"Interveining Event\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to look through the Merck and Acceleron buyout papers\u2014can anyone tell me where to find the section about the government approvals they need before the deal can actually wrap up?"
+    },
+    "original": "Consider the Merger Agreement between \"Merck Sharp & Dohme Corp.\" and \"Acceleron Pharma Inc.\"; Where is the Closing Conditions: Regulatory Approvals clause"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking through the merger agreement between Banc of California and Pacific Mercantile Bancorp. Does the deal include a \"tail\" clause that covers other buyout offers? Basically, if the merger falls through but Pacific Mercantile gets bought by someone else shortly after, is there a rule saying they still have to deal with Banc of California?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Banc of California, Inc.\" and Target \"Pacific Mercantile Bancorp\"; Is there a Tail provision for acquisition proposals"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking at the deal where STERIS plc bought Cantel Medical Corp. Where in the contract does Cantel basically promise that nothing huge went wrong or significantly hurt the business since a specific date?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"STERIS plc\" and Target \"Cantel Medical Corp.\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been looking into the merger between Bridge Bancorp and Dime Community Bancshares. Does anyone know how the payout actually works? I\u2019m trying to figure out if shareholders are getting cash, stock, or a mix of both for the deal."
+    },
+    "original": "Consider the Merger Agreement between \"Bridge Bancorp, Inc.\" and \"Dime Community Bancshares, Inc.\"; What is the Type of Consideration"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to make sense of the buyout deal between Merck and Pandion Therapeutics. Does anyone know what the specific rules are for how Pandion has to keep running their day-to-day business normally until the sale is officially finished? I\u2019m looking for the part that says what they can or can\u2019t change while they're waiting for the deal to close."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"MERCK SHARP & DOHME CORP.\" and Target \"PANDION THERAPEUTICS, INC.\"; What are the Ordinary course of business covenants"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking into the buyout deal between Covert Intermediate and Covanta Holding Corp\u2014can anyone tell me what the specific rules are for how Covanta has to keep running its business normally until the whole thing is finalized?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Covert Intermediate, Inc.\" and Target \"Covanta Holding Corporation\"; What are the Ordinary course of business covenants"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m looking at the paperwork for Gray Television buying Meredith Corp\u2014where exactly does Meredith promise that nothing majorly disastrous has happened to the company since a certain date? I\u2019m trying to find their specific guarantee that the business hasn't hit any huge snags."
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Gray Television, Inc.\" and Target \"Meredith Corporation\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "Anyone following the Sterling Bancorp and Webster Financial merger? I'm trying to figure out what kind of promises they have to keep and what rules they need to follow before the deal is officially finalized. What are the \"must-dos\" for both sides to make sure this thing actually closes?"
+    },
+    "original": "Consider the Merger Agreement between \"Sterling Bancorp\" and \"Webster Financial Corporation\"; Information about the Closing Condition: Compliance with Covenants"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking at the paperwork for the merger between Capstead Mortgage Corporation and Rodeo Sub I, LLC, and I\u2019m trying to figure something out. What exactly do they mean by \u201cknowledge\u201d in this deal?"
+    },
+    "original": "Consider the Merger Agreement between \"Capstead Mortgage Corporation\" and \"Rodeo Sub I, LLC\"; What is the Definition of \"Knowledge\""
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m digging through the deal where Graham Holdings bought Leaf Group and I'm stuck. Where's the part where Leaf Group basically guarantees that nothing huge or terrible happened to the company after a specific date?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Graham Holdings Company\" and Target \"Leaf Group Ltd.\"; What is the Target's Representation & Warranty of No Material Adverse Effect, with regards to some specified date"
+  },
+  {
+    "dataset": "maud",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m digging through the big merger paperwork between Elanco Animal Health and Kindred Biosciences and I can\u2019t seem to find the section that stops Kindred from looking for other offers. Does anyone know where the part is that says they aren\u2019t allowed to talk to other potential buyers?"
+    },
+    "original": "Consider the Acquisition Agreement between Parent \"Elanco Animal Health Incorporated\" and Target \"Kindred Biosciences, Inc.\"; Where is the No-Shop Clause"
+  }
+]

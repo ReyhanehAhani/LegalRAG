@@ -1,0 +1,352 @@
+[
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I've been looking through Viber's privacy policy and I'm confused... who else is actually allowed to see my info? Is it just the app, or are they handing my data off to other people too?"
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; are there other people who can access my information?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I've been playing a ton of Wordscapes lately, but I'm curious\u2014does the app track what I'm doing to show me those creepy personalized ads? I tried reading their legal page but couldn't figure out if they're actually using my data like that."
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; does the app show targeted advertisements?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I was just trying to read through the Wordscapes privacy policy and I'm a little freaked out\u2014is this app actually tracking my GPS location?"
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; does this app track my gps location?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone know if Keep lets other people see which workout list I\u2019m using? I\u2019m trying to figure out their privacy settings but I can\u2019t tell if my routines are hidden or if everyone can see what I\u2019m doing."
+    },
+    "original": "Consider \"Keep\"'s privacy policy; can people see what workout list i'm using?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Does Viber actually keep a record of who I call? I'm trying to figure out if they're logging my call history or not."
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; are my call logs recorded?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to figure out if I should download Groupon, but I\u2019m a bit weird about my data. Does anyone know what kind of stuff the app actually needs access to on my phone to function? Like, what's it asking for in the fine print?"
+    },
+    "original": "Consider \"Groupon\"'s privacy policy; what type of permissions does the app need to operate?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019ve been using Keep lately but I\u2019m worried about where my workout info is actually going. Does anyone know if they share your data with other people or companies? I\u2019m mostly stressed that health insurance providers might get a hold of it."
+    },
+    "original": "Consider \"Keep\"'s privacy policy; will my workout data be given to anyone else or shared with anyone (i.e. insurance companies)?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Looking through Keep's privacy stuff and I'm a bit worried\u2014do they actually sell my data to other companies or what?"
+    },
+    "original": "Consider \"Keep\"'s privacy policy; do you sell my data"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Quick question about TickTick\u2014I\u2019m about to start dumping my whole life into this app, but I\u2019m a bit paranoid about the fine print. Who\u2019s actually able to see the tasks and notes I make? Is it just me, or do the developers and other companies have access to my stuff too?"
+    },
+    "original": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; who has access to whatever i create using this?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I was just looking through TickTick\u2019s privacy policy and now I\u2019m wondering\u2014is the app actually selling my data or cashing in on the stuff I type into my to-do lists?"
+    },
+    "original": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; will the application make money off of the info i enter in the app?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to figure out Wordscapes' privacy policy\u2014does the app actually need to get into my social media accounts to work?"
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; does this app need access to any of my social media accounts?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I was checking Groupon\u2019s privacy rules and I\u2019m a bit sketched out\u2014does the app actually need to track my location in the background when I\u2019m not even using it?"
+    },
+    "original": "Consider \"Groupon\"'s privacy policy; does it need location services while not using it?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I was trying to make sense of Viber's privacy policy, but I\u2019m still worried\u2014does the app actually record our calls?"
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; do you record our phone calls?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I was reading through Fiverr's privacy policy and I'm wondering if there's any way to actually choose what info potential clients see. Like, do I have any control over what shows up on my profile, or is it all just out there for anyone who wants to hire me?"
+    },
+    "original": "Consider \"Fiverr\"'s privacy policy; can i control the information that is presented to potential employers?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I've been using Groupon a ton lately, but I just realized I have no idea what they're actually doing with all my info. Does anyone know if they're selling our data to other companies or what they're even using it for?"
+    },
+    "original": "Consider \"Groupon\"'s privacy policy; what does groupon do with collected data? (eg, does it sell it to third parties?)"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I was just looking through Keep\u2019s privacy policy and I\u2019m a bit confused\u2014who actually has access to my data?"
+    },
+    "original": "Consider \"Keep\"'s privacy policy; who can see my data?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been playing a ton of Wordscapes lately, but I\u2019m kind of worried about my privacy. Does anyone know if they actually sell our personal info to other companies?"
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; does the app sell any personal information?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I've been looking into getting a 23andMe kit, but I'm kind of sketched out by the privacy stuff\u2014does anyone know if they actually give my info to other companies or outside groups?"
+    },
+    "original": "Consider \"23andMe\"'s privacy policy; is my information shared with any third parties?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I've been using Viber a lot lately but I\u2019m worried about how private it actually is. Has anyone looked into their privacy policy? Are the messages I send really safe from prying eyes?"
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; is the messages sent through it are safe?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019ve been playing a lot of Wordscapes lately, but I'm getting a bit paranoid about my privacy. Does the app actually grab any of my personal details like my name or email address? I'm trying to figure out if their policy says they're tracking that kind of stuff."
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; does the wordscapes app collect any personally identifiable information like my name or email?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been thinking about using TickTick to get my life together, but I\u2019m a bit sketched out by their privacy policy. Does anyone know who actually ends up seeing the stuff I put in the app? I\u2019m trying to figure out who has access to my info once I start using it."
+    },
+    "original": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; who will have access to the info i enter into the application?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I actually sat down and tried to read Wordscapes's privacy policy, but I can't tell if it's legit. Is my personal info actually safe with them or what?"
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; is my information secure"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I've been trying to dig through Viber's privacy rules and I'm still confused\u2014does the app actually record my video calls?"
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; are my video calls recorded?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I'm looking at Keep's privacy stuff and I can't tell\u2014does this app actually snoop through my contact list or what?"
+    },
+    "original": "Consider \"Keep\"'s privacy policy; does the app access my contact list?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to figure out Fiverr's privacy settings before I sign up\u2014does anyone know what kind of personal info actually gets shared between buyers and sellers on there?"
+    },
+    "original": "Consider \"Fiverr\"'s privacy policy; what type of identifiable information is passed between users on the platform"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I've been looking through Fiverr's privacy policy but it's pretty confusing. Does anyone know who can actually see the specific jobs I'm hiring people for? Is my order history private or is it out there for everyone to see?"
+    },
+    "original": "Consider \"Fiverr\"'s privacy policy; who can see which tasks i hire workers for?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking into using TickTick for my daily planning, but I'm worried about my info. Does their privacy policy mention anything about them giving or selling my data to other companies?"
+    },
+    "original": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; will my data be shared with third party entities?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking into getting a 23andMe kit but the privacy stuff is confusing. Does anyone know if they actually give my DNA data to other companies or outsiders?"
+    },
+    "original": "Consider \"23andMe\"'s privacy policy; will my test results be shared with any third party entities?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019ve been obsessed with Wordscapes lately, but does anyone know if it\u2019s actually tracking my location? I tried checking their privacy policy to see if they\u2019re seeing where I am, but it\u2019s not super clear."
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; does it collect location"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019ve been playing way too much Wordscapes lately, but I finally took a look at their privacy policy and it's a lot to wrap my head around. Does anyone actually know what kind of info they\u2019re grabbing from my phone?"
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; what information are they collecting?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019ve been playing a ton of Wordscapes lately, but I\u2019m a little paranoid about my data. Does anyone know if their privacy policy says they\u2019re actually tracking where I am?"
+    },
+    "original": "Consider \"Wordscapes\"'s privacy policy; does it record my location information?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I've been using Keep a lot lately, but I'm starting to worry about where my data ends up. I tried looking at their privacy policy and it\u2019s a total headache\u2014does anyone actually know how they\u2019re keeping my personal stuff safe?"
+    },
+    "original": "Consider \"Keep\"'s privacy policy; how is my information protected?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Has anyone actually looked into Groupon's privacy policy lately? I\u2019m trying to figure out if my info is actually safe with them or if they\u2019re just selling my data to everyone under the sun."
+    },
+    "original": "Consider \"Groupon\"'s privacy policy; is my data safe"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been trying to make sense of Viber\u2019s privacy policy\u2014does anyone know if they\u2019ll actually hand over your data if the government asks for it?"
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; will viber comply to government information request?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to wrap my head around Groupon\u2019s privacy policy... what's the deal with the app\u2019s security? How are they actually keeping my info safe?"
+    },
+    "original": "Consider \"Groupon\"'s privacy policy; what security system do you have in place for the app?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Does Viber let you put a password on the app itself? I was trying to read through their privacy policy to see if there's a feature that forces you to enter a code every time you want to open it, but I'm not sure if they actually offer that."
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; does the app offer a password service where i am required to input a password when i want to access it?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I've been trying to make sense of Viber's privacy policy, but I'm still confused about one thing\u2014where and how do they actually keep my data stored?"
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; how is my data stored?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been looking through TickTick's privacy policy and it's making me a bit nervous\u2014is the app actually keeping tabs on my daily schedule and everything I put on my to-do list?"
+    },
+    "original": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; is my task schedule being tracked?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to make sense of Keep\u2019s privacy policy, but it\u2019s a lot. Can anyone tell me if they\u2019re gonna share my info with other companies just to hit me with ads and marketing?"
+    },
+    "original": "Consider \"Keep\"'s privacy policy; will my information be shared with other companies for marketing?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone know if Viber actually encrypts messages? I was trying to make sense of their privacy policy, but it\u2019s hard to tell\u2014are my chats really private and scrambled so nobody else can read them?"
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; are my message encrypted on viber?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019ve been going through Fiverr\u2019s privacy policy and I\u2019m a bit worried\u2014do they actually sell my data to other companies?"
+    },
+    "original": "Consider \"Fiverr\"'s privacy policy; do you sell my information to third parties?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone know if you can actually stop TickTick from sharing your personal info? I was trying to make sense of their massive privacy policy, but I couldn't find a simple way to opt out. Is there a setting for this that I'm just missing?"
+    },
+    "original": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; is there a way to opt out of data sharing"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone actually know if Keep keeps your usage stats private? I tried reading through their privacy policy, but it\u2019s a total headache\u2014I just want to know if my info is actually staying between me and the app."
+    },
+    "original": "Consider \"Keep\"'s privacy policy; are my statistics kept private?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m thinking about using TickTick to stay organized, but I\u2019m a bit worried about the privacy stuff. Does anyone know what kind of personal info they\u2019re actually sharing with other companies?"
+    },
+    "original": "Consider \"TickTick: To Do List with Reminder, Day Planner\"'s privacy policy; what information is shared"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I've been reading through 23andMe's privacy policy and I'm kind of confused\u2014is my info actually anonymous, or can it still be traced back to me?"
+    },
+    "original": "Consider \"23andMe\"'s privacy policy; is my data anonymized?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "If I finally decide to delete my Groupon account, how long do they actually hang onto my personal info before they're forced to get rid of it?"
+    },
+    "original": "Consider \"Groupon\"'s privacy policy; if i decide to discontinue using groupon, how long does it keep my data?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I was looking into Keep's privacy policy and honestly, I'm a bit lost. Is my data actually safe with them? I\u2019m just trying to figure out how they\u2019re actually protecting my info and if it's solid."
+    },
+    "original": "Consider \"Keep\"'s privacy policy; how well does keep protect my data and how do they do that?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "I was just looking through Keep's fine print and it's pretty confusing. Does anyone know if they actually give or sell our info to other companies?"
+    },
+    "original": "Consider \"Keep\"'s privacy policy; is any information shared with third parties?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been using Groupon forever, but it just hit me\u2014what kind of stuff do they actually know about me? Like, if you look at their fine print, what personal data are they really keeping on file?"
+    },
+    "original": "Consider \"Groupon\"'s privacy policy; what kind of personal info does groupon have on me?"
+  },
+  {
+    "dataset": "privacy_qa",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been reading through Viber\u2019s privacy policy and I'm a bit confused\u2014is there a way for me to actually get them to delete all my data if I ask?"
+    },
+    "original": "Consider \"Viber Messenger\"'s privacy policy; can i submit a request to have my data deleted?"
+  }
+]

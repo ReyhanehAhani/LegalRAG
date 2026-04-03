@@ -1,0 +1,352 @@
+[
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m digging through the gas transport deal between PennTex North Louisiana and MRD Operating and I\u2019m a bit stuck on the fine print. Does anyone know if there\u2019s a limit on how much one of them might owe if things go sideways, or is the liability totally uncapped?"
+    },
+    "original": "Consider the Gas Transportation Agreement between PennTex North Louisiana Operating, LLC and MRD Operating LLC; Is there uncapped liability under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone know when that Good Sam branding deal between Holiday RV Superstores and Affinity Group is finally over? I'm looking for the actual expiration date of their contract."
+    },
+    "original": "Consider the Endorsement Agreement between Holiday RV Superstores, Inc. and Affinity Group, Inc. for Good Sam Branding; What is the expiration date of this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to wrap my head around the co-branding deal between Dassault Systemes and PlanetCAD Inc. Does anyone know what the rules are for one company checking the other's books? Like, how much power do they actually have to go in and audit things under this contract?"
+    },
+    "original": "Consider the Co-Branding Agreement between Dassault Systemes and PlanetCAD Inc.; What are the audit rights under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "So, I\u2019m looking at the partnership between Theravance and Glaxo for those long-acting asthma drugs\u2014does the contract actually force either of them to do a minimum amount of work or hit a specific spending floor, or are they off the hook if they want to do less?"
+    },
+    "original": "Consider the Collaboration Agreement between Theravance, Inc. and Glaxo Group Limited for Development of Long-Acting \u03b22 Adrenoceptor Agonists; Is there a minimum commitment required under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking at the services agreement between TransMontaigne Management and TLP Management Services\u2014anyone know when the contract actually runs out?"
+    },
+    "original": "Consider the Services Agreement between TransMontaigne Management Company, LLC and TLP Management Services, LLC; What is the expiration date of this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to make sense of the blockchain dev and admin deal between ARCA U.S. Treasury Fund and ARCA Capital Management. Does anyone know how long the contract actually extends for once it hits the renewal phase?"
+    },
+    "original": "Consider the Blockchain Administration and Development Agreement between ARCA U.S. Treasury Fund and ARCA Capital Management, LLC; What is the renewal term for this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m checking out the partnership between Ginkgo Bioworks and Berkeley Lights for that work they're doing on the Beacon Platform. Does anyone know if there's a limit in the contract on how much they can actually use it or any caps on volume?"
+    },
+    "original": "Consider the Collaboration Agreement between Ginkgo Bioworks, Inc. and Berkeley Lights, Inc. for Workflow Development on the Beacon Platform; Does this contract include any volume restrictions?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "Hey everyone, I'm looking at the third amendment to that manufacturing deal between ADMA BioManufacturing and Sanofi Pasteur. Does it actually say there's no limit on what someone has to pay if things go wrong, or is the liability capped somewhere?"
+    },
+    "original": "Consider the Amendment #3 to Manufacturing Agreement between ADMA BioManufacturing, LLC and Sanofi Pasteur S.A.; Is there uncapped liability under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "So I'm digging through the Remarketing Agreement between Nuveen AMT-Free Municipal Credit Income Fund and Nuveen Fund Advisors. Does anyone know if this is an exclusive deal where they can't work with anyone else, or are they allowed to bring in other firms?"
+    },
+    "original": "Consider the Remarketing Agreement between Nuveen AMT-Free Municipal Credit Income Fund and Nuveen Fund Advisors, LLC; Does this contract include an exclusivity agreement?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to make sense of the endorsement deal between NFLA, NFLA-NC, and Gridiron BioNutrients for promoting their stuff. Does anyone know which state's laws actually apply to this contract?"
+    },
+    "original": "Consider the Endorsement Agreement between NFLA, NFLA-NC, and Gridiron BioNutrients for Product Promotion; What is the governing law for this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m digging through the licensing deal Digicorp has with New China Media, YGP, and TWK Holdings. Does this contract actually say they have to share the profits or split any of the money they make?"
+    },
+    "original": "Consider the Content License Agreement between Digicorp, Inc. and New China Media LLC, YGP, LLC, and TWK Holdings, LLC; Does this contract include any revenue or profit-sharing arrangements?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking through the IP deal between Rare Element Resources Ltd. and Synchron and I'm trying to figure out if there\u2019s a rule in there that stops them from just handing the contract off to some other company. Is there a \"no-transfer\" clause or something like that?"
+    },
+    "original": "Consider the Intellectual Property Rights Agreement between Rare Element Resources Ltd. and Synchron; Is there an anti-assignment clause in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking through the addendum for the distributor agreement between Zebra Technologies, Xplore, and ScanSource. Does anyone know which state\u2019s laws actually run this contract?"
+    },
+    "original": "Consider the Addendum to Distributor Agreement between Zebra Technologies, Xplore Technologies, and ScanSource; What is the governing law for this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I've been looking into the big cancer research partnership between MD Anderson and Adaptimmune. Does anyone know what the deal is with the audit rights in their contract? I\u2019m trying to figure out exactly how and when they're allowed to go in and check the other side's books or records."
+    },
+    "original": "Consider the Strategic Alliance Agreement between The University of Texas M. D. Anderson Cancer Center and Adaptimmune LLC & Adaptimmune Limited for Cancer Research; What are the audit rights under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking through the endorsement deal between Shaq's company and Papa John's\u2014does it actually say anywhere that they aren't allowed to hand the contract over to someone else?"
+    },
+    "original": "Consider the Endorsement Agreement between ABG-Shaq, LLC and Papa John's International, Inc.; Is there an anti-assignment clause in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking at this distribution contract between Signature Orthopaedics Pty Ltd and CPM Medical Consultants LLC for their medical products. Does anyone know if there\u2019s a specific part in here where they promise not to sue each other?"
+    },
+    "original": "Consider the Distributorship Agreement between Signature Orthopaedics Pty Ltd and CPM Medical Consultants LLC for Medical Products; Is there a covenant not to sue included in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking through that sponsorship deal where Gridiron BioNutrients is promoting stuff for NFLA and NFLA-NC\u2014does this contract actually have a clause where they promise not to sue each other?"
+    },
+    "original": "Consider the Endorsement Agreement between NFLA, NFLA-NC, and Gridiron BioNutrients for Product Promotion; Is there a covenant not to sue included in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking through my franchise deal with Airsopure International Group and I\u2019m a bit confused. Is there anything in this contract that says I can't reach out to or try to win over our existing customers?"
+    },
+    "original": "Consider the Franchise Agreement between Airsopure International Group, Inc. and Franchisee; Is there a clause preventing the solicitation of customers in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "Hey, I\u2019m trying to figure out the timeline for the co-branding deal between NETTAXI and Solutions Media (SpinRecords.com)\u2014does anyone know when this contract is actually set to end?"
+    },
+    "original": "Consider the Co-Branding Agreement between NETTAXI Online Communities, Inc. and Solutions Media, Inc. (SpinRecords.com); What is the expiration date of this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking through the operations and maintenance deal between Pi\u00f1on Gathering Company and SandRidge Midstream and I can't tell\u2014is there actually a limit on how much one of them has to pay if they mess up, or is the liability totally uncapped?"
+    },
+    "original": "Consider the Operations and Maintenance Agreement between Pi\u00f1on Gathering Company, LLC and SandRidge Midstream, Inc.; Is there a cap on liability under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking through the hosting and services deal between Vitalibis Inc. and Votocast, Inc. and I'm a bit confused\u2014who actually ends up owning the rights to all the creative stuff and tech according to this contract?"
+    },
+    "original": "Consider the Services and Hosting Agreement between VITALIBIS INC and VOTOCAST, Inc.; How is intellectual property ownership assigned in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking into the deal Cargill and Bioamber signed to make succinic acid together\u2014does that contract actually have a non-compete? I\u2019m trying to find out if there's anything in there that stops them from working with rivals or starting a competing business."
+    },
+    "original": "Consider the Development Agreement between Cargill, Incorporated and Bioamber S.A.S. for the Production of Succinic Acid; Is there a non-compete clause in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m looking at the big contract between Burger King Corp and International Fast Food Polska for the restaurants in Poland and I\u2019m a bit stuck. Does anyone know if there\u2019s anything in the fine print about \"first dibs\"? Specifically, I\u2019m trying to see if one of them has the right to get the first offer, the first chance to negotiate, or the right to match any other deals that come along before the other side can sell to someone else."
+    },
+    "original": "Consider the Franchise Agreement between Burger King Corporation and International Fast Food Polska SP ZO.O. for Burger King Restaurants in Poland; Does this contract include any right of first refusal, right of first offer, or right of first negotiation?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to figure out the deal between Biopure and The Butler Company for Oxyglobin vet products. Does anyone know what kind of insurance they're required to carry under the agency agreement?"
+    },
+    "original": "Consider the Agency Agreement between Biopure Corporation and The Butler Company for Oxyglobin Veterinary Products; What are the insurance requirements under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019ve been looking into the deal between Bioeq and Coherus for that Ranibizumab biosimilar. Does the contract actually give any rights to Coherus\u2019s sister companies or affiliates, or is it just limited to Coherus itself?"
+    },
+    "original": "Consider the License and Development Agreement between Bioeq IP AG and Coherus BioSciences, Inc. for Ranibizumab Biosimilar; Does the licensee's affiliates have any licensing rights under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking into the hosting and license deal between Corio Inc. and Commerce One, Inc. Does anyone know how much heads-up they actually have to give if they want to stop the contract from automatically renewing?"
+    },
+    "original": "Consider the License and Hosting Agreement between Corio Inc. and Commerce One, Inc.; What is the notice period required to terminate the renewal?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging through this huge License and Hosting Agreement between Corio Inc. and Changepoint and I'm honestly lost. Can someone help me figure out what they\u2019re actually letting each other do? Like, what permissions or licenses are they giving out in this deal?"
+    },
+    "original": "Consider the License and Hosting Agreement between Corio Inc. and Changepoint, Inc.; What licenses are granted under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m digging through this service contract between PC Financial Services and Mobimagic for system maintenance and data processing. I\u2019m trying to figure out what the deal is with audits\u2014like, what exactly are PC Financial's rights when it comes to going in and checking Mobimagic's books or systems to make sure everything's being handled right?"
+    },
+    "original": "Consider the Service Agreement between PC Financial Services Private Limited and Mobimagic Co., Ltd. for System Maintenance and Data Processing Services; What are the audit rights under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to find out when the Fintepla distribution deal between Zogenix and Nippon Shinyaku is supposed to wrap up. Does anyone know the actual date their contract expires?"
+    },
+    "original": "Consider the Distributorship Agreement between Zogenix Inc. and Nippon Shinyaku Company Ltd. for Fintepla\u00ae; What is the expiration date of this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to make sense of the exclusive sales contract between IMRS Operations Inc. and Delteq Pte Ltd. Does anyone know if there's anything in there about them splitting the money or sharing the profits?"
+    },
+    "original": "Consider the Exclusive Distributor Agreement between IMRS Operations Inc. and Delteq Pte Ltd.; Does this contract include any revenue or profit-sharing arrangements?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm digging through the transition services deal between Reynolds Group Holdings and Reynolds Consumer Products. Does it say anywhere in there that they aren't allowed to just hand the contract off to a different company?"
+    },
+    "original": "Consider the Transition Services Agreement between Reynolds Group Holdings Inc. and Reynolds Consumer Products Inc.; Is there an anti-assignment clause in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to make sense of this coffee distribution deal with B & C General Warehouse Corp, but I\u2019m stuck on who actually owns the brand stuff. Does anyone know how this contract handles who gets to keep the rights to things like the logos and trademarks?"
+    },
+    "original": "Consider the Distributor Agreement between B & C General Warehouse Corporation LLC and Distributor for Coffee Products; How is intellectual property ownership assigned in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "Hey, so I'm digging into Kathy Whitworth's sponsorship deal with Square Two Golf for her line of women\u2019s clubs. Does anyone know if she actually gets a cut of the sales or a piece of the profits in that contract?"
+    },
+    "original": "Consider the Endorsement Agreement between SQUARE TWO GOLF INC. and Kathy Whitworth for Women's Golf Clubs; Does this contract include any revenue or profit-sharing arrangements?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone know when the partnership between Astellas and FibroGen for those anemia treatments is supposed to wrap up? I\u2019m trying to find the actual expiration date for their deal."
+    },
+    "original": "Consider the Collaboration Agreement between Astellas Pharma Inc. and FibroGen, Inc. for Development of Anemia Treatments; What is the expiration date of this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m digging through the manufacturing agreement between Invasix Ltd. and Flextronics Israel Ltd. and I can\u2019t tell\u2014is there anything in here that says they aren't allowed to just hand the contract off to someone else?"
+    },
+    "original": "Consider the Turn-Key Manufacturing Agreement between Invasix Ltd. and Flextronics Israel Ltd.; Is there an anti-assignment clause in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking at the consulting and product development deal between Emerald Health Sciences, Emerald Health Nutraceuticals, and Dr. Michael T. Murray\u2014does anyone know when this thing actually ends? What's the expiration date?"
+    },
+    "original": "Consider the Consulting and Product Development Agreement between Emerald Health Sciences Inc., Emerald Health Nutraceuticals Inc., and Dr. Michael T. Murray; What is the expiration date of this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm trying to wrap my head around this IP deal between Rare Element Resources and Synchron. If Synchron has any sister companies or other related businesses, do those guys actually get any rights to use the tech under this contract?"
+    },
+    "original": "Consider the Intellectual Property Rights Agreement between Rare Element Resources Ltd. and Synchron; Does the licensee's affiliates have any licensing rights under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to wrap my head around this IP agreement between Armstrong Flooring, AFI Licensing, AHF Holding, and Armstrong Hardwood Flooring Company. What kind of licenses are they actually handing out in this contract? Who\u2019s getting permission to use what?"
+    },
+    "original": "Consider the Intellectual Property Agreement between Armstrong Flooring, Inc., AFI Licensing LLC, AHF Holding, Inc., and Armstrong Hardwood Flooring Company; What licenses are granted under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to make sense of the sales and marketing agreement between Calm.com and XpresSpa\u2014does it actually include a promise where they agree they won't sue each other?"
+    },
+    "original": "Consider the Product Sale and Marketing Agreement between Calm.com, Inc. and XpresSpa Group, Inc.; Is there a covenant not to sue included in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m looking at this agreement between STAAR Surgical AG and their distributor. Does it actually say they\u2019re the only ones who can sell the stuff, or are they allowed to have other distributors too?"
+    },
+    "original": "Consider the Distributorship Agreement between STAAR Surgical AG and Distributor; Does this contract include an exclusivity agreement?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m trying to make sense of the partnership deal between Tate & Lyle and Igene for making astaxanthin. Does the contract give either company \"first dibs\" or a guaranteed first shot at buying or negotiating before they can go to anyone else?"
+    },
+    "original": "Consider the Joint Venture Agreement between Tate & Lyle Fermentation Products Ltd. and Igene Biotechnology, Inc. for Astaxanthin Production; Does this contract include any right of first refusal, right of first offer, or right of first negotiation?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking at the supply deal between Shi Farms and Gridiron BioNutrients\u2014is there anything in the paperwork that stops them from just handing the contract off to someone else?"
+    },
+    "original": "Consider the Supply Agreement between EWSD 1, LLC d/b/a Shi Farms and Gridiron BioNutrients, Inc.; Is there an anti-assignment clause in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "So I\u2019m looking at the exclusive distributor agreement between Smart RX Systems and A3 Development Group for those Smart Pharm Assist Kiosks. Does the contract actually say anything about them splitting the revenue or sharing the profits?"
+    },
+    "original": "Consider the Exclusive Distributor Agreement between Smart RX Systems, Inc. and A3 Development Group, LLC for Smart Pharm Assist Kiosk\u2122; Does this contract include any revenue or profit-sharing arrangements?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking over the hosting deal between Bluefly and IBM and I\u2019m trying to see if there\u2019s a limit on how much money they\u2019d actually have to pay out if things go south. Does the contract have a cap on what they\u2019re responsible for?"
+    },
+    "original": "Consider the e-business Hosting Agreement between Bluefly, Inc. and International Business Machines Corporation; Is there a cap on liability under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I'm looking at the co-branding deal between VerticalNet and Impresse\u2014does the contract say they aren't allowed to hand off their license rights to someone else?"
+    },
+    "original": "Consider the Co-Branding Agreement between VerticalNet, Inc. and Impresse Corporation; Are the licenses granted under this contract non-transferable?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m looking at the software partnership between PC Quote and A.B. Watley\u2014is there anything in the paperwork that stops them from just handing the deal off to a different company?"
+    },
+    "original": "Consider the Co-Branding Agreement between PC Quote, Inc. and A.B. Watley, Inc. for Market Data Software; Is there an anti-assignment clause in this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019m checking out the reseller agreement between MediaNet and International Direct Response\u2014does anyone know if there\u2019s a limit on how much money one company can be held responsible for if they mess up, or is there no cap at all?"
+    },
+    "original": "Consider the Reseller Agreement between MediaNet Group Technologies, Inc. and International Direct Response, Inc.; Is there a cap on liability under this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "Does anyone know when Shaq\u2019s endorsement deal with Papa John\u2019s is actually over? I\u2019m trying to find the official end date for that contract between ABG-Shaq and the pizza company."
+    },
+    "original": "Consider the Endorsement Agreement between ABG-Shaq, LLC and Papa John's International, Inc.; What is the expiration date of this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I was reading through the partnership agreement between Yaskawa and Argo Medical for their medical robots and I can't figure out one thing: which legal system are they actually using for the contract? Like, whose laws are in charge of the deal?"
+    },
+    "original": "Consider the Strategic Alliance Agreement between Yaskawa Electric Corporation and Argo Medical Technologies Ltd. for Healthcare Robotics; What is the governing law for this contract?"
+  },
+  {
+    "dataset": "cuad",
+    "rewrite": {
+      "v4_reddit_style": "I\u2019ve been digging through the battery production deal between Fengfan Group and Valence Tech. Does their contract actually say anything about how they\u2019re splitting the profits or sharing the revenue?"
+    },
+    "original": "Consider the Joint Venture Contract between Fengfan Group Limited Liability Company and Valence Technology Inc. for Battery Production; Does this contract include any revenue or profit-sharing arrangements?"
+  }
+]
