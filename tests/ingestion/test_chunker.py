@@ -95,6 +95,50 @@ def test_doc_id_citation_differs_from_stem_fallback() -> None:
     assert citation_id != stem_id
 
 
+# ── HierarchicalChunker: char span correctness ────────────────────────────────
+
+
+def test_hierarchical_chunk_text_matches_offsets(sample_doc: RawDocument) -> None:
+    """chunk.text must equal document.text[char_start:char_end] for every chunk."""
+    chunker = HierarchicalChunker(parent_size=300, child_size=100, child_overlap=20)
+    for chunk in chunker.chunk(sample_doc):
+        expected = sample_doc.text[chunk.char_start:chunk.char_end]
+        assert chunk.text == expected, (
+            f"Offset mismatch for chunk_id={chunk.chunk_id}: "
+            f"text[{chunk.char_start}:{chunk.char_end}]={expected!r} "
+            f"!= chunk.text={chunk.text!r}"
+        )
+
+
+def test_hierarchical_parents_cover_full_document(sample_doc: RawDocument) -> None:
+    """Parent chunks must tile the document with no gaps or overlaps."""
+    chunker = HierarchicalChunker(parent_size=300, child_size=100, child_overlap=20)
+    parents = sorted(
+        [c for c in chunker.chunk(sample_doc) if c.is_parent],
+        key=lambda c: c.char_start,
+    )
+    assert parents, "Expected at least one parent chunk"
+    assert parents[0].char_start == 0, "First parent must start at 0"
+    assert parents[-1].char_end == len(sample_doc.text), "Last parent must end at len(text)"
+    for a, b in zip(parents, parents[1:]):
+        assert a.char_end == b.char_start, (
+            f"Gap or overlap between parents: [{a.char_start}:{a.char_end}] -> [{b.char_start}:{b.char_end}]"
+        )
+
+
+def test_hierarchical_child_offsets_within_parent(sample_doc: RawDocument) -> None:
+    """Every child's char span must fall within its parent's char span."""
+    chunker = HierarchicalChunker(parent_size=300, child_size=100, child_overlap=20)
+    chunks = chunker.chunk(sample_doc)
+    parent_map = {c.chunk_id: c for c in chunks if c.is_parent}
+    for child in [c for c in chunks if not c.is_parent]:
+        parent = parent_map[child.parent_chunk_id]
+        assert child.char_start >= parent.char_start and child.char_end <= parent.char_end, (
+            f"Child [{child.char_start}:{child.char_end}] outside "
+            f"parent [{parent.char_start}:{parent.char_end}]"
+        )
+
+
 # ── RecursiveCharacterTextSplitter ────────────────────────────────────────────
 
 
