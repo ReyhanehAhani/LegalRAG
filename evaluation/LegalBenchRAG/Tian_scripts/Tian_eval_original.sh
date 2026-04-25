@@ -52,7 +52,7 @@ python -m evaluation.LegalBenchRAG.ingest \
     --embedding-model nlpaueb/legal-bert-base-uncased \
     --all
 
-python -m evaluation.LegalBenchRAG.eval_precision_recall \ 
+python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
     --index-name lbr-hier-legalbert \
     --embedding-provider huggingface \

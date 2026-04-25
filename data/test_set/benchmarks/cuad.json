@@ -1,0 +1,43 @@
+{
+    "tests": [
+        {
+            "query": "Consider the Marketing Affiliate Agreement between Birch First Global Investments Inc. and Mount Knowledge Holdings Inc.; What is the expiration date of this contract?",
+            "snippets": [
+                {
+                    "file_path": "cuad/CybergyHoldingsInc_20140520_10-Q_EX-10.27_8605784_EX-10.27_Affiliate Agreement.txt",
+                    "span": [
+                        1414,
+                        1784
+                    ],
+                    "answer": "This agreement shall begin upon the date of its execution by MA and acceptance in writing by Company and shall remain in effect until the end of the current calendar year and shall be automatically renewed for successive one (1) year periods unless otherwise terminated according to the cancellation or termination provisions contained in paragraph 18 of this Agreement."
+                }
+            ]
+        },
+        {
+            "query": "Consider the Marketing Affiliate Agreement between Birch First Global Investments Inc. and Mount Knowledge Holdings Inc.; What is the renewal term for this contract?",
+            "snippets": [
+                {
+                    "file_path": "cuad/CybergyHoldingsInc_20140520_10-Q_EX-10.27_8605784_EX-10.27_Affiliate Agreement.txt",
+                    "span": [
+                        1414,
+                        1784
+                    ],
+                    "answer": "This agreement shall begin upon the date of its execution by MA and acceptance in writing by Company and shall remain in effect until the end of the current calendar year and shall be automatically renewed for successive one (1) year periods unless otherwise terminated according to the cancellation or termination provisions contained in paragraph 18 of this Agreement."
+                }
+            ]
+        },
+        {
+            "query": "Consider the Marketing Affiliate Agreement between Birch First Global Investments Inc. and Mount Knowledge Holdings Inc.; What is the notice period required to terminate the renewal?",
+            "snippets": [
+                {
+                    "file_path": "cuad/CybergyHoldingsInc_20140520_10-Q_EX-10.27_8605784_EX-10.27_Affiliate Agreement.txt",
+                    "span": [
+                        22066,
+                        22221
+                    ],
+                    "answer": "This Agreement may be terminated by either party at the expiration of its term or any renewal term upon thirty (30) days written notice to the other party."
+                }
+            ]
+        }
+    ]
+}

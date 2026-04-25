@@ -216,7 +216,7 @@ LLMQueryFormulator    (pydantic-ai Agent → StructuredQuery with filters)
 | `legalrag/ingestion/loader.py` | `TxtFileLoader` + `clean_document_text()` |
 | `legalrag/ingestion/metadata_extractor.py` | `CanLIIMetadataExtractor` — parses CanLII headers |
 | `legalrag/ingestion/chunker.py` | `HierarchicalChunker` — parent + child chunks |
-| `legalrag/ingestion/embedder.py` | `SentenceTransformerEmbedder` / `OpenAIEmbedder` |
+| `legalrag/ingestion/embedder.py` | `SentenceTransformerEmbedder` / `HuggingFaceEmbedder` / `OpenAIEmbedder`; `build_embedder(model_name=None)` factory |
 | `legalrag/ingestion/indexer.py` | `OpenSearchIndexer` — bulk upsert |
 | `legalrag/ingestion/pipeline.py` | `IngestionPipeline` — orchestrates all ingestion steps |
 | `legalrag/prompts/formulator.yaml` | System prompt + field docs for query formulator |
@@ -299,6 +299,14 @@ From the CanLII 5-line header:
 ---
 
 ## Gotchas
+
+- **Three embedding providers**: `EMBEDDING_PROVIDER` in `.env` selects the embedder class.
+  `sentence_transformers` (default) — models with a sentence-transformers config on HF.
+  `huggingface` — raw `AutoModel` + mean pooling, for models not packaged as sentence-transformers
+  (e.g. `jhu-clsp/BERT-DPR-CLERC-ft`). `openai` — OpenAI-compatible API.
+  `build_embedder(model_name=None, provider=None)` accepts optional overrides for both;
+  both `ingest` and `eval_precision_recall` expose these as `--embedding-provider` and `--embedding-model`,
+  so you can run experiments with different models without touching `.env`.
 
 - **Embedding dim mismatch**: If you change `EMBEDDING_MODEL` or `EMBEDDING_DIM` in `.env`,
   you must delete and recreate the index: `curl -X DELETE http://localhost:9200/legalrag`
