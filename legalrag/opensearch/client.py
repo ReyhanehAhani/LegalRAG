@@ -358,6 +358,25 @@ class OpenSearchClient:
             return resp["_source"]
         return None
 
+    def mget_by_chunk_ids(self, chunk_ids: list[str]) -> dict[str, dict]:
+        """Fetch multiple chunks by chunk_id in one round trip.
+
+        Returns a dict mapping chunk_id → _source for every id that was found.
+        Missing ids are silently omitted.
+        """
+        if not chunk_ids:
+            return {}
+        resp = self._client.mget(
+            index=self.index_name,
+            body={"ids": chunk_ids},
+            _source=True,
+        )
+        return {
+            doc["_id"]: doc["_source"]
+            for doc in resp["docs"]
+            if doc.get("found")
+        }
+
     def get_parent(self, parent_chunk_id: str) -> dict[str, Any] | None:
         """Fetch the parent chunk for context expansion."""
         return self.get_by_chunk_id(parent_chunk_id)
