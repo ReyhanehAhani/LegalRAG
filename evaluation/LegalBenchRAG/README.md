@@ -302,7 +302,18 @@ python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --trace-file logs/eval_trace.jsonl
 ```
 
-Each line has this structure:
+### File format
+
+The output is **JSONL** (one JSON object per line). There are two record types, distinguished by the presence of `"_type"`:
+
+| Record type | Condition | Description |
+| ----------- | --------- | ----------- |
+| *(no `_type`)* | one per query | Per-query retrieval trace |
+| `"run_summary"` | last line | Aggregate metrics for the whole run |
+
+---
+
+### Per-query record
 
 ```json
 {
@@ -314,41 +325,144 @@ Each line has this structure:
   ],
   "total_gt_chars": 450,
   "n_retrieved": 60,
-  "retrieved_all": [
-    {
-      "rank": 1, "file": "cuad/contract_001.txt",
-      "char_start": 12300, "char_end": 12812, "char_len": 512,
-      "score": 0.9821, "chunk_id": "abc123..."
-    }
-  ],
-  "metrics_by_k": [
-    {
-      "k": 20,
-      "char_recall": 0.8444,
-      "char_precision": 0.0211,
-      "intersection_chars": 380,
-      "gt_chars": 450,
-      "retrieved_chars": 9012,
-      "top_k_chunks": [
-        {"rank": 1, "file": "cuad/contract_001.txt", ..., "gt_overlap": true},
-        {"rank": 2, "file": "cuad/contract_002.txt", ..., "gt_overlap": false}
-      ]
-    }
-  ]
+  "retrieved_all": [ ... ],
+  "metrics_by_k": [ ... ]
 }
 ```
 
-Quick analysis with `jq`:
+#### Top-level fields
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `query_idx` | int | 0-based position of this test case across all benchmarks in the run |
+| `query` | string | Raw query string from the benchmark JSON |
+| `tags` | string[] | Sub-benchmark name(s) this query belongs to (e.g. `["cuad"]`) |
+| `ground_truth` | object[] | GT snippets — each has `file` (relative corpus path) and `span` ([char_start, char_end]) |
+| `total_gt_chars` | int | Total unique GT characters after merging overlapping GT spans per file |
+| `n_retrieved` | int | Number of chunks actually returned by the retriever (≤ max(ks)) |
+| `retrieved_all` | object[] | All retrieved chunks in rank order (see below) |
+| `metrics_by_k` | object[] | Per-K metric breakdown (see below) |
+
+#### `retrieved_all` — one entry per retrieved chunk
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `rank` | int | Retrieval rank (1 = highest scored) |
+| `file` | string | Relative corpus path (e.g. `cuad/contract_001.txt`) |
+| `char_start` | int | Character offset of chunk start in the original document |
+| `char_end` | int | Character offset of chunk end (exclusive) |
+| `char_len` | int | `char_end - char_start` |
+| `score` | float | Semantic (kNN) score returned by OpenSearch |
+| `chunk_id` | string | MD5 chunk identifier used in the index |
+
+#### `metrics_by_k` — one entry per K cutoff
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `k` | int | Rank cutoff |
+| `char_recall` | float | Character-level recall: `intersection_chars / gt_chars` |
+| `char_precision` | float | Character-level precision: `intersection_chars / retrieved_chars` |
+| `intersection_chars` | int | Characters in the intersection of GT spans and top-K retrieved spans (after merging per file) |
+| `gt_chars` | int | Same as `total_gt_chars` — total unique GT characters |
+| `retrieved_chars` | int | Total unique characters covered by top-K chunks (after merging per file) |
+| `chunk_recall` | float | Chunk-level recall: `# GT snippets hit by ≥1 top-K chunk / # GT snippets` |
+| `chunk_precision` | float | Chunk-level precision: `# top-K chunks overlapping ≥1 GT snippet / k` |
+| `n_gt_snippets` | int | Number of GT snippets for this query |
+| `n_gt_hit` | int | Number of GT snippets hit by at least one top-K chunk |
+| `n_chunk_hits` | int | Number of top-K chunks that overlap at least one GT snippet |
+| `chunk_hits` | object[] | Per-chunk hit detail (see below) |
+| `gt_snippet_hits` | object[] | Per-GT-snippet hit detail (see below) |
+
+#### `chunk_hits` — one entry per top-K chunk
+
+Extends all fields from `retrieved_all` plus:
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `is_chunk_hit` | bool | True if this chunk overlaps at least one GT snippet |
+| `gt_overlaps` | object[] | One entry per GT snippet that this chunk overlaps (empty if no hit) |
+| `gt_overlaps[].gt_idx` | int | 0-based index into `ground_truth` |
+| `gt_overlaps[].overlap_span` | [int, int] | `[overlap_start, overlap_end]` character offsets |
+| `gt_overlaps[].overlap_chars` | int | Number of overlapping characters |
+| `gt_overlaps[].overlap_pct_of_chunk` | float | `overlap_chars / chunk_char_len × 100` |
+| `gt_overlaps[].overlap_pct_of_gt` | float | `overlap_chars / gt_snippet_char_len × 100` |
+
+#### `gt_snippet_hits` — one entry per GT snippet
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `gt_idx` | int | 0-based index into `ground_truth` |
+| `file` | string | Relative corpus path of the GT snippet |
+| `span` | [int, int] | `[char_start, char_end]` of the GT snippet |
+| `is_hit` | bool | True if at least one top-K chunk overlaps this snippet |
+| `hit_by_chunk_ranks` | int[] | Ranks of the chunks that hit this snippet (empty if not hit) |
+
+---
+
+### `run_summary` record (last line)
+
+The final line has `"_type": "run_summary"` and contains aggregate metrics for the entire run.
+
+```json
+{
+  "_type": "run_summary",
+  "run_info": {
+    "label": "all-mpnet-base-v2",
+    "embedding_model": "sentence-transformers/all-mpnet-base-v2",
+    "index_name": "lbr-hier-all-mpnet-base-v2",
+    "ks": [20, 40, 60],
+    "timestamp": "2024-11-01T14:23:05"
+  },
+  "benchmarks": {
+    "cuad": {
+      "n_queries": 50,
+      "char_recall_at_k":    {"20": 0.154, "40": 0.333, "60": 0.641},
+      "char_precision_at_k": {"20": 0.0077, "40": 0.0135, "60": 0.0141},
+      "chunk_recall_at_k":   {"20": 0.12, "40": 0.28, "60": 0.52},
+      "chunk_precision_at_k":{"20": 0.006, "40": 0.007, "60": 0.009}
+    }
+  },
+  "overall": {
+    "char_recall_at_k":    {"20": 0.195, "40": 0.332, "60": 0.482},
+    "char_precision_at_k": {"20": 0.015, "40": 0.013, "60": 0.011},
+    "chunk_recall_at_k":   {"20": 0.11, "40": 0.23, "60": 0.41},
+    "chunk_precision_at_k":{"20": 0.006, "40": 0.006, "60": 0.007}
+  }
+}
+```
+
+`run_summary` fields:
+
+| Field | Description |
+| ----- | ----------- |
+| `run_info.label` | Display name for this run (defaults to embedding model name; override with `--label`) |
+| `run_info.embedding_model` | Embedding model used |
+| `run_info.index_name` | OpenSearch index queried |
+| `run_info.ks` | K cutoffs evaluated |
+| `run_info.timestamp` | ISO-8601 timestamp of the run |
+| `benchmarks.<name>.n_queries` | Number of queries evaluated for this sub-benchmark |
+| `benchmarks.<name>.*_at_k` | Average metric across queries; keys are stringified K values |
+| `overall.*_at_k` | Macro-average of per-benchmark scores (not weighted by n_queries) |
+
+---
+
+### Quick analysis with `jq`
 
 ```bash
-# Queries with zero recall at K=20
-jq 'select(.metrics_by_k[] | select(.k==20) | .char_recall == 0)' logs/eval_trace.jsonl
+# Queries with zero character recall at K=20
+jq 'select(.metrics_by_k != null) | select(.metrics_by_k[] | select(.k==20) | .char_recall == 0)' logs/eval_trace.jsonl
 
-# Top-5 retrieved chunks for a specific query
+# Top-5 retrieved chunks for query index 3
 jq 'select(.query_idx==3) | .retrieved_all[:5]' logs/eval_trace.jsonl
 
-# All queries where rank-1 chunk hit a GT span
-jq 'select(.metrics_by_k[0].top_k_chunks[0].gt_overlap == true) | .query' logs/eval_trace.jsonl
+# Queries where the rank-1 chunk hit a GT span
+jq 'select(.metrics_by_k != null) | select(.metrics_by_k[0].chunk_hits[0].is_chunk_hit == true) | .query' logs/eval_trace.jsonl
+
+# GT snippets that were never hit at K=40 (hard negatives)
+jq 'select(.metrics_by_k != null) | .metrics_by_k[] | select(.k==40) | .gt_snippet_hits[] | select(.is_hit == false)' logs/eval_trace.jsonl
+
+# Print the run summary
+jq 'select(._type == "run_summary")' logs/eval_trace.jsonl
 ```
 
 
