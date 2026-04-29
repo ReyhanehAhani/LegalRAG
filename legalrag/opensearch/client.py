@@ -358,6 +358,28 @@ class OpenSearchClient:
             return resp["_source"]
         return None
 
+    def get_child_chunks_by_citation(self, citation: str) -> list[dict]:
+        """Return all child chunks (is_parent=false) for a corpus-relative file path.
+
+        Returns a list of _source dicts (chunk_id, char_start, char_end, text).
+        """
+        resp = self._client.search(
+            index=self.index_name,
+            body={
+                "query": {
+                    "bool": {
+                        "must": [
+                            {"term": {"citation": citation}},
+                            {"term": {"is_parent": False}},
+                        ]
+                    }
+                },
+                "_source": ["chunk_id", "char_start", "char_end", "text"],
+                "size": 10_000,
+            },
+        )
+        return [h["_source"] for h in resp["hits"]["hits"]]
+
     def mget_by_chunk_ids(self, chunk_ids: list[str]) -> dict[str, dict]:
         """Fetch multiple chunks by chunk_id in one round trip.
 
