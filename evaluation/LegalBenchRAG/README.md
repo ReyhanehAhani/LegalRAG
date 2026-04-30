@@ -2,17 +2,6 @@
 
 Retrieval evaluation pipeline for [zeroentropy-ai/legalbenchrag](https://github.com/zeroentropy-ai/legalbenchrag) — a character-level IR benchmark covering legal contracts (CUAD, ContractNLI, MAUD, PrivacyQA).
 
-Unlike CLERC (which uses NDCG/MRR over ranked document IDs), LegalBench-RAG measures retrieval quality at the **exact character level**:
-
-
-| Metric    | Formula |
-| --------- | ------- |
-| Recall    | `       |
-| Precision | `       |
-
-
-Retrieved chunk spans are merged per file before computing the intersection with ground-truth spans, following the methodology in the [original paper](https://arxiv.org/abs/2408.10343).
-
 ---
 
 ## Data Download
@@ -58,44 +47,126 @@ If not running:
 
 ---
 
-## Quickstart
+## NOTE
+- `legalrag/core/config.py` and `.env` files are implemented for the sake of centeralized configs control for STABLE SYSTEM in the future.
+- For evaluation and experiments, use CLI flags to contorl embedding models, embedding provider, chunk size, etc.
+- The only setting that cannot be bypassed by CLI flags and use the `legalrag/core/config.py` is the `opensearch` set up
 
-### Step 1 — Ingest corpus (default settings)
+---
+## End-to-End Workflow
 
-By default, only the corpus files referenced by benchmark test cases are ingested
-(much smaller than the full corpus). This is the recommended first run.
+This section walks through a full experiment: ingest → evaluate → analyse results.
+The example uses `all-mpnet-base-v2` with hierarchical chunking on the 50-query subset.
 
-```bash
-python -m evaluation.LegalBenchRAG.ingest \
-    --data-dir data/LegalBenchRAG
-```
-
-For a fast smoke test (10 test cases per sub-benchmark → minimal corpus):
-
-```bash
-python -m evaluation.LegalBenchRAG.ingest \
-    --data-dir data/LegalBenchRAG \
-    --limit 10
-```
-
-To ingest from a custom corpus subset (e.g. `corpus_50`):
+### Step 1 — Ingest the corpus
 
 ```bash
 python -m evaluation.LegalBenchRAG.ingest \
     --data-dir data/LegalBenchRAG \
-    --corpus-dir data/LegalBenchRAG/corpus_50 \
+    --index-name lbr-hier-all-mpnet-base-v2 \
+    --chunker hierarchical \
+    --parent-size 2048 \
+    --chunk-size 512 \
+    --chunk-overlap 64 \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
     --all
 ```
 
-### Step 2 — Evaluate
+Verify the index was created and has documents:
+
+```bash
+curl http://localhost:9200/lbr-hier-all-mpnet-base-v2/_count
+```
+
+### Step 2 — Run evaluation
+
+Evaluate on the **50-query sampled subset** (`data/LegalBenchRAG/benchmarks_50/`), using
+K cutoffs `2 4 6 10 15 20 40 60` and writing a per-query **trace file**:
+
+**trace file**: detailed logs of each run, it's very important for debugging, result reproducbility and analytics.
+
 
 ```bash
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
-    --ks 20 40 60
+    --index-name lbr-hier-all-mpnet-base-v2 \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
+    --benchmarks-dir data/LegalBenchRAG/benchmarks_50 \
+    --ks 2 4 6 10 15 20 40 60 \
+    --trace-file logs/eval/original/lbr_hier_all-mpnet.jsonl
 ```
 
+The terminal prints a results table like:
+
+```
+benchmark       R@6    R@20   R@60   P@6    P@20   P@60
+contractnli     0.231  0.308  0.462  0.0308 0.0154 0.0090
+cuad            0.154  0.333  0.641  0.0154 0.0077 0.0141
+maud            0.083  0.125  0.167  0.0083 0.0042 0.0056
+privacy_qa      0.313  0.563  0.646  0.0417 0.0333 0.0167
+OVERALL         0.195  0.332  0.482  0.0240 0.0150 0.0113
+```
+
+### Step 3 — Analyse with notebooks
+
+Analyics is done via loading trace files in notebooks(`notebooks/`), some notebooks includes:
+
+| Notebook | Purpose |
+| -------- | ------- |
+| [chunk_hits_eda.ipynb](../../notebooks/chunk_hits_eda.ipynb) | EDA on chunk-level hit/miss patterns across benchmarks |
+| [eval_trace_inspector.ipynb](../../notebooks/eval_trace_inspector.ipynb) | Interactive per-query trace inspector; filter by recall, drill into retrieved chunks |
+| [plot_eval_results.ipynb](../../notebooks/plot_eval_results.ipynb) | Multi-run comparison charts (recall/precision vs K, model vs model) |
+
+Pass your `--trace-file` path into the notebooks to load results.
+
+
 ---
+
+## Experiment Matrix
+
+The scripts in `Tian_scripts/` cover a full sweep across embedding models, chunkers, and
+query-rewriting variants. The table below shows what each script targets.
+
+### Embedding models
+
+| Index label | Model | Provider |
+| ----------- | ----- | -------- |
+| `*-clerc` | `jhu-clsp/BERT-DPR-CLERC-ft` | `huggingface` |
+| `*-legalbert` | `nlpaueb/legal-bert-base-uncased` | `huggingface` |
+| `*-legal-embed-bge-base-en-v1.5` | `axondendriteplus/Legal-Embed-bge-base-en-v1.5` | `sentence_transformers` |
+| `*-all-mpnet-base-v2` | `sentence-transformers/all-mpnet-base-v2` | `sentence_transformers` |
+| `*-octen` | `Octen/Octen-Embedding-0.6B` | `sentence_transformers` |
+| `*-qwen3` | `Qwen/Qwen3-Embedding-0.6B` | `sentence_transformers` |
+
+### Query-rewriting variants
+
+Each script evaluates on a different LLM-rewritten version of the benchmark queries.
+The `--benchmarks-dir` path determines which variant is used.
+
+| Script | Benchmarks dir | Query rewriter |
+| ------ | -------------- | -------------- |
+| `Tian_eval_original.sh` | `benchmarks_50/` | None (original queries) |
+| `Tian_eval_qwen2.5.sh` | `benchmark_50_reformated_proccessed/qwen72b` | Qwen2.5-72B |
+| `Tian_eval_qwen3.5.sh` | `benchmark_50_reformated_proccessed/qwen35_9b` | Qwen3.5-9B |
+| `Tian_eval_mistral.sh` | `benchmark_50_reformated_proccessed/mistral` | Mistral |
+| `Tian_eval_gemini_3.sh` | `benchmark_50_reformated_proccessed/gemini-3-flash` | Gemini 3 Flash |
+| `Tian_eval_mini.sh` | *(uses `data/legalbenchrag-mini`)* | Original (mini dataset) |
+
+Trace files land in `logs/eval/{variant}/`, e.g. `logs/eval/qwen3.5/lbr_hier_clerc.jsonl`.
+
+### Running a full sweep (one script)
+
+```bash
+bash evaluation/LegalBenchRAG/Tian_scripts/Tian_eval_original.sh
+```
+
+Each script ingests every model × chunker combination and immediately evaluates it,
+so indices accumulate in OpenSearch across runs.
+
+---
+
 
 ## Chunker Strategies
 
@@ -103,15 +174,15 @@ Two chunkers are available. Pass `--chunker` to `ingest` to select one.
 
 ### `hierarchical` (default)
 
-Two-level structure: large **parent** chunks (~~1500 chars) contain overlapping
+Two-level structure: large **parent** chunks (~~2048 chars) contain overlapping
 **child** chunks (~~512 chars). Only child chunks are embedded and retrieved;
 the parent is fetched at generation time for richer context
 (*small-to-big retrieval*).
 
 - Better for generative RAG (wider context per retrieved chunk)
-- `--parent-size` controls the parent window (default: 1500 chars)
-- `--chunk-size` controls the child window (default: 512 chars from config)
-- `--chunk-overlap` controls child overlap (default: 64 chars from config)
+- `--parent-size` controls the parent window (using 2048)
+- `--chunk-size` controls the child window (using 512 chars)
+- `--chunk-overlap` controls child overlap (using 64 chars)
 
 ```bash
 # Ingest with hierarchical chunker into a named index
@@ -122,15 +193,19 @@ python -m evaluation.LegalBenchRAG.ingest \
     --chunk-size 512 \
     --chunk-overlap 64 \
     --index-name lbr-hier-all-mpnet-base-v2 \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
     --all
 
 # Evaluate against that index
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
     --index-name lbr-hier-all-mpnet-base-v2 \
-    --ks 2 4 6 10 15 20 40 60 \
-    --trace-file logs/eval/lbr_hier_all-mpnet-base-v2.jsonl \
-    --benchmarks-dir data/LegalBenchRAG/benchmarks_50
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
+    --benchmarks-dir data/LegalBenchRAG/benchmarks_50 \
+    --trace-file logs/eval/original/lbr_hier_all-mpnet.jsonl \
+    --ks 2 4 6 10 15 20 40 60
 ```
 
 ### `recursive`
@@ -150,14 +225,19 @@ python -m evaluation.LegalBenchRAG.ingest \
     --chunker recursive \
     --chunk-size 512 \
     --chunk-overlap 64 \
-    --index-name legalrag-lbr-recursive \
+    --index-name lbr-rec-all-mpnet-base-v2 \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
     --all
-
 
 # Evaluate against that index
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
-    --index-name legalrag-lbr-recursive \
+    --index-name lbr-rec-all-mpnet-base-v2 \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
+    --benchmarks-dir data/LegalBenchRAG/benchmarks_50 \
+    --trace-file logs/eval/original/lbr_rec_all-mpnet.jsonl \
     --ks 2 4 6 10 15 20 40 60
 ```
 
@@ -180,7 +260,7 @@ python -m evaluation.LegalBenchRAG.eval_precision_recall \
 
 ## Embedding Providers
 
-The `EMBEDDING_PROVIDER` in `.env` controls which embedder class is used. The `--embedding-model` flag (on both `ingest` and `eval_precision_recall`) overrides only the model name — the provider is always taken from `.env`.
+The `EMBEDDING_PROVIDER` in `.env` controls which embedder class is used. The `--embedding-model` and `--embedding-provider` flags (on both `ingest` and `eval_precision_recall`) override the `.env` values per-run — no file edits needed for experiments.
 
 | `EMBEDDING_PROVIDER`    | Class                        | Use when                                                                 |
 | ----------------------- | ---------------------------- | ------------------------------------------------------------------------ |
@@ -190,45 +270,28 @@ The `EMBEDDING_PROVIDER` in `.env` controls which embedder class is used. The `-
 
 `HuggingFaceEmbedder` mean-pools the last hidden state over non-padding tokens and L2-normalises the result. It is GPU-aware (uses CUDA if available).
 
-Example — ingest and evaluate with `jhu-clsp/BERT-DPR-CLERC-ft`:
+Example — ingest and evaluate with `jhu-clsp/BERT-DPR-CLERC-ft` (CLERC model):
 
 ```bash
-# .env
-EMBEDDING_PROVIDER=huggingface
-EMBEDDING_MODEL=jhu-clsp/BERT-DPR-CLERC-ft
-EMBEDDING_DIM=768
-
-# Ingest
 python -m evaluation.LegalBenchRAG.ingest \
     --data-dir data/LegalBenchRAG \
     --index-name lbr-hier-clerc \
-    --all
-
-# Evaluate
-python -m evaluation.LegalBenchRAG.eval_precision_recall \
-    --data-dir data/LegalBenchRAG \
-    --index-name lbr-hier-clerc \
-    --ks 20 40 60
-```
-
-Or override both on the command line without touching `.env`:
-
-```bash
-# Ingest
-python -m evaluation.LegalBenchRAG.ingest \
-    --data-dir data/LegalBenchRAG \
-    --index-name lbr-hier-clerc \
+    --chunker hierarchical \
+    --parent-size 2048 \
+    --chunk-size 512 \
+    --chunk-overlap 64 \
     --embedding-provider huggingface \
     --embedding-model jhu-clsp/BERT-DPR-CLERC-ft \
     --all
 
-# Evaluate
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
     --index-name lbr-hier-clerc \
     --embedding-provider huggingface \
     --embedding-model jhu-clsp/BERT-DPR-CLERC-ft \
-    --ks 20 40 60
+    --benchmarks-dir data/LegalBenchRAG/benchmarks_50 \
+    --trace-file logs/eval/original/lbr_hier_clerc.jsonl \
+    --ks 2 4 6 10 15 20 40 60
 ```
 
 ---
@@ -238,8 +301,13 @@ python -m evaluation.LegalBenchRAG.eval_precision_recall \
 Delete the index and re-run ingestion when you change the embedding model or chunk size:
 
 ```bash
-curl -X DELETE http://localhost:9200/legalrag-legalbenchrag
-python -m evaluation.LegalBenchRAG.ingest --data-dir data/LegalBenchRAG
+curl -X DELETE http://localhost:9200/lbr-hier-all-mpnet-base-v2
+python -m evaluation.LegalBenchRAG.ingest \
+    --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-all-mpnet-base-v2 \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
+    --all
 ```
 
 > **Note**: if you change `--embedding-model` to a model with a different output
@@ -261,11 +329,11 @@ python -m evaluation.LegalBenchRAG.ingest --data-dir data/LegalBenchRAG
 | `--all`                   | false                    | Ingest every `*.txt` under `corpus/` (ignores benchmark filter)        |
 | `--corpus-dir PATH`       | `<data-dir>/corpus`      | Override the corpus directory (e.g. `data/LegalBenchRAG/corpus_50`)    |
 | `--chunker`               | `hierarchical`           | Chunking strategy: `hierarchical` or `recursive`                       |
-| `--chunk-size N`          | 512 (config)             | Child chunk size in characters                                         |
-| `--chunk-overlap N`       | 64 (config)              | Character overlap between consecutive chunks                           |
+| `--chunk-size N`          | required                 | Child chunk size in characters                                         |
+| `--chunk-overlap N`       | required                 | Character overlap between consecutive chunks                           |
 | `--parent-size N`         | 1500                     | Parent chunk size — hierarchical only                                  |
-| `--embedding-provider PROVIDER` | `EMBEDDING_PROVIDER` in `.env` | Embedding provider: `sentence_transformers`, `huggingface`, or `openai` |
-| `--embedding-model MODEL` | `EMBEDDING_MODEL` in `.env` | Override the embedding model name                                      |
+| `--embedding-provider PROVIDER` | required           | Embedding provider: `sentence_transformers`, `huggingface`, or `openai` |
+| `--embedding-model MODEL` | required                 | Embedding model name                                                   |
 | `--index-name NAME`       | `legalrag-legalbenchrag` | OpenSearch index to ingest into                                        |
 | `--log-level`             | INFO                     | Verbosity                                                              |
 
@@ -276,14 +344,14 @@ python -m evaluation.LegalBenchRAG.ingest --data-dir data/LegalBenchRAG
 | Flag                      | Default                     | Description                                               |
 | ------------------------- | --------------------------- | --------------------------------------------------------- |
 | `--data-dir PATH`         | required                    | Root of downloaded data dir                               |
-| `--benchmarks-dir PATH`   | `<data-dir>/benchmarks`     | Override benchmarks directory (e.g. for a sampled subset) |
+| `--benchmarks-dir PATH`   | `<data-dir>/benchmarks`     | Override benchmarks directory (e.g. for a sampled subset or a rewritten-query variant) |
 | `--benchmarks NAME …`     | all four                    | Sub-benchmarks to evaluate                                |
 | `--limit N`               | None                        | Cap test cases per benchmark (for fast iteration)         |
 | `--ks K …`                | `1 5 10 20`                 | Rank cutoffs; retrieves `max(ks)` chunks per query        |
-| `--index-name NAME`       | `legalrag-legalbenchrag`    | OpenSearch index to query — must match ingestion          |
-| `--embedding-provider PROVIDER` | `EMBEDDING_PROVIDER` in `.env` | Embedding provider: `sentence_transformers`, `huggingface`, or `openai`. Must match ingest. |
-| `--embedding-model MODEL` | `EMBEDDING_MODEL` in `.env` | Override the query embedding model. Must match ingest.                 |
-| `--trace-file PATH`       | None                        | Write per-query JSONL retrieval trace (see below)         |
+| `--index-name NAME`       | required                    | OpenSearch index to query — must match ingestion          |
+| `--embedding-provider PROVIDER` | required                    | Embedding provider: `sentence_transformers`, `huggingface`, or `openai`. Must match ingest. |
+| `--embedding-model MODEL` | required                    | Embedding model name. Must match ingest.                               |
+| `--trace-file PATH`       | required                    | Write per-query JSONL retrieval trace (see below)         |
 | `--log-level`             | WARNING                     | Verbosity                                                 |
 
 
@@ -291,15 +359,17 @@ python -m evaluation.LegalBenchRAG.ingest --data-dir data/LegalBenchRAG
 
 ## Retrieval trace file
 
-Pass `--trace-file logs/eval_trace.jsonl` to write one JSON line per query. Useful for debugging low-scoring queries.
+Pass `--trace-file logs/eval_trace.jsonl` to write one JSON line per query. Useful for debugging low-scoring queries and as input to the analysis notebooks.
 
 ```bash
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
-    --benchmarks-dir data/LegalBenchRAG/benchmarks_subset \
-    --index-name legalrag-lb-hierarchical \
-    --ks 20 40 60 \
-    --trace-file logs/eval_trace.jsonl
+    --benchmarks-dir data/LegalBenchRAG/benchmarks_50 \
+    --index-name lbr-hier-all-mpnet-base-v2 \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
+    --ks 2 4 6 10 15 20 40 60 \
+    --trace-file logs/eval/original/lbr_hier_all-mpnet.jsonl
 ```
 
 ### File format
@@ -446,29 +516,7 @@ The final line has `"_type": "run_summary"` and contains aggregate metrics for t
 
 ---
 
-### Quick analysis with `jq`
-
-```bash
-# Queries with zero character recall at K=20
-jq 'select(.metrics_by_k != null) | select(.metrics_by_k[] | select(.k==20) | .char_recall == 0)' logs/eval_trace.jsonl
-
-# Top-5 retrieved chunks for query index 3
-jq 'select(.query_idx==3) | .retrieved_all[:5]' logs/eval_trace.jsonl
-
-# Queries where the rank-1 chunk hit a GT span
-jq 'select(.metrics_by_k != null) | select(.metrics_by_k[0].chunk_hits[0].is_chunk_hit == true) | .query' logs/eval_trace.jsonl
-
-# GT snippets that were never hit at K=40 (hard negatives)
-jq 'select(.metrics_by_k != null) | .metrics_by_k[] | select(.k==40) | .gt_snippet_hits[] | select(.is_hit == false)' logs/eval_trace.jsonl
-
-# Print the run summary
-jq 'select(._type == "run_summary")' logs/eval_trace.jsonl
-```
-
-
----
-
-## How chunk-to-span mapping works
+## How chunk-to-span mapping works for char-level
 
 1. Each corpus document is ingested with its **relative file path** (e.g. `cuad/contract_001.txt`) stored as `metadata.citation`.
 2. The chunker records `char_start` / `char_end` (character offsets in the original document text) on every child chunk.
@@ -488,6 +536,7 @@ jq 'select(._type == "run_summary")' logs/eval_trace.jsonl
 | `pipeline.py`              | `LegalBenchRAGIngestionPipeline` — chunker → embed → OpenSearch                          |
 | `ingest.py`                | CLI for corpus ingestion                                                                 |
 | `eval_precision_recall.py` | CLI for character-level Precision & Recall evaluation                                    |
+| `Tian_scripts/`            | Full sweep scripts — one per query-rewriting variant; each covers all embedding models   |
 
 
 ---
@@ -516,4 +565,3 @@ jq 'select(._type == "run_summary")' logs/eval_trace.jsonl
   url={https://arxiv.org/abs/2408.10343}
 }
 ```
-

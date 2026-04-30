@@ -10,8 +10,6 @@ that implements the OpenAI Chat Completions API spec.  This includes:
   - Ollama         serving Qwen, Llama, etc.            (local CPU/GPU)
   - Alibaba DashScope (cloud Qwen)
   - OpenAI         (GPT-4o, etc.)
-
-Swap backends by changing LLM_BASE_URL + LLM_MODEL in .env – no code changes.
 """
 
 from pydantic import Field
@@ -47,7 +45,7 @@ class LLMSettings(BaseSettings):
 
 class EmbeddingSettings(BaseSettings):
     provider: str = Field("sentence_transformers", alias="EMBEDDING_PROVIDER")
-    model: str = Field("nlpaueb/legal-bert-base-uncased", alias="EMBEDDING_MODEL")
+    model: str = Field("sentence-transformers/all-mpnet-base-v2", alias="EMBEDDING_MODEL")
     dim: int = Field(768, alias="EMBEDDING_DIM")
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore", populate_by_name=True)

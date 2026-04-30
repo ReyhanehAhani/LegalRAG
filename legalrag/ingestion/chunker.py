@@ -110,7 +110,7 @@ class HierarchicalChunker(BaseChunker):
 
     def __init__(
         self,
-        parent_size: int = 1500,
+        parent_size: int | None = None,
         child_size: int | None = None,
         child_overlap: int | None = None,
     ) -> None:

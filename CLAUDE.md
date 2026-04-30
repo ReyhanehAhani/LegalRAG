@@ -86,31 +86,46 @@ Metrics: **chunk-level Precision@K and Recall@K** (binary hit/miss per GT snippe
 cutoffs K). A single retrieval pass fetches `max(ks)` chunks; metrics are computed at each K
 by slicing the ranked list. Default K values: 20, 40, 60.
 
+> **Convention**: `legalrag/core/config.py` and `.env` are for the stable production system.
+> For evaluation and experiments, always use CLI flags (`--embedding-model`, `--embedding-provider`,
+> `--chunk-size`, `--parent-size`, etc.) to control every parameter — no `.env` edits needed.
+> The only exception is OpenSearch settings, which always come from `config.py`.
+
 ```bash
 # ── Step 1: Ingest corpus ──────────────────────────────────────────────────────
+# --index-name is required; use a descriptive name encoding model + chunker config.
+# --parent-size must always be passed explicitly (no hardcoded default).
 
-# Ingest only corpus files referenced by benchmark tests (recommended)
+# Ingest entire corpus into a named index (recommended)
 python -m evaluation.LegalBenchRAG.ingest \
-    --data-dir data/LegalBenchRAG
+    --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-<model-label> \
+    --chunker hierarchical \
+    --parent-size 2048 \
+    --chunk-size 512 \
+    --chunk-overlap 64 \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
+    --all
 
 # Ingest only files for specific sub-benchmarks
 python -m evaluation.LegalBenchRAG.ingest \
     --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-<model-label> \
     --benchmarks cuad maud
 
 # Fast smoke test: ingest files for first 10 test cases per benchmark
 python -m evaluation.LegalBenchRAG.ingest \
     --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-<model-label> \
     --limit 10
 
-# Ingest entire corpus (all *.txt files, ignores benchmark filter)
+# Delete index and re-ingest (required after changing embedding model or chunk size)
+curl -X DELETE http://localhost:9200/lbr-hier-<model-label>
 python -m evaluation.LegalBenchRAG.ingest \
     --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-<model-label> \
     --all
-
-# Delete index and re-ingest (required after changing EMBEDDING_MODEL/EMBEDDING_DIM)
-curl -X DELETE http://localhost:9200/legalrag-legalbenchrag
-python -m evaluation.LegalBenchRAG.ingest --data-dir data/LegalBenchRAG
 
 
 # ── Step 2: Sample a subset of queries (optional) ─────────────────────────────
@@ -134,36 +149,44 @@ for name, n in [('contractnli',13),('cuad',13),('maud',12),('privacy_qa',12)]:
 
 
 # ── Step 3: Evaluate ──────────────────────────────────────────────────────────
+# --index-name and --trace-file are REQUIRED (no defaults).
+# --trace-file writes a per-query JSONL log; used by analysis notebooks.
 
 # Full evaluation on all 4 benchmarks at K=20,40,60
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
-    --ks 20 40 60
+    --index-name lbr-hier-<model-label> \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
+    --ks 20 40 60 \
+    --trace-file logs/eval/original/lbr_hier_<model-label>.jsonl
 
 # Evaluate on the 50-query subset (fast iteration)
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
-    --benchmarks-dir data/LegalBenchRAG/benchmarks_subset \
-    --ks 20 40 60
-
-# Custom K values and specific sub-benchmarks
-python -m evaluation.LegalBenchRAG.eval_precision_recall \
-    --data-dir data/LegalBenchRAG \
-    --benchmarks cuad maud \
-    --ks 10 20 50 100
+    --index-name lbr-hier-<model-label> \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
+    --benchmarks-dir data/LegalBenchRAG/benchmarks_50 \
+    --ks 2 4 6 10 15 20 40 60 \
+    --trace-file logs/eval/original/lbr_hier_<model-label>.jsonl
 
 # Quick smoke test (10 queries per benchmark, verbose)
 python -m evaluation.LegalBenchRAG.eval_precision_recall \
     --data-dir data/LegalBenchRAG \
+    --index-name lbr-hier-<model-label> \
+    --embedding-provider sentence_transformers \
+    --embedding-model sentence-transformers/all-mpnet-base-v2 \
     --limit 10 \
     --ks 20 40 60 \
+    --trace-file logs/eval/smoke_test.jsonl \
     --log-level INFO
 
 # Check index doc count
-curl http://localhost:9200/legalrag-legalbenchrag/_count
+curl http://localhost:9200/lbr-hier-<model-label>/_count
 
-# Check index embedding dimension (must match EMBEDDING_DIM in .env)
-curl -s http://localhost:9200/legalrag-legalbenchrag/_mapping \
+# Check index embedding dimension
+curl -s http://localhost:9200/lbr-hier-<model-label>/_mapping \
     | python3 -c "import json,sys; m=json.load(sys.stdin); \
       print(list(m.values())[0]['mappings']['properties']['embedding']['dimension'])"
 ```
@@ -243,12 +266,13 @@ LLMQueryFormulator    (pydantic-ai Agent → StructuredQuery with filters)
 renames. Falls back to `MD5("stem|<filename stem>")` for ~0.7% of docs without a citation.
 `chunk_id = MD5(doc_id|char_start|char_end)` — re-ingestion is idempotent (upsert by `_id`).
 
-**Hierarchical chunking**: Child chunks (512 chars) are embedded and retrieved. Parent chunks
-(1500 chars) are stored without embeddings and fetched at generation time for richer context
-(small-to-big retrieval pattern). Splitting is done **purely by character position** using
-`_split_positions()` — never by reconstructing text from tokens (which loses whitespace and
-causes `str.find()` to fail on legal documents with multi-space / newline runs, leaving large
-unindexed gaps).
+**Hierarchical chunking**: Child chunks (~512 chars) are embedded and retrieved. Parent chunks
+are stored without embeddings and fetched at generation time for richer context
+(small-to-big retrieval pattern). `HierarchicalChunker(parent_size=None)` — `parent_size`
+has no hardcoded default; always pass `--parent-size` explicitly (experiments use 2048).
+Splitting is done **purely by character position** using `_split_positions()` — never by
+reconstructing text from tokens (which loses whitespace and causes `str.find()` to fail on
+legal documents with multi-space / newline runs, leaving large unindexed gaps).
 
 **Hybrid search**: Uses OpenSearch's native `hybrid` query + `legalrag_hybrid_pipeline` search
 pipeline (`score-ranker-processor` with RRF combination, available from OpenSearch 2.11+/3.x).
@@ -312,9 +336,10 @@ From the CanLII 5-line header:
   you must delete and recreate the index: `curl -X DELETE http://localhost:9200/legalrag`
   then re-run ingestion. The index mapping is fixed at creation time.
 
-- **Default dim is 1024**: `config.py` defaults to 1024 (for `bge-large-en-v1.5`). Current
-  `.env` sets `EMBEDDING_DIM=384` for `all-MiniLM-L6-v2`. Make sure `.env` exists before
-  the index is created.
+- **Config defaults don't apply to experiments**: `config.py` defaults exist for the stable
+  system only. For evaluation runs, always pass `--embedding-model`, `--embedding-provider`,
+  `--chunk-size`, and `--parent-size` explicitly via CLI flags. Make sure `.env` exists before
+  the index is created (OpenSearch settings are always read from there).
 
 - **OpenSearch — two options**: On the lab machine the primary setup is the standalone
   install at `~/opensearch-3.4.0/` (version 3.4.0). A Docker-based alternative is also
@@ -328,7 +353,11 @@ From the CanLII 5-line header:
   deprecated; use `lucene` or `faiss`. `cosinesimil` with `engine: lucene` is fine and does
   not auto-normalise vectors (unlike Faiss). Minimum `opensearch-py` client version is 3.0.0.
 
-- **Query log**: Every run is appended to `logs/queries.log` (gitignored). Each run logs:
+- **Data directory tracking**: `data/LegalBenchRAG/` is tracked in git (benchmark JSONs,
+  sampled subsets, etc.). Only `data/extracted_court_documents/` and `data/subset/` are
+  gitignored (large raw CanLII corpora).
+
+- **Query log**: Every run is appended to `logs/queries.log` (gitignored via `logs/*.log`). Each run logs:
   reformulated query, all 80 retrieved chunks with scores, all reranked results, and the
   final answer. Third-party HTTP logs (`httpx`, `opensearch`, `sentence_transformers`) are
   suppressed to WARNING. Pass `--log-level DEBUG` to see them. To disable file logging,

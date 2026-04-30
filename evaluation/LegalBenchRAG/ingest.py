@@ -101,29 +101,23 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default="hierarchical",
         choices=["hierarchical", "recursive"],
         help=(
-            "Chunking strategy. 'hierarchical' stores parent (~1500 chars) + child "
+            "Chunking strategy. 'hierarchical' stores parent + child "
             "chunks (default); 'recursive' produces flat chunks only."
         ),
     )
     parser.add_argument(
         "--chunk-size",
         type=int,
-        default=None,
+        required=True,
         metavar="N",
-        help=(
-            "Child chunk size in characters "
-            "(default: CHUNK_SIZE from config, usually 512)."
-        ),
+        help="Child chunk size in characters.",
     )
     parser.add_argument(
         "--chunk-overlap",
         type=int,
-        default=None,
+        required=True,
         metavar="N",
-        help=(
-            "Character overlap between consecutive child chunks "
-            "(default: CHUNK_OVERLAP from config, usually 64)."
-        ),
+        help="Character overlap between consecutive child chunks.",
     )
     parser.add_argument(
         "--parent-size",
@@ -132,30 +126,25 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         metavar="N",
         help=(
             "Parent chunk size in characters — hierarchical chunker only "
-            "(default: 1500)."
         ),
     )
     # ── Embedding options ─────────────────────────────────────────────────────
     parser.add_argument(
         "--embedding-provider",
-        default=None,
+        required=True,
         choices=["sentence_transformers", "huggingface", "openai"],
         metavar="PROVIDER",
         help=(
             "Embedding provider: sentence_transformers, huggingface, or openai. "
-            "Overrides EMBEDDING_PROVIDER in .env. "
             "Use 'huggingface' for models not packaged as sentence-transformers "
             "(e.g. jhu-clsp/BERT-DPR-CLERC-ft)."
         ),
     )
     parser.add_argument(
         "--embedding-model",
-        default=None,
+        required=True,
         metavar="MODEL",
-        help=(
-            "Embedding model name. Overrides EMBEDDING_MODEL in .env. "
-            "Provider is taken from --embedding-provider or EMBEDDING_PROVIDER in .env."
-        ),
+        help="Embedding model name. Must match the provider passed to --embedding-provider.",
     )
     # ── Index ─────────────────────────────────────────────────────────────────
     parser.add_argument(

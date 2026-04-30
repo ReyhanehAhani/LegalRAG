@@ -680,44 +680,35 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--index-name",
-        default=DEFAULT_INDEX_NAME,
+        required=True,
         metavar="NAME",
-        help=(
-            f"OpenSearch index to query (default: {DEFAULT_INDEX_NAME}). "
-            "Must match the index used during ingestion."
-        ),
+        help="OpenSearch index to query. Must match the index used during ingestion.",
     )
     parser.add_argument(
         "--embedding-provider",
-        default=None,
+        required=True,
         choices=["sentence_transformers", "huggingface", "openai"],
         metavar="PROVIDER",
         help=(
             "Embedding provider: sentence_transformers, huggingface, or openai. "
-            "Overrides EMBEDDING_PROVIDER in .env. "
             "Must match the provider used during ingestion."
         ),
     )
     parser.add_argument(
         "--embedding-model",
-        default=None,
+        required=True,
         metavar="MODEL",
-        help=(
-            "Override the query embedding model (default: EMBEDDING_MODEL in .env). "
-            "Must match the model used during ingestion. "
-            "Provider is taken from --embedding-provider or EMBEDDING_PROVIDER in .env."
-        ),
+        help="Embedding model name. Must match the model used during ingestion.",
     )
     parser.add_argument(
         "--trace-file",
-        default=None,
+        required=True,
         metavar="PATH",
         help=(
             "Write a per-query retrieval trace to this file in JSONL format. "
             "Each line is a JSON object with: query, ground_truth spans, all "
             "retrieved chunks (ranked with scores), and per-K metrics with "
-            "gt_overlap flags. Useful for debugging retrieval failures. "
-            "Default: no trace file written."
+            "gt_overlap flags. Useful for debugging retrieval failures."
         ),
     )
     parser.add_argument(
@@ -765,15 +756,13 @@ def main(argv: list[str] | None = None) -> None:
         embedding_provider=args.embedding_provider,
     )
 
-    trace_path = Path(args.trace_file) if args.trace_file else None
-    if trace_path:
-        trace_path.parent.mkdir(parents=True, exist_ok=True)
+    trace_path = Path(args.trace_file)
+    trace_path.parent.mkdir(parents=True, exist_ok=True)
 
     scores: list[QueryScore] = []
-    trace_fh = open(trace_path, "w", encoding="utf-8") if trace_path else None
+    trace_fh = open(trace_path, "w", encoding="utf-8")
     _real_stdout = sys.stdout
-    if trace_fh:
-        sys.stdout = _Tee(_real_stdout, trace_fh)
+    sys.stdout = _Tee(_real_stdout, trace_fh)
     try:
         print(
             f"\nRunning evaluation: {len(tests)} queries, "
@@ -786,24 +775,22 @@ def main(argv: list[str] | None = None) -> None:
                 print(f"  {i}/{len(tests)} queries done …")
         aggregate(scores, benchmark_names, ks=ks, index_name=args.index_name)
 
-        if trace_fh is not None:
-            embedding_model_name = args.embedding_model or settings.embedding.model
-            summary = compute_aggregate_dict(
-                scores,
-                benchmark_names,
-                ks=ks,
-                index_name=args.index_name,
-                label=args.label or embedding_model_name,
-                embedding_model=embedding_model_name,
-            )
-            summary["_type"] = "run_summary"
-            trace_fh.write(json.dumps(summary) + "\n")
-            trace_fh.flush()
+        embedding_model_name = args.embedding_model or settings.embedding.model
+        summary = compute_aggregate_dict(
+            scores,
+            benchmark_names,
+            ks=ks,
+            index_name=args.index_name,
+            label=args.label or embedding_model_name,
+            embedding_model=embedding_model_name,
+        )
+        summary["_type"] = "run_summary"
+        trace_fh.write(json.dumps(summary) + "\n")
+        trace_fh.flush()
     finally:
         sys.stdout = _real_stdout
-        if trace_fh:
-            trace_fh.close()
-            print(f"  Trace written → {trace_path}")
+        trace_fh.close()
+        print(f"  Trace written → {trace_path}")
 
 
 if __name__ == "__main__":
