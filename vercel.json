@@ -1,3 +1,6 @@
 {
-  "outputDirectory": "eval-viewer"
+  "outputDirectory": "eval-viewer",
+  "buildCommand": null,
+  "installCommand": null,
+  "framework": null
 }

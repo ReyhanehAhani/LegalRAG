@@ -296,7 +296,7 @@ function renderCharts(mbk) {
 
 // ── text helpers ──────────────────────────────────────────────────────────────
 function highlightText(text, gtOverlaps, charStart) {
-  if (!text) return '<span class="text-gray-400 italic">text not available in static build — see file path above</span>';
+  if (!text) return '';
   if (!gtOverlaps || !gtOverlaps.length) return esc(text);
   const spans = gtOverlaps
     .map(o => [Math.max(0, o.overlap_span[0]-charStart), Math.min(text.length, o.overlap_span[1]-charStart)])
@@ -392,7 +392,7 @@ function renderDetail(data) {
     <section>
       <h2 class="font-semibold text-gray-700 mb-2">
         Top-${(data.retrieved||[]).length} Retrieved Chunks
-        <span class="font-normal text-xs text-gray-400 ml-1">— ${nHits} hit${nHits!==1?'s':''} (GT overlap in yellow · miss chunk text omitted)</span>
+        <span class="font-normal text-xs text-gray-400 ml-1">— ${nHits} hit${nHits!==1?'s':''} (GT overlap highlighted in yellow)</span>
       </h2>
       <div class="space-y-2">${chunksHtml}</div>
     </section>
